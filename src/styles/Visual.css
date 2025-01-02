@@ -1,5 +1,73 @@
-div{
-  background-color: red;
-  width: 150px;
-  height: 150px;
+@import './common.css';
+
+
+
+#main-visual {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.main-img-box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+.main-img-box::after{
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  position: absolute; left: 0; top: 0;
+}
+.main-img-box > div{
+  width: 100%;
+  height: 100%;
+}
+.main-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-visual-text {
+  position: absolute; /* 화면에 고정된 위치 */
+  top: 40%; /* 세로 가운데 */
+  left: 15%; /* 왼쪽으로 살짝 띄움 */
+  transform: translateY(-50%); /* 세로 가운데 정렬 */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* 텍스트를 왼쪽 정렬 */
+  z-index: 1;
+}
+
+.main-visual-text div {
+  /* max-width: 600px; 텍스트 박스 최대 너비 설정 */
+  padding: 20px;
+}
+
+.main-visual-text p {
+  font-family: 'GmarketSansMedium';
+}
+.main-visual-text p:nth-of-type(1){
+  font-size: 3.5em;
+}
+.main-visual-text p:nth-of-type(2){
+  font-size: 3em;
+}
+.main-visual-text p:nth-of-type(3){
+  font-size: 1.5em;
+}
+.main-visual-text button{
+  width: 50%;
+  padding: 7px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
 }
