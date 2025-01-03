@@ -17,7 +17,7 @@ function NaverMap() {
 
   return(
     <>
-      <div id="main-map" style={{width: '100vw', height: '100vh'}}/>
+      <div id="main-map" style={{position: 'absolute', width: '100vw', height: '100vh'}}/>
     </>
   )
 }

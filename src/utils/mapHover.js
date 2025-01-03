@@ -12,8 +12,7 @@ function MapHover(map, geoJson) {
 
       return {
         fillColor: color,
-        strokeColor: color,
-        strokeWeight: 2,
+        strokeColor: color
       };
     });
 
