@@ -99,8 +99,15 @@ color: #fff;
   border: none;
   margin-top: 30px;
   font-family: 'GmarketSansMedium';
+  background-color: #FF8C00;  /* 밝은 오렌지색 */
+  color: white;
+  transition: all 0.3s ease-in-out;
 }
-
+.main-visual-text button:hover{
+  background-color: #FF4500;  /* 어두운 오렌지색 */
+  transform: scale(1.1);  /* 살짝 확대 */
+  box-shadow: 0 4px 15px rgba(255, 69, 0, 0.5);  /* 그림자 효과 */
+}
 
 /* --------비주얼 네비 */
 .main-visual-ctrl{
@@ -176,6 +183,7 @@ color: #fff;
   color: #fff;
   font-size: 2em;
   font-family: 'SeoulHangangM';
+  cursor: pointer;
 
 }
 .main-top-func{
