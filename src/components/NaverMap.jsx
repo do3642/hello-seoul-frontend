@@ -1,13 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import MapHover from "../utils/maphover";
+import gudata from "../data/Seoul_Gu.json"
 
 function NaverMap() {
   useEffect(() => {
+
+    // 지도 초기화
     var mapOptions = {
       center: new naver.maps.LatLng(37.566535, 126.9779692),
       zoom: 12
     }
 
-    var map = new naver.maps.Map('main-map', mapOptions);
+    var newMap = new naver.maps.Map('main-map', mapOptions);
+    MapHover(newMap, gudata)
   }, [])
 
   return(
