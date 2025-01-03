@@ -53,9 +53,8 @@
 }
 /* -------------메인 텍스트 -------------- */
 .main-visual-text {
-width: 1000px;
+width: 70%;
 color: #fff;
- margin-right: 20%;
  margin-top: 30vh;
  transition: 1s;
  opacity: 0;
@@ -74,7 +73,6 @@ color: #fff;
 
 .main-visual-text div {
   /* max-width: 600px; 텍스트 박스 최대 너비 설정 */
-  padding: 20px;
   line-height: 60px;
   letter-spacing: 2px;
 }
@@ -95,7 +93,7 @@ color: #fff;
   font-family: 'Pretendard-Regular';
 }
 .main-visual-text button{
-  width: 50%;
+  width: 300px;
   padding: 8px;
   border-radius: 5px;
   border: none;
@@ -169,6 +167,7 @@ color: #fff;
   left: 0;top: 3%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .logo{
   margin-left: 5%;
@@ -197,6 +196,10 @@ color: #fff;
 }
 .weather-container h2{
   font-family: 'SeoulHangangM';
+}
+.weather-temperature{
+  display: flex;
+  align-items: center;
 }
 .weather-temperature span{
   margin: 0 5px;

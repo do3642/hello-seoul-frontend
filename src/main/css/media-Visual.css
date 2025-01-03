@@ -1,0 +1,90 @@
+
+@media (max-width: 1025px) {
+  .main-visual-text {
+   
+  }
+  .main-visual-text button{
+    width: 40%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-visual-text >div, .main-visual-text button{
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .main-visual-text >div{
+    font-size: 12px;
+  }
+  .main-visual-text,.main-bar{
+    width: 80%;
+  }
+}
+
+@media (max-width: 735px) {
+  .main-visual-text,.main-bar{
+    width: 90%;
+  }
+}
+
+@media (max-width: 690px) {
+  .main-visual-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .main-visual-text p:nth-of-type(1){
+  font-size: 2em;
+  line-height: 30px;
+}
+.main-visual-text p:nth-of-type(2){
+  font-size: 1.8em;
+}
+.main-visual-text p:nth-of-type(3){
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  font-family: 'Pretendard-Regular';
+}
+.main-visual-text button{
+  width: 50%;
+}
+
+.logo h1{
+  font-size: 1em;
+}
+.weather-container h2,.weather-icon i,.weather-temperature span{
+  font-size: 12px;
+}
+.main-dots .dot{
+  padding: 5px;
+}
+}
+@media (max-width: 550px) {
+  .main-visual-text p:nth-of-type(1){
+    font-size: 1.8em;
+  }
+}
+@media (max-width: 500px) {
+  .main-visual-text p:nth-of-type(1){
+    font-size: 1em;
+    line-height: 0px;
+  }
+  .main-visual-text p:nth-of-type(2){
+    font-size: 1.8em;
+  }
+  .main-visual-text p:nth-of-type(3){
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    font-family: 'Pretendard-Regular';
+  }
+  .main-visual-text button{
+    width: 90%;
+    font-size: 1em;
+    padding: 5px 0;
+  }
+}
+
+

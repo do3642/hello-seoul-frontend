@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import './css/Visual.css'
+import './css/media-Visual.css'
 import { useEffect, useState } from "react";
 import Weather from './Weather';
 
