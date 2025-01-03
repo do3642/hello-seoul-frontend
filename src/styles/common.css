@@ -1,3 +1,4 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 html,body{
   margin:0px;
 }
@@ -38,6 +39,12 @@ span,em,strong,a{display: inline-block;}
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'SeoulHangangM';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* 네이버 나눔바른고딕 */
 @font-face {

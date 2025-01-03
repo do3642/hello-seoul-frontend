@@ -1,4 +1,4 @@
-import Visual from "./Visual";
+import Visual from "../main/Visual";
 
 
 function Home(){
