@@ -3,12 +3,14 @@ import { useState } from 'react'
 
 import './App.css'
 import axios from 'axios';
+import Trainline from './Trainline';
 
 function App() {
   const [test, setTest] = useState();
 
   return (
     <>
+    <Trainline/>
     <div className="App">
       <h1>요청결과 : {test}</h1>
       <button onClick={() => {
