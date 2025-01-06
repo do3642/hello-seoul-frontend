@@ -1,0 +1,20 @@
+[
+  {
+    "imageSrc": "../../public/img/main-visual-01.jpg",
+    "title": "Christmas Market with Gwanghwamun Square as a Background",
+    "subtitle": "Gwanghwamun Market",
+    "period": "Period: 2024.12.13 ~ 2025.01.05"
+  },
+  {
+    "imageSrc": "../../public/img/main-visual-02.jpg",
+    "title": "SOUL LANTERN: Seoul, Playing with Light",
+    "subtitle": "Seoul Lantern Festival",
+    "period": "Period: 2024.12.13 ~ 2025.01.12"
+  },
+  {
+    "imageSrc": "../../public/img/main-visual-03.jpg",
+    "title": "Autumn and Winter of the Lake, and the Luminarie",
+    "subtitle": "Luminarie Festival",
+    "period": "Period: 2024.10.25 ~ 2025.02.28"
+  }
+]

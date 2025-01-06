@@ -1,10 +1,12 @@
-import { useMemo } from 'react';
+import { useEffect, useState, useMemo } from "react";
+import { useTranslation } from 'react-i18next';
+import Weather from './Weather';
+import TranslationDropdown from './TranslationDropdown';
 import './css/Visual.css'
 import './css/media-Visual.css'
-import { useEffect, useState } from "react";
-import Weather from './Weather';
 
 function Visual (){
+  const { t } = useTranslation(); // useTranslation 훅 사용
   const [visualStates, setVisualStates] = useState([]);
   const [visualEffects, setVisualEffects] = useState([
     { zIndex: -10, opacity: 1 },
@@ -81,12 +83,14 @@ function Visual (){
     <section id="main-visual">
 
       <article className='main-top'>
-        <div className='logo'><h1>안녕, 서울</h1></div>
+        <div className='logo'><h1>{t('logo')}</h1></div>
         <div className='main-top-func'>
           <div className="main-weather">
           <Weather />
           </div>
-          <div className="main-translation">번역버튼</div>
+          <div className="main-translation">
+            <TranslationDropdown />
+          </div>
         </div>
       </article>
       {/* 메인 이미지 */}
@@ -112,7 +116,7 @@ function Visual (){
           <p>{visualStates[visibleImageIndex]?.title}</p>
           <p>{visualStates[visibleImageIndex]?.subtitle}</p>
           <p>{visualStates[visibleImageIndex]?.period}</p>
-          <button>자세히 보기</button>
+          <button>{t('seeDetails')}</button>
         </div>
       </article>
 

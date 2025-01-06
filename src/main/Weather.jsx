@@ -10,12 +10,12 @@ function Weather() {
   const fetchWeatherData = async () => {
     const serviceKey = '5CQeftawhDwl1cz9L0RxxMn8mjHETjXzCuHxHgteyt%2FvAK1i50baokozMpWbrG%2FEb2yMXkwSwn18uBEylgUk0g%3D%3D';
     const baseDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const baseTime = '0530'; // 예시 시간 (실제로는 동적으로 처리)
-    const nx = 60; // 서울 예보지점 X 좌표값
-    const ny = 127; // 서울 예보지점 Y 좌표값
-    const numOfRows = 1000; // 한 페이지 결과 수
-    const pageNo = 1; // 페이지 번호
-    const dataType = 'JSON'; // 요청 형식 (JSON)
+    const baseTime = '0530'; 
+    const nx = 60; 
+    const ny = 127; 
+    const numOfRows = 1000;
+    const pageNo = 1; 
+    const dataType = 'JSON'; 
 
     // API URL
     const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${serviceKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&dataType=${dataType}&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
