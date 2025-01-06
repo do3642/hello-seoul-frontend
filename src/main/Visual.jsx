@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useTranslation } from 'react-i18next';
 import Weather from './Weather';
 import TranslationDropdown from './TranslationDropdown';
+import Navigation from "./Navigation";
 import './css/Visual.css'
 import './css/media-Visual.css'
 
@@ -139,8 +140,10 @@ function Visual (){
         <div className={`progress ${isActive ? 'active' : ''}`}></div>
       </div>
     </div>
-
-
+      
+      <div className="main-nav-ctrl">
+        <Navigation />
+      </div>
 
     </section>
   )
