@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Weather() {
+  const { t } = useTranslation();
+
   const [temperature, setTemperature] = useState({ min: null, max: null }); // 최저/최고 온도 상태
   const [weatherStatus, setWeatherStatus] = useState(''); // 날씨 상태
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
@@ -82,7 +85,7 @@ function Weather() {
                       weatherStatus === '눈옴' ? 'fas fa-snowflake' :
                       'fas fa-question-circle'}></i>
       </div>
-      <h2>서울</h2>
+      <h2>{t('weather')}</h2>
 
       {temperature.min !== null && temperature.max !== null ? (
         <div className='weather-temperature'>

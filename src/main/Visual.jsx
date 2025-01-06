@@ -7,6 +7,8 @@ import './css/media-Visual.css'
 
 function Visual (){
   const { t } = useTranslation(); // useTranslation 훅 사용
+  const visuals = t('visuals', { returnObjects: true });
+  // console.log(visuals);
   const [visualStates, setVisualStates] = useState([]);
   const [visualEffects, setVisualEffects] = useState([
     { zIndex: -10, opacity: 1 },
@@ -113,9 +115,9 @@ function Visual (){
       <article className={`main-visual-text ${isActive ? 'active' : ''}`}>
         <div>
           {/* 보이는 이미지에 해당하는 텍스트만 표시 */}
-          <p>{visualStates[visibleImageIndex]?.title}</p>
-          <p>{visualStates[visibleImageIndex]?.subtitle}</p>
-          <p>{visualStates[visibleImageIndex]?.period}</p>
+          <p>{visuals[visibleImageIndex]?.title}</p>
+          <p>{visuals[visibleImageIndex]?.subtitle}</p>
+          <p>{visuals[visibleImageIndex]?.period}</p>
           <button>{t('seeDetails')}</button>
         </div>
       </article>
