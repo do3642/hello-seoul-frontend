@@ -1,0 +1,22 @@
+{
+  "logo": "Hello, Seoul",
+  "weather" : "Seoul",
+  "seeDetails": "See Details",
+  "visuals": [
+    {
+      "title": "Christmas Market with Gwanghwamun Square as the Background",
+      "subtitle": "Gwanghwamun Market",
+      "period": "Period 2024.12.13 ~ 2025.01.05"
+    },
+    {
+      "title": "SOUL LANTERN: Seoul, Playing with Light",
+      "subtitle": "Seoul Lantern Festival",
+      "period": "Period 2024.12.13 ~ 2025.01.12"
+    },
+    {
+      "title": "Autumn and Winter at the Lake, and Luminarie",
+      "subtitle": "Luminarie Festival",
+      "period": "Period 2024.10.25 ~ 2025.02.28"
+    }
+  ]
+}
