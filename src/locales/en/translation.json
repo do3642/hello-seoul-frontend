@@ -1,7 +1,15 @@
 {
   "logo": "Hello, Seoul",
-  "weather" : "Seoul",
+  "weather": "Seoul",
   "seeDetails": "See Details",
+  "nav": [
+    {
+      "navMap": "Map",
+      "subway": "Subway",
+      "whereToGo": "Where to go?",
+      "page": "Page move"
+    }
+  ],
   "visuals": [
     {
       "title": "Christmas Market with Gwanghwamun Square as the Background",

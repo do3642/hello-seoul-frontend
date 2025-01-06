@@ -1,21 +1,29 @@
 {
   "logo": "你好，首尔",
-  "weather" : "首尔",
+  "weather": "首尔",
   "seeDetails": "查看更多",
+  "nav": [
+    {
+      "navMap": "地图",
+      "subway": "地铁",
+      "whereToGo": "去哪儿?",
+      "page": "页面移动"
+    }
+  ],
   "visuals": [
     {
-      "title": "光华门广场背景的圣诞市场",
-      "subtitle": "光华门市场",
+      "title": "光化门广场背景下的圣诞市场",
+      "subtitle": "光化门市场",
       "period": "期间 2024.12.13 ~ 2025.01.05"
     },
     {
-      "title": "SOUL LANTERN: 首尔，玩转光影",
+      "title": "SOUL LANTERN: 首尔，光之玩耍",
       "subtitle": "首尔灯笼节",
       "period": "期间 2024.12.13 ~ 2025.01.12"
     },
     {
-      "title": "湖泊的秋冬与光明艺术展",
-      "subtitle": "光明艺术节",
+      "title": "湖泊的秋冬以及光之艺术展",
+      "subtitle": "光之艺术节",
       "period": "期间 2024.10.25 ~ 2025.02.28"
     }
   ]
