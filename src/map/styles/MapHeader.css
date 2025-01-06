@@ -1,3 +1,9 @@
+.map-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .map-header {
   width: 400px;
   position: relative;
@@ -6,6 +12,10 @@
   justify-content: space-around;
   align-items: center;
   padding-top: 20px;
+}
+
+.map-header-right {
+  display: flex;
 }
 
 .map-header button {
@@ -22,6 +32,8 @@
   background-color: #505050;
   color: #fff;
   border-color: #505050;
+  transition: transform 0.3s ease, color 0.3s ease;
+  transform: scale(1.1);
 }
 
 .map-header button.active .map-header-icon {
