@@ -6,13 +6,11 @@ import Weather from "./Weather";
 function Sidebar() {
 
   return (
-    <>
-      <div className="side-bar">
-        <Search /> 
-        <Weather />
-        <SidebarList /> 
-      </div>
-    </>
+    <div className="side-bar">
+      <Search /> 
+      <Weather />
+      <SidebarList /> 
+    </div>
   )
 }
 

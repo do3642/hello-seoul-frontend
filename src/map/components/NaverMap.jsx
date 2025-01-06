@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import MapHover from "../utils/maphover";
-import gudata from "../data/Seoul_Gu.json"
+import { useEffect } from "react";
+import MapHover from "../utils/maphover.js";
+import gudata from "../data/Seoul_Gu.json";
 
 function NaverMap() {
   useEffect(() => {

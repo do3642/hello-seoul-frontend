@@ -4,7 +4,7 @@ import { useState } from 'react'
 import './App.css'
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
-import Map from './pages/Map';
+import Map from './map/pages/Map';
 
 function App() {
 
