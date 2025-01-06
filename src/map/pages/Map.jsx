@@ -1,6 +1,4 @@
-import Location from "../components/Location";
 import MapHeader from "../components/MapHeader";
-import MapNavWeb from "../components/MapNavWeb";
 import NaverMap from "../components/NaverMap";
 import Sidebar from "../components/Sidebar";
 
@@ -11,7 +9,6 @@ function Map() {
       <NaverMap />
       <Sidebar />
       <MapHeader />
-      <MapNavWeb />
     </>
   )
 }

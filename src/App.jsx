@@ -1,21 +1,22 @@
-import { useState } from 'react'
-
-
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
-import Map from './map/pages/Map';
+import Home from './pages/Home'
+import Map from './map/pages/Map'
+
+
 
 function App() {
 
+
   return (
-    <>
-      <div className="App">
-        <Routes>
-          <Route path='/map' element={<Map />} />
-        </Routes>
-      </div>
-    </>
+    <main>
+    
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/map' element={<Map />} />
+    </Routes>
+
+    </main>
   )
 }
 
