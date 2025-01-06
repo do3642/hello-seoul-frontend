@@ -35,3 +35,7 @@
   margin-top: 1px;
   color: rgb(46, 46, 46);
 }
+
+.location:hover, .translation:hover {
+  filter: brightness(0.8);
+}

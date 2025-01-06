@@ -1,4 +1,5 @@
 import MapHeader from "../components/MapHeader";
+import MapWebNav from "../components/MapWebNav";
 import NaverMap from "../components/NaverMap";
 import Sidebar from "../components/Sidebar";
 
@@ -9,6 +10,7 @@ function Map() {
       <NaverMap />
       <Sidebar />
       <MapHeader />
+      <MapWebNav />
     </>
   )
 }
