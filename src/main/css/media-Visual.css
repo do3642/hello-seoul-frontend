@@ -70,7 +70,6 @@
 @media (max-width: 500px) {
   .main-visual-text p:nth-of-type(1){
     font-size: 1em;
-    line-height: 0px;
   }
   .main-visual-text p:nth-of-type(2){
     font-size: 1.8em;
@@ -84,6 +83,14 @@
     width: 90%;
     font-size: 1em;
     padding: 5px 0;
+  }
+
+  .main-top-func{
+    flex-direction: column;
+    gap: 5px;
+  }
+  .dropdown-button{
+    font-size: 12px;
   }
 }
 
