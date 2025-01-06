@@ -120,6 +120,7 @@ function Visual (){
           <p>{visuals[visibleImageIndex]?.subtitle}</p>
           <p>{visuals[visibleImageIndex]?.period}</p>
           <button>{t('seeDetails')}</button>
+          
         </div>
       </article>
 
