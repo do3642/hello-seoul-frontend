@@ -17,12 +17,12 @@ function MapHover(map, geoJson) {
     });
 
     map.data.addListener('mouseover', function (e) {
-      var color = 'rgb(0, 180, 147)';
+      var color = 'rgb(209, 111, 21)'
 
       map.data.overrideStyle(e.feature, {
         fillColor: color,
         strokeColor: color,
-        strokeWeight: 8,
+        strokeWeight: 3,
       });
     });
 

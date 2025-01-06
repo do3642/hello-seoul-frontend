@@ -3,7 +3,33 @@
   width: 100%;
   height: 115px;
   background-color: white;
-  border: 1px gray solid;
+  border: 1px solid #ddd;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidebar-list:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-list-left h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.sidebar-list-left p {
+  font-size: 16px;
+  color: #555;
+}
+
+.sidebar-list-right img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
