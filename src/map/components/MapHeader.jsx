@@ -6,7 +6,7 @@ import Location from './Location';
 import Translation from './Translation';
 
 function MapHeader() {
-  const [activeButton, setActiveButton] = useState("관광지")
+  const [activeButton, setActiveButton] = useState("관광지");
 
   const handleClick = (buttonName) => {
     setActiveButton(buttonName);
