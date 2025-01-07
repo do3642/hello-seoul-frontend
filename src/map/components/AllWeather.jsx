@@ -66,7 +66,6 @@ function AllWeather({ map, activeButton }) {
 
       return marker;
     });
-
     setMarkers(newMarkers); // 마커 먼저 상태에 저장
     setIsLoading(false);
 
