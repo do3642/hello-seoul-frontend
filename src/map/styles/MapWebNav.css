@@ -1,0 +1,39 @@
+.map-web-nav-container {
+  position: fixed; /* 화면에 고정 */
+  bottom: 20px; /* 화면 하단에서 20px 위 */
+  right: 20px; /* 화면 오른쪽에서 20px 왼쪽 */
+  z-index: 1000; /* 지도 위에 보이도록 z-index 설정 */
+}
+
+.map-web-nav {
+  display: flex;
+  flex-direction: column; /* 세로 배치 */
+  gap: 10px; /* 메뉴 간 간격 */
+}
+
+.map-web-nav li {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 90px; /* 높이와 동일하게 설정 */
+  height: 90px;
+  text-align: center;
+  display: flex; /* 텍스트 가운데 정렬 */
+  align-items: center; /* 수직 정렬 */
+  justify-content: center; /* 수평 정렬 */
+}
+
+.map-web-nav a {
+  font-size: 16px;
+  font-family: 'GmarketSansMedium', sans-serif;
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: #333; /* 텍스트 색상 */
+  display: block;
+  text-align: center;
+  line-height: 1.2; /* 글자 줄 간격 */
+}
+
+.map-web-nav li:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}

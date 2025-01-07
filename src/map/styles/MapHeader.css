@@ -26,6 +26,7 @@
   background-color: #f5f5f5;
   cursor: pointer;
   font-size: 18px;
+  font-family: 'GmarketSansMedium';
 }
 
 .map-header button.active {

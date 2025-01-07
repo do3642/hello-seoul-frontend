@@ -19,6 +19,7 @@
   border: 1px solid #ccc;
   border-radius: 20px;
   font-size: 16px;
+  font-family: 'GmarketSansMedium';
   outline: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease;

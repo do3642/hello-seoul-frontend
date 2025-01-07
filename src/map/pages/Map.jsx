@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import MapHeader from "../components/MapHeader";
+import MapWebNav from "../components/MapWebNav";
 import NaverMap from "../components/NaverMap";
 import Sidebar from "../components/Sidebar";
-import gudata from "../data/Seoul_Gu.json";
+import gudata from "../../data/Seoul_Gu.json"
 
 function Map() {
   const [map, setMap] = useState(null);
+  const [showCurrentLocation, setShowCurrentLocation] = useState(false);    // 현재 위치 표시 여부
   
   useEffect(() => {
     // 지도 초기화
@@ -13,7 +15,6 @@ function Map() {
       center: new naver.maps.LatLng(37.566535, 126.9779692), 
       zoom: 12, // 줌 레벨
     };
-
     const newMap = new naver.maps.Map('main-map', mapOptions);
     setMap(newMap);
 
@@ -22,11 +23,19 @@ function Map() {
       newMap.destroy();
     };
   }, []);
+
+
+    // 내 위치 버튼이 눌렸을 때 상태 변경
+    const handleToggleLocation = (isActive) => {
+      setShowCurrentLocation(isActive);
+    };
+
   return (
     <>
-      <NaverMap map={map} geoJson={gudata} />
+      <NaverMap  map={map} geoJson={gudata} showCurrentLocation={showCurrentLocation}/>
       <Sidebar />
-      <MapHeader />
+      <MapHeader onToggleLocation={handleToggleLocation}/>
+      <MapWebNav />
     </>
   )
 }

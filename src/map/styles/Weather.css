@@ -13,8 +13,10 @@
   font-size: 18px;
   font-weight: bold;
   color: #333;
+  font-family: 'GmarketSansMedium';
 }
 
 .weather-right p {
   color: #555;
+  font-family: 'GmarketSansMedium';
 }
