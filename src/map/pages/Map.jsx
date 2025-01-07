@@ -4,6 +4,7 @@ import MapWebNav from "../components/MapWebNav";
 import NaverMap from "../components/NaverMap";
 import Sidebar from "../components/Sidebar";
 import gudata from "../../data/Seoul_Gu.json"
+import AllWeather from "../components/AllWeather";
 
 function Map() {
   const [map, setMap] = useState(null);
@@ -36,6 +37,10 @@ function Map() {
       <Sidebar />
       <MapHeader onToggleLocation={handleToggleLocation}/>
       <MapWebNav />
+      {
+        map &&
+        <AllWeather map={map}/>
+      }
     </>
   )
 }
