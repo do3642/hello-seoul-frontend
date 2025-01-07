@@ -50,8 +50,9 @@ function NaverMap({ showCurrentLocation }) {
               });
 
               setMarker(newMarker);
-              map.setCenter(currentLocation);
-              map.setZoom(17)
+              
+              // 부드럽게 이동하고 줌하기
+              map.morph(currentLocation, 17);
             },
             (error) => {
               console.error("위치를 가져올 수 없습니다.", error);
