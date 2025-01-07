@@ -1,26 +1,17 @@
 import { useState, useEffect } from 'react';
+import districtData from '../../data/district_nx_ny_values.json'; // district_nx_ny_values.json 파일 임포트
+import { getBaseTime } from '../utils/timeUtils'
 
-// 각 구에 해당하는 nx, ny 좌표 (예시 값)
-const districtCoordinates = {
-  '강남구': { nx: 60, ny: 127 },
-  '강동구': { nx: 61, ny: 128 },
-  '강북구': { nx: 59, ny: 126 },
-  '강서구': { nx: 64, ny: 130 },
-  '구로구': { nx: 62, ny: 128 },
-  '금천구': { nx: 63, ny: 129 },
-  '노원구': { nx: 58, ny: 124 },
-  // 다른 구들에 대한 nx, ny 값 추가
-};
 
-function AllWeather({ map }) {
-  const [weatherData, setWeatherData] = useState({});
+function AllWeather({ map, activeButton }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [markers, setMarkers] = useState([]); // 마커 상태 추가
 
   // 날씨 데이터를 받아오는 함수
   const fetchWeatherData = async (nx, ny) => {
     const serviceKey = '5CQeftawhDwl1cz9L0RxxMn8mjHETjXzCuHxHgteyt%2FvAK1i50baokozMpWbrG%2FEb2yMXkwSwn18uBEylgUk0g%3D%3D';
     const baseDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const baseTime = '0530'; // 예시 시간
+    const baseTime = getBaseTime(); // 예시 시간
     const numOfRows = 40;
     const pageNo = 1;
     const dataType = 'JSON';
@@ -50,26 +41,24 @@ function AllWeather({ map }) {
 
   // 각 구의 날씨 데이터를 받아오고 지도에 팝업을 표시하는 함수
   const loadWeatherForDistricts = async () => {
-    const weatherResults = {};
+    const weatherResults = [];
 
-    for (const district in districtCoordinates) {
-      const { nx, ny } = districtCoordinates[district];
+    // districtData는 이제 `district_nx_ny_values.json`에서 가져온 데이터
+    const weatherPromises = Object.keys(districtData).map(async (district) => {
+      const { nx, ny, latitude, longitude } = districtData[district];
 
       // 각 구에 대해 날씨 정보 받아오기
       const weather = await fetchWeatherData(nx, ny);
 
       if (weather) {
-        weatherResults[district] = weather;
-
-        // 마커 생성
-        
         const marker = new naver.maps.Marker({
           map: map,
-          position: new naver.maps.LatLng(nx, ny),
+          position: new naver.maps.LatLng(latitude, longitude),
           title: district,  // 마커에 툴팁 추가
           zIndex: 1000,
           visible: true,
         });
+
         // InfoWindow 생성
         const contentString = `
           <div class="iw_inner">
@@ -93,18 +82,28 @@ function AllWeather({ map }) {
             infoWindow.open(map, marker);  // 마커를 anchor로 설정하여 팝업 위치 결정
           }
         });
-      }
-    }
 
-    setWeatherData(weatherResults);  // 날씨 데이터 상태 업데이트
+        return marker; // 마커 객체 반환
+      }
+    });
+
+    // 모든 날씨 데이터 로드를 병렬로 처리
+    const newMarkers = await Promise.all(weatherPromises);
+    
+    setMarkers(newMarkers.filter(marker => marker)); // null이 아닌 마커만 추가
     setIsLoading(false);
   };
 
   useEffect(() => {
-    if (map) {
-      loadWeatherForDistricts(); // 지도 객체가 있을 때만 날씨 로드
+    if (activeButton !== '날씨') {
+      markers.forEach(marker => marker.setMap(null)); // 모든 마커 제거
+      setMarkers([]); // 마커 상태 초기화
     }
-  }, [map]);
+
+    if (map && activeButton === '날씨') {
+      loadWeatherForDistricts(); // 날씨 로드
+    }
+  }, [map, activeButton]);
 
   if (isLoading) {
     return <div>날씨 데이터를 불러오는 중입니다...</div>;

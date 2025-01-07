@@ -9,7 +9,9 @@ import AllWeather from "../components/AllWeather";
 function Map() {
   const [map, setMap] = useState(null);
   const [showCurrentLocation, setShowCurrentLocation] = useState(false);    // 현재 위치 표시 여부
+  const [activeButton, setActiveButton] = useState("관광지");
   
+
   useEffect(() => {
     // 지도 초기화
     const mapOptions = {
@@ -30,16 +32,19 @@ function Map() {
     const handleToggleLocation = (isActive) => {
       setShowCurrentLocation(isActive);
     };
+     // 버튼 클릭 시 상태 변경
+  const handleButtonClick = (buttonName) => {
+    setActiveButton(buttonName); // 클릭된 버튼에 따른 상태 변경
+  };
 
   return (
     <>
       <NaverMap  map={map} geoJson={gudata} showCurrentLocation={showCurrentLocation}/>
       <Sidebar />
-      <MapHeader onToggleLocation={handleToggleLocation}/>
+      <MapHeader onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick}/>
       <MapWebNav />
       {
-        map &&
-        <AllWeather map={map}/>
+        map && <AllWeather map={map} activeButton={activeButton} />
       }
     </>
   )
