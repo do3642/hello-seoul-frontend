@@ -10,9 +10,7 @@ function NaverMap({ map, geoJson, showCurrentLocation }) {
     }
   }, [map, geoJson]); // map과 geoJson 변경 시마다 실행
 
-
   useEffect(() => {
-
     // 현재 위치의 정확도를 높이기 위한 옵션
     var options = {
       enableHighAccuracy: true,
