@@ -20,9 +20,13 @@ function NaverMap({ showCurrentLocation }) {
   }, [])
 
   useEffect(() => {
+
+    // 현재 위치의 정확도를 높이기 위한 옵션
     var options = {
       enableHighAccuracy: true,
-    }
+      timeout: 30000,
+      maximumAge: 2000,
+    };
 
     if(map) {
       if(showCurrentLocation) {
@@ -47,6 +51,7 @@ function NaverMap({ showCurrentLocation }) {
 
               setMarker(newMarker);
               map.setCenter(currentLocation);
+              map.setZoom(17)
             },
             (error) => {
               console.error("위치를 가져올 수 없습니다.", error);
@@ -64,7 +69,7 @@ function NaverMap({ showCurrentLocation }) {
         }
       }
     }
-  }, [showCurrentLocation, map]);
+  }, [showCurrentLocation]);
 
   return(
     <>
