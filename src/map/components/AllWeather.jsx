@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import districtData from '../../data/district_nx_ny_values.json'; // district_nx_ny_values.json 파일 임포트
-import { getBaseTime } from '../utils/timeUtils'
-
+import { getBaseTime } from '../utils/timeUtils';
 
 function AllWeather({ map, activeButton }) {
   const [isLoading, setIsLoading] = useState(true);
   const [markers, setMarkers] = useState([]); // 마커 상태 추가
+  const [infoWindows, setInfoWindows] = useState([]); // infoWindow 상태 추가
 
   // 날씨 데이터를 받아오는 함수
   const fetchWeatherData = async (nx, ny) => {
@@ -50,19 +50,38 @@ function AllWeather({ map, activeButton }) {
       // 각 구에 대해 날씨 정보 받아오기
       const weather = await fetchWeatherData(nx, ny);
 
-      if (weather) {
-        const marker = new naver.maps.Marker({
-          map: map,
-          position: new naver.maps.LatLng(latitude, longitude),
-          title: district,  // 마커에 툴팁 추가
-          zIndex: 1000,
-          visible: true,
-        });
+      return { district, latitude, longitude, weather };
+    });
 
+    // 먼저 마커를 생성하고, 날씨 데이터가 준비되면 업데이트
+    const newMarkers = Object.keys(districtData).map((district) => {
+      const { latitude, longitude } = districtData[district];
+      const marker = new naver.maps.Marker({
+        map: map,
+        position: new naver.maps.LatLng(latitude, longitude),
+        title: district,  // 마커에 툴팁 추가
+        zIndex: 1000,
+        visible: true,
+      });
+
+      return marker;
+    });
+
+    setMarkers(newMarkers); // 마커 먼저 상태에 저장
+    setIsLoading(false);
+
+    // 날씨 데이터를 받아온 후 마커에 팝업을 추가하는 작업
+    const weatherData = await Promise.all(weatherPromises);
+
+    // 날씨 정보가 준비되면 팝업을 업데이트
+    weatherData.forEach((data, index) => {
+      const marker = newMarkers[index];
+      const weather = data.weather;
+      if (weather) {
         // InfoWindow 생성
         const contentString = `
           <div class="iw_inner">
-            <h3>${district}</h3>
+            <h3>${data.district}</h3>
             <p>최저 온도: ${weather.minTemperature}°C</p>
             <p>최고 온도: ${weather.maxTemperature}°C</p>
             <p>상태: ${weather.skyCondition === '1' ? '맑음' : '흐림'}</p>
@@ -76,33 +95,41 @@ function AllWeather({ map, activeButton }) {
 
         // 마커 클릭 시 InfoWindow 열기
         naver.maps.Event.addListener(marker, "click", function() {
-          if (infoWindow.getMap()) {
+          // 클릭한 마커에 대한 팝업을 열고 닫기 처리
+          const isOpen = infoWindow.getMap();
+          if (isOpen) {
             infoWindow.close();
           } else {
-            infoWindow.open(map, marker);  // 마커를 anchor로 설정하여 팝업 위치 결정
+            // 열려있는 팝업이 있으면 닫고 새로 연다
+            infoWindows.forEach(window => window.close());
+            infoWindow.open(map, marker);
           }
         });
 
-        return marker; // 마커 객체 반환
+        setInfoWindows(prevInfoWindows => [...prevInfoWindows, infoWindow]); // infoWindow 상태 업데이트
       }
     });
-
-    // 모든 날씨 데이터 로드를 병렬로 처리
-    const newMarkers = await Promise.all(weatherPromises);
-    
-    setMarkers(newMarkers.filter(marker => marker)); // null이 아닌 마커만 추가
-    setIsLoading(false);
   };
 
   useEffect(() => {
     if (activeButton !== '날씨') {
+      // '날씨' 버튼이 아닌 경우 마커와 팝업을 제거
       markers.forEach(marker => marker.setMap(null)); // 모든 마커 제거
+      infoWindows.forEach(window => window.close()); // 모든 팝업 닫기
       setMarkers([]); // 마커 상태 초기화
-    }
-
-    if (map && activeButton === '날씨') {
+      setInfoWindows([]); // infoWindow 상태 초기화
+    } else if (map && activeButton === '날씨') {
+      // '날씨' 버튼이 클릭된 경우, 날씨 데이터를 로드
       loadWeatherForDistricts(); // 날씨 로드
     }
+
+    // clean-up 함수: 컴포넌트가 언마운트되거나 activeButton이 변경될 때 마커 및 팝업 제거
+    return () => {
+      markers.forEach(marker => marker.setMap(null)); // 마커 제거
+      infoWindows.forEach(window => window.close()); // 팝업 닫기
+      setMarkers([]); // 상태 초기화
+      setInfoWindows([]); // 상태 초기화
+    };
   }, [map, activeButton]);
 
   if (isLoading) {
