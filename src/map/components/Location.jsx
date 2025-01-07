@@ -3,11 +3,13 @@ import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
 import '../styles/mapHeaderRight.css';
 
-function Location () {
+function Location ({ onToggleLocation }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
-    setIsActive(!isActive);
+    const newState = !isActive;
+    setIsActive(newState);
+    onToggleLocation(newState);
   };
 
   return (

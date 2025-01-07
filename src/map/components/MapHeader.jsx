@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Location from './Location';
 import Translation from './Translation';
 
-function MapHeader() {
+function MapHeader({ onToggleLocation }) {
   const [activeButton, setActiveButton] = useState("관광지")
 
   const handleClick = (buttonName) => {
@@ -37,7 +37,7 @@ function MapHeader() {
         </button>
       </div>
       <div className='map-header-right'>
-        <Location />
+        <Location onToggleLocation={onToggleLocation}/>
         <Translation />
       </div>
     </div>
