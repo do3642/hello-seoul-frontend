@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getBaseTime } from '../map/utils/timeUtils';
 
 function Weather() {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ function Weather() {
   const fetchWeatherData = async () => {
     const serviceKey = '5CQeftawhDwl1cz9L0RxxMn8mjHETjXzCuHxHgteyt%2FvAK1i50baokozMpWbrG%2FEb2yMXkwSwn18uBEylgUk0g%3D%3D';
     const baseDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const baseTime = '0530'; 
+    const baseTime = getBaseTime();
     const nx = 60; 
     const ny = 127; 
     const numOfRows = 1000;
@@ -30,6 +31,7 @@ function Weather() {
 
       // 최저/최고 온도를 추출하는 로직
       const temperatureData = items.filter(item => item.category === 'T1H'); // 'T1H'는 온도 데이터 카테고리
+      
       let minTemp = null;
       let maxTemp = null;
 
