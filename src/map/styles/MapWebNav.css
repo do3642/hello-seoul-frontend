@@ -24,13 +24,11 @@
 }
 
 .map-web-nav li span {
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'GmarketSansMedium', sans-serif;
-  text-decoration: none; /* 링크 밑줄 제거 */
   color: #333; /* 텍스트 색상 */
   display: block;
   text-align: center;
-  line-height: 1.2; /* 글자 줄 간격 */
 }
 
 .map-web-nav li:hover {

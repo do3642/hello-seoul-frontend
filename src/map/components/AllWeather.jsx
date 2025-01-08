@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import districtData from '../../data/district_nx_ny_values.json'; // district_nx_ny_values.json 파일 임포트
 import { getBaseTime } from '../utils/timeUtils';
 import { getSkyConditionText, getSkyConditionIcon } from '../utils/weatherUtils';
+import { useTranslation } from 'react-i18next';
 
 function AllWeather({ map, activeButton }) {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [markers, setMarkers] = useState([]); // 마커 상태 추가
   const [infoWindows, setInfoWindows] = useState([]); // infoWindow 상태 추가
@@ -77,18 +79,22 @@ function AllWeather({ map, activeButton }) {
     weatherData.forEach((data, index) => {
       const marker = newMarkers[index];
       const weather = data.weather;
+      
       if (weather) {
         // InfoWindow 생성
-        const contentString = `
-          <div class="iw_inner weather-popup">
-            <h3>${data.district}</h3>
-            <p>최저 온도: ${weather.minTemperature}°C</p>
-            <p>최고 온도: ${weather.maxTemperature}°C</p>
-            <p>상태: ${getSkyConditionIcon(weather.skyCondition)} ${getSkyConditionText(weather.skyCondition)}</p>
-          </div>
-        `;
+        const createContentString = () => {
+          return `
+            <div class="iw_inner weather-popup">
+              <h3>${t(`map-page.districts.${data.district}`)}</h3>
+              <p>${t('map-page.minTemp')}: ${weather.minTemperature}°C</p>
+              <p>${t('map-page.maxTemp')}: ${weather.maxTemperature}°C</p>
+              <p>${t('map-page.status')}: ${getSkyConditionIcon(weather.skyCondition)} ${t(`map-page.weatherConditions.${getSkyConditionText(weather.skyCondition)}`)}</p>
+            </div>
+          `;
+        };
+
         const infoWindow = new naver.maps.InfoWindow({
-          content: contentString,
+          content: createContentString(),
           maxWidth: 200,  // 팝업 크기 조정
           zIndex: 1000,   // 팝업이 다른 요소 위에 오도록 설정
         });
@@ -113,7 +119,6 @@ function AllWeather({ map, activeButton }) {
 
   useEffect(() => {
     if (activeButton !== '날씨') {
-      // '날씨' 버튼이 아닌 경우 마커와 팝업을 제거
       markers.forEach(marker => marker.setMap(null)); // 모든 마커 제거
       infoWindows.forEach(window => window.close()); // 모든 팝업 닫기
       setMarkers([]); // 마커 상태 초기화
@@ -122,7 +127,12 @@ function AllWeather({ map, activeButton }) {
       // '날씨' 버튼이 클릭된 경우, 날씨 데이터를 로드
       loadWeatherForDistricts(); // 날씨 로드
     }
-
+    
+    if (t) {
+      infoWindows.forEach(window => window.close());
+      setInfoWindows([]); // 팝업 상태 초기화
+    }
+    
     // clean-up 함수: 컴포넌트가 언마운트되거나 activeButton이 변경될 때 마커 및 팝업 제거
     return () => {
       markers.forEach(marker => marker.setMap(null)); // 마커 제거
@@ -130,7 +140,7 @@ function AllWeather({ map, activeButton }) {
       setMarkers([]); // 상태 초기화
       setInfoWindows([]); // 상태 초기화
     };
-  }, [map, activeButton]);
+  }, [map, activeButton,t]);
 
   if (isLoading) {
     return <div>날씨 데이터를 불러오는 중입니다...</div>;

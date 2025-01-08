@@ -26,5 +26,46 @@
       "subtitle": "Luminarie Festival",
       "period": "Period 2024.10.25 ~ 2025.02.28"
     }
-  ]
+  ],
+  "map-page": {
+    "touristAttraction": "Attractions",
+    "weather": "Weather",
+    "random": "Random",
+    "minTemp": "minTemp",
+    "maxTemp": "maxTemp",
+    "status": "Status",
+    "weatherConditions": {
+      "clear": "Clear",
+      "partlyCloudy": "Partly Cloudy",
+      "cloudy": "Cloudy",
+      "unknown": "Unknown"
+    },
+    "districts": {
+      "종로구": "Jongno-gu",
+      "중구": "Jung-gu",
+      "용산구": "Yongsan-gu",
+      "성동구": "Seongdong-gu",
+      "광진구": "Gwangjin-gu",
+      "동대문구": "Dongdaemun-gu",
+      "중랑구": "Jungnang-gu",
+      "성북구": "Seongbuk-gu",
+      "강북구": "Gangbuk-gu",
+      "도봉구": "Dobong-gu",
+      "노원구": "Nowon-gu",
+      "은평구": "Eunpyeong-gu",
+      "서대문구": "Seodaemun-gu",
+      "마포구": "Mapo-gu",
+      "양천구": "Yangcheon-gu",
+      "강서구": "Gangseo-gu",
+      "구로구": "Guro-gu",
+      "금천구": "Geumcheon-gu",
+      "영등포구": "Yeongdeungpo-gu",
+      "동작구": "Dongjak-gu",
+      "관악구": "Gwanak-gu",
+      "서초구": "Seocho-gu",
+      "강남구": "Gangnam-gu",
+      "송파구": "Songpa-gu",
+      "강동구": "Gangdong-gu"
+    }
+  }
 }

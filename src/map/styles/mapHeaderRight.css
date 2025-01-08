@@ -39,3 +39,9 @@
 .location:hover, .translation:hover {
   filter: brightness(0.8);
 }
+
+
+.translation .dropdown-menu {
+  top: 110%;
+  transform: translateX(-40%); 
+}
