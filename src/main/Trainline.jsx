@@ -1,10 +1,13 @@
 import React from 'react';
 import Trainmap from './Trainmap';
+import Line from './Line';
+
 
 function Trainline() {
   return (
     <div>
-      지하철노선도
+      
+      <Line />
     </div>
   );
 }

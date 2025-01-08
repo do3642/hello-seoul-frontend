@@ -18,7 +18,7 @@ const Navigation = ({ contentName, link }) => {
           <p>{navItems.navMap} <i className="fa-solid fa-map"></i></p>
           <span>{navItems.page}<i className="fa-solid fa-caret-right"></i></span>
         </li>
-        <li>
+        <li onClick={() => handleNavigation('/subway')}>
           <p>{navItems.subway} <i className="fa-solid fa-train-subway"></i></p>
           <span>{navItems.page}<i className="fa-solid fa-caret-right"></i></span>
         </li>
