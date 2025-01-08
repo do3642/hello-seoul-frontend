@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import districtData from '../../data/district_nx_ny_values.json'; // district_nx_ny_values.json 파일 임포트
 import { getBaseTime } from '../utils/timeUtils';
+import { getSkyConditionText, getSkyConditionIcon } from '../utils/weatherUtils';
 
 function AllWeather({ map, activeButton }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -79,11 +80,11 @@ function AllWeather({ map, activeButton }) {
       if (weather) {
         // InfoWindow 생성
         const contentString = `
-          <div class="iw_inner">
+          <div class="iw_inner weather-popup">
             <h3>${data.district}</h3>
             <p>최저 온도: ${weather.minTemperature}°C</p>
             <p>최고 온도: ${weather.maxTemperature}°C</p>
-            <p>상태: ${weather.skyCondition === '1' ? '맑음' : '흐림'}</p>
+            <p>상태: ${getSkyConditionIcon(weather.skyCondition)} ${getSkyConditionText(weather.skyCondition)}</p>
           </div>
         `;
         const infoWindow = new naver.maps.InfoWindow({
