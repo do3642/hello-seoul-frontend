@@ -3,6 +3,7 @@ import './App.css'
 import axios from 'axios';
 import Trainline from './main/Trainline';
 import Home from './pages/Home'
+import Map from './map/pages/Map'
 
 
 
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/subway' element={<Trainline />} />
+      <Route path='/map' element={<Map />} />
     </Routes>
 
     </main>

@@ -1,0 +1,47 @@
+.location, .translation {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  margin-right: 20px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.location.active, .translation.active {
+  background-color: #505050;
+  transform: scale(1.1);
+}
+
+.location.active .location-icon, .translation.active .translation-icon {
+  color: white;
+}
+
+.location-icon {
+  font-size: 40px;
+  margin-top: 5px;
+  margin-right: 3px;
+  color: rgb(46, 46, 46);
+}
+
+.translation-icon {
+  font-size: 40px;
+  margin-top: 1px;
+  color: rgb(46, 46, 46);
+}
+
+.location:hover, .translation:hover {
+  filter: brightness(0.8);
+}
+
+
+.translation .dropdown-menu {
+  top: 110%;
+  transform: translateX(-40%); 
+}

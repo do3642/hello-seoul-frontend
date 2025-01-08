@@ -7,7 +7,6 @@ const TranslationDropdown = () => {
   const { t } = useTranslation();
   const languageRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(t('한국어'));
 
   const languages = [
     { code: 'ko', label: '한국어' },
@@ -15,6 +14,12 @@ const TranslationDropdown = () => {
     { code: 'ja', label: '日本語' },
     { code: 'zh', label: '中文' }
   ];
+
+  const [selectedLanguage, setSelectedLanguage] = useState(() => {
+    const initialLang = i18n.language;
+    return languages.find(lang => lang.code === initialLang)?.label || t('한국어');
+  });
+
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -25,6 +30,12 @@ const TranslationDropdown = () => {
     setSelectedLanguage(languageLabel);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    const currentLang = i18n.language;
+    const currentLabel = languages.find(lang => lang.code === currentLang)?.label || t('한국어');
+    setSelectedLanguage(currentLabel);
+  }, [i18n.language]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
