@@ -3,10 +3,10 @@
 // skyCondition에 따른 상태를 구분하는 함수
 export const getSkyConditionText = (skyCondition) => {
   switch (skyCondition) {
-    case '1': return '맑음'; // Clear
-    case '3': return '구름 많음'; // Partly Cloudy
-    case '4': return '흐림'; // Cloudy
-    default: return '알 수 없음'; // Unknown
+    case '1': return 'clear'; // Clear
+    case '3': return 'partlyCloudy'; // Partly Cloudy
+    case '4': return 'cloudy'; // Cloudy
+    default: return 'unknown'; // Unknown
   }
 };
 

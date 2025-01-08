@@ -25,8 +25,11 @@
   border: 1px solid #ccc;
   background-color: #f5f5f5;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'GmarketSansMedium';
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .map-header button.active {
