@@ -5,6 +5,7 @@ import NaverMap from "../components/NaverMap";
 import Sidebar from "../components/Sidebar";
 import gudata from "../../data/Seoul_Gu.json"
 import AllWeather from "../components/AllWeather";
+import '../styles/media-map.css'
 
 function Map() {
   const [map, setMap] = useState(null);

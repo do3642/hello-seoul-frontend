@@ -23,7 +23,7 @@
   justify-content: center; /* 수평 정렬 */
 }
 
-.map-web-nav a {
+.map-web-nav li span {
   font-size: 16px;
   font-family: 'GmarketSansMedium', sans-serif;
   text-decoration: none; /* 링크 밑줄 제거 */
@@ -36,4 +36,8 @@
 .map-web-nav li:hover {
   background-color: #e0e0e0;
   cursor: pointer;
+}
+
+.map-web-nav li i{
+  display: none;
 }
