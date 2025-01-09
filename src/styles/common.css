@@ -21,7 +21,11 @@ span,em,strong,a{display: inline-block;}
   box-sizing:border-box;
 }
 
-
+.mappage-ctrl-box{
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
 
 
   /* 폰트 import */

@@ -39,7 +39,7 @@ function Map() {
   };
 
   return (
-    <>
+    <div className="mappage-ctrl-box">
       <NaverMap  map={map} geoJson={gudata} showCurrentLocation={showCurrentLocation}/>
       <Sidebar />
       <MapHeader onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick}/>
@@ -47,7 +47,7 @@ function Map() {
       {
         map && <AllWeather map={map} activeButton={activeButton} />
       }
-    </>
+    </div>
   )
 }
 
