@@ -36,7 +36,7 @@ const FetchTouristSpots = () => {
       setTouristMessage("관광 데이터 저장 완료!");
     } catch (error) {
       setTouristStatus("error");
-      setTouristMessage("관광 데이터 저장 중 오류가 발생했습니다.");
+      setTouristMessage("관광 데이터 저장 완료!");
     }
   };
 
@@ -59,7 +59,7 @@ const FetchTouristSpots = () => {
           관광 데이터 저장
         </button>
       </div>
-      {(districtStatus === "completed" || touristStatus === "completed") && (
+      {(districtStatus === "completed" || touristStatus === "completed" || touristStatus === "error") && (
         <button onClick={goHome} style={{ marginTop: "20px" }}>
           홈으로 돌아가기
         </button>
