@@ -1,51 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FetchTouristSpots = () => {
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [districtStatus, setDistrictStatus] = useState("idle"); // 지역 데이터 상태 관리
+  const [touristStatus, setTouristStatus] = useState("idle"); // 관광 데이터 상태 관리
+  const [districtMessage, setDistrictMessage] = useState(""); // 지역 데이터 상태 메시지
+  const [touristMessage, setTouristMessage] = useState(""); // 관광 데이터 상태 메시지
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // 백엔드 작업 시작
-    const fetchTouristSpots = async () => {
-      try {
-        const response = await fetch('http://localhost:8888/api/fetch-tourist-spots/korea', {
-          method: 'GET',
-        });
+  // 지역 데이터 저장
+  const saveDistricts = async () => {
+    setDistrictStatus("saving");
+    setDistrictMessage("지역 데이터를 저장 중입니다...");
 
-        if (response.ok) {
-          setMessage('Tourist spots fetched and saved successfully.');
-        } else {
-          setMessage('Error fetching tourist spots.');
-        }
-      } catch (error) {
-        setMessage('Error: ' + error.message);
-      } finally {
-        setLoading(false); // 로딩 완료
-      }
-    };
+    try {
+      const districtResponse = await fetch("http://localhost:8888/api/districts", { method: "POST" });
+      if (!districtResponse.ok) throw new Error("지역 데이터 저장 실패");
+      setDistrictStatus("completed");
+      setDistrictMessage("지역 데이터 저장 완료!");
+    } catch (error) {
+      setDistrictStatus("error");
+      setDistrictMessage("지역 데이터 저장 중 오류가 발생했습니다.");
+    }
+  };
 
-    fetchTouristSpots(); // 백엔드 호출
-  }, []); // 빈 배열로 컴포넌트 로드 시에만 실행
+  // 관광 데이터 저장
+  const saveTouristSpots = async () => {
+    setTouristStatus("saving");
+    setTouristMessage("관광 데이터를 저장 중입니다...");
 
-  // 버튼 클릭 시 메인 페이지로 이동
-  const goToHome = () => {
-    navigate('/'); // 메인 페이지로 이동
+    try {
+      const touristResponse = await fetch("http://localhost:8888/api/touristspot", { method: "POST" });
+      if (!touristResponse.ok) throw new Error("관광 데이터 저장 실패");
+      setTouristStatus("completed");
+      setTouristMessage("관광 데이터 저장 완료!");
+    } catch (error) {
+      setTouristStatus("error");
+      setTouristMessage("관광 데이터 저장 중 오류가 발생했습니다.");
+    }
+  };
+
+  const goHome = () => {
+    navigate("/"); // 메인 페이지로 리디렉션
   };
 
   return (
-    <div>
-      <h2>Tourist Spots Auto Fetch</h2>
-      {loading ? (
-        <p>Loading...</p> // 작업 진행 중 표시
-      ) : (
-        <div>
-          <p>{message}</p>
-          {message.includes('successfully') && ( // 성공 메시지에만 버튼 표시
-            <button onClick={goToHome}>홈으로</button>
-          )}
-        </div>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>데이터 저장 작업</h1>
+      <div style={{ marginBottom: "20px" }}>
+        <p>{districtMessage}</p>
+        <button onClick={saveDistricts} disabled={districtStatus === "saving"}>
+          지역 데이터 저장
+        </button>
+      </div>
+      <div style={{ marginBottom: "20px" }}>
+        <p>{touristMessage}</p>
+        <button onClick={saveTouristSpots} disabled={touristStatus === "saving"}>
+          관광 데이터 저장
+        </button>
+      </div>
+      {(districtStatus === "completed" || touristStatus === "completed") && (
+        <button onClick={goHome} style={{ marginTop: "20px" }}>
+          홈으로 돌아가기
+        </button>
       )}
     </div>
   );
