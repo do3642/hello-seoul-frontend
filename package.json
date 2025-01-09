@@ -21,7 +21,8 @@
     "react-dom": "^18.3.1",
     "react-i18next": "^15.4.0",
     "react-router-dom": "^6.28.1",
-    "react-svg-pan-zoom": "^3.13.1"
+    "react-svg-pan-zoom": "^3.13.1",
+    "react-zoom-pan-pinch": "^3.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
