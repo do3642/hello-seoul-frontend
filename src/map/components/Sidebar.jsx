@@ -4,15 +4,17 @@ import SidebarList from "./SidebarList";
 import Weather from "./Weather";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Pagination from "./pagination";
 
-function Sidebar() {
+function Sidebar({ map, activeButton, handleButtonClick }) {
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [touristSpots, setTouristSpots] = useState([]);
   const [sidebarHeight, setSidebarHeight] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [totalPages, setTotalPages] = useState(0); // 총 페이지 
 
   const selectedLanguage = i18n.language; // 현재 선택된 언어 코드
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,16 +43,17 @@ function Sidebar() {
 
     const fetchTouristSpots = async () => {
       try {
-        const response = await fetch(`http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}`);
+        const response = await fetch(`http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`);
         const data = await response.json();
-        setTouristSpots(data); // 가져온 데이터 상태에 저장
+        setTouristSpots(data.content); // 현재 페이지의 데이터
+        setTotalPages(data.totalPages); // 총 페이지 수
       } catch (error) {
         console.error('데이터를 불러오는 데 실패했습니다:', error);
       }
     };
 
     fetchTouristSpots(); // 데이터 호출
-  }, [selectedLanguage]);
+  }, [currentPage, selectedLanguage]);
 
 
 
@@ -64,6 +67,11 @@ function Sidebar() {
               {touristSpots.map((spot, index) => (
               <SidebarList key={index} spot={spot} />
               ))}
+                <Pagination 
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
             </div>
           </div>
           ) : (
@@ -75,10 +83,16 @@ function Sidebar() {
                 {touristSpots.map((spot, index) => (
                 <SidebarList key={index} spot={spot} />
                 ))}
+                <Pagination 
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
               </div>
             </div>
             </>
           )}
+
 
     </>
   )
