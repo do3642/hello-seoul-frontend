@@ -1,18 +1,6 @@
-import touristSpots from '/src/data/touristSpots.json'
-let markers = [];
-let infoWindows = [];
-let activeInfoWindow = null;
+import zoomInToRegion from '/src/utils/zoomInToRegion'
+import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkersForDistrict';
 
-function clearMarkers() {
-  // 모든 마커 제거
-  markers.forEach(marker => marker.setMap(null));
-  markers = []; // 배열 초기화
-
-  infoWindows.forEach(window => window.close());
-  infoWindows = []; // 배열 초기화
-
-  activeInfoWindow = null;
-}
 
 function MapHover(map, geoJson,activeButton,handleClick) {
   
@@ -50,44 +38,10 @@ function MapHover(map, geoJson,activeButton,handleClick) {
 
     // 클릭 시 구로 확대, 관광지버튼활성화, 해당구 관광지마커,팝업생성
     map.data.addListener('click', function (e) {
-      clearMarkers(); 
-      if (activeButton !== "관광지") {
-      handleClick("관광지");
-      }
+      
       var clickedFeature = e.feature;
       var district = clickedFeature.getProperty('SIG_KOR_NM');
-      var spots = touristSpots.filter(spot => spot.district === district);
-      
-
-      spots.forEach(spot => {
-        var marker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(spot.coordinates.lat, spot.coordinates.lng),
-          map: map,
-          title: spot.touristName,
-        });
-
-         // 정보 창 생성
-         var infoWindow = new naver.maps.InfoWindow({
-          content: `<div style="padding:5px;">${spot.touristName}</div>`,
-        });
-
-        // 마커에 클릭 이벤트 추가하여 정보 창 표시
-        naver.maps.Event.addListener(marker, 'click', function () {
-          if (activeInfoWindow && activeInfoWindow !== infoWindow) {
-            activeInfoWindow.close(); // 이전 정보 창 닫기
-          }
-          if (activeInfoWindow === infoWindow) {
-            infoWindow.close(); // 동일한 정보 창 닫기
-            activeInfoWindow = null; // 상태 초기화
-          } else {
-            infoWindow.open(map, marker); // 정보 창 열기
-            activeInfoWindow = infoWindow; // 활성 정보 창 업데이트
-          }
-        });
-
-        markers.push(marker); // 마커를 배열에 추가
-        infoWindows.push(infoWindow);
-      });
+      createMarkersForDistrict(map, district, activeButton, handleClick);
 
       var bounds = clickedFeature.bounds;
 
@@ -100,9 +54,8 @@ function MapHover(map, geoJson,activeButton,handleClick) {
           new naver.maps.LatLng(minPoint.y, minPoint.x), // 좌하단 (위도, 경도 순서)
           new naver.maps.LatLng(maxPoint.y, maxPoint.x)  // 우상단 (위도, 경도 순서)
         );
-    
-        var center = latLngBounds.getCenter();
-        map.morph(center,14,'linear')
+        zoomInToRegion(map, latLngBounds.getCenter().x, latLngBounds.getCenter().y, activeButton, handleClick);
+
       }
     });
     

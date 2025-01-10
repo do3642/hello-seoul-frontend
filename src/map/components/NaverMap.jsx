@@ -14,6 +14,7 @@ function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButto
     if (map && geoJson) {
       // 지도 객체와 geoJson이 있을 때만 실행
       MapHover(map, geoJson,activeButton,handleClick);
+      
     }
   }, [map, geoJson,activeButton]); // map과 geoJson 변경 시마다 실행
 
