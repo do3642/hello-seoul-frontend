@@ -48,7 +48,7 @@ function MapHover(map, geoJson,activeButton,handleClick) {
     });
 
 
-    // 클릭 시 구로 확대
+    // 클릭 시 구로 확대, 관광지버튼활성화, 해당구 관광지마커,팝업생성
     map.data.addListener('click', function (e) {
       clearMarkers(); 
       if (activeButton !== "관광지") {
