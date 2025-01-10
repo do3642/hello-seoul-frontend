@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './css/Spots.css';
 import Card from './Card';  // Card 컴포넌트 import
+import Translation from '../map/components/Translation';
 
 function Spots() {
   const buttonLabels = ['전체', '계절별', '힐링', '산책', '등산', '전통'];
@@ -36,6 +37,8 @@ function Spots() {
           <li><button onClick={() => handleNavigation('/')}>홈</button></li>
           <li><button onClick={() => handleNavigation('/map')}>지도</button></li>
           <li><button onClick={() => handleNavigation('/subway')}>지하철</button></li>
+          <li>날씨</li>
+          <li><Translation/></li>
         </ul>
       </header>
 
