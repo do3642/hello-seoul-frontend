@@ -5,6 +5,7 @@ import Weather from "./Weather";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Pagination from "./pagination";
+import zoomInToRegion from "../../utils/zoomInToRegion";
 
 function Sidebar({ map, activeButton, handleButtonClick }) {
   const { i18n } = useTranslation();
@@ -15,6 +16,21 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
   const [totalPages, setTotalPages] = useState(0); // 총 페이지 
 
   const selectedLanguage = i18n.language; // 현재 선택된 언어 코드
+
+  const handleListClick = (event) => {
+    // currentTarget을 사용해 클릭된 요소의 부모 요소에 접근
+    const lon = parseFloat(event.currentTarget.getAttribute('data-lon'));
+    const lat = parseFloat(event.currentTarget.getAttribute('data-lat'));
+  
+    // 좌표가 유효한지 확인 (NaN 체크)
+    if (isNaN(lon) || isNaN(lat)) {
+      console.error("Invalid coordinates:", lon, lat);
+      return;
+    }
+  
+    // 좌표를 이용해 지도 확대
+    zoomInToRegion(map, lon, lat, activeButton, handleButtonClick);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,8 +71,6 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
     fetchTouristSpots(); // 데이터 호출
   }, [currentPage, selectedLanguage]);
 
-
-
   return (
     <>
         {windowWidth > 820 ? (
@@ -65,7 +79,7 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
             <Weather />
             <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
               {touristSpots.map((spot, index) => (
-              <SidebarList key={index} spot={spot} />
+              <SidebarList key={index} spot={spot} onClick={handleListClick}/>
               ))}
                 <Pagination 
                   currentPage={currentPage}
@@ -81,7 +95,7 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
               <Weather />
               <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
                 {touristSpots.map((spot, index) => (
-                <SidebarList key={index} spot={spot} />
+                <SidebarList key={index} spot={spot} onClick={handleListClick}/>
                 ))}
                 <Pagination 
                   currentPage={currentPage}
