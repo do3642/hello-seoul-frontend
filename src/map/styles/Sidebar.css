@@ -5,3 +5,52 @@
   background-color: rgb(234, 227, 212);
   box-shadow: 5px 5px 5px lightgrey;
 }
+
+
+/* 기본 스타일 */
+.sidebar-list-box {
+  height: 100%; /* 기본 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤 가능 */
+  -webkit-overflow-scrolling: touch; /* 모바일에서 부드럽게 스크롤 */
+  cursor: pointer;
+}
+
+
+ /* 스크롤바 스타일 */
+ .sidebar-list-box::-webkit-scrollbar {
+  width: 6px; /* 스크롤바의 두께 */
+}
+
+.sidebar-list-box::-webkit-scrollbar-thumb {
+  background-color: #888; /* 스크롤바 thumb 색상 */
+  border-radius: 10px; /* 둥근 모서리 */
+}
+
+.sidebar-list-box::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* hover 시 색상 변경 */
+}
+
+.sidebar-list-box::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 스크롤바 배경 색상 */
+  border-radius: 10px;
+}
+
+
+/* 데스크탑 환경에서 높이 동적 설정 */
+@media (min-width: 820px) {
+  .sidebar-list-box {
+    overflow-y: scroll; /* 스크롤 가능하게 */
+  }
+}
+
+/* 모바일 환경에서 리스트 1~2개만 보이도록 높이 설정 */
+@media (max-width: 820px) {
+  .sidebar-list-box {
+    height: 200px; /* 1~2개 항목이 보이도록 높이 제한 */
+    overflow-y: auto; /* 스크롤 가능 */
+  }
+  /* 모바일에서는 스크롤바 숨기기 */
+  .sidebar-list-box::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
+  }
+}

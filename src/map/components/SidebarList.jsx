@@ -1,20 +1,20 @@
-import '../styles/SidebarList.css'
+import React from "react";
+import '../styles/SidebarList.css';
 
-function SidebarList() {
-
+function SidebarList({ spot }) {
   return (
     <div className="sidebar-list">
       <div className="sidebar-list-left">
-        <h4>구 이름</h4>
+        <h4>{spot.district}</h4>
         <br />
-        <p>관광지 이름</p>
-        <p>전화번호</p>
+        <p>{spot.touristName}</p>
+        <p>{spot.phoneNumber}</p>
       </div>
       <div className="sidebar-list-right">
-        <img src="http://placehold.it/100X100" alt="img" />
+        <img src={spot.image} alt="관광지 이미지" />
       </div>
     </div>
-  )
+  );
 }
 
 export default SidebarList;

@@ -44,6 +44,7 @@ function AllWeather({ map, activeButton }) {
 
   // 각 구의 날씨 데이터를 받아오고 지도에 팝업을 표시하는 함수
   const loadWeatherForDistricts = async () => {
+    // setIsLoading(true);
     const weatherResults = [];
 
     // districtData는 이제 `district_nx_ny_values.json`에서 가져온 데이터
@@ -70,7 +71,6 @@ function AllWeather({ map, activeButton }) {
       return marker;
     });
     setMarkers(newMarkers); // 마커 먼저 상태에 저장
-    setIsLoading(false);
 
     // 날씨 데이터를 받아온 후 마커에 팝업을 추가하는 작업
     const weatherData = await Promise.all(weatherPromises);
@@ -126,6 +126,7 @@ function AllWeather({ map, activeButton }) {
     } else if (map && activeButton === '날씨') {
       // '날씨' 버튼이 클릭된 경우, 날씨 데이터를 로드
       loadWeatherForDistricts(); // 날씨 로드
+      setIsLoading(false);
     }
     
     if (t) {
@@ -142,7 +143,7 @@ function AllWeather({ map, activeButton }) {
     };
   }, [map, activeButton,t]);
 
-  if (isLoading) {
+  if (isLoading && activeButton === '날씨') {
     return <div>날씨 데이터를 불러오는 중입니다...</div>;
   }
 

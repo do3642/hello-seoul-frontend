@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getBaseTime } from '../map/utils/timeUtils';
+import LoadingSVG from '../utils/loadingSVG'
 
 function Weather() {
   const { t } = useTranslation();
@@ -74,7 +75,7 @@ function Weather() {
   }, []); // 빈 배열로 설정하여 한 번만 호출
 
   // 로딩 중일 때, 에러 발생 시, 또는 데이터가 있을 때의 처리
-  if (isLoading) return <div>날씨 불러오는 중...</div>;
+  if (isLoading) return <div>{LoadingSVG()}</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -95,7 +96,7 @@ function Weather() {
           <span>{temperature.max}°C</span>
         </div>
       ) : (
-        <p>날씨 정보를 불러오는 중입니다.</p>
+        <p>{LoadingSVG()}</p>
       )}
     </div>
   );
