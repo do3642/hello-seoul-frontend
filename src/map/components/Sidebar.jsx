@@ -3,11 +3,15 @@ import '../styles/Sidebar.css';
 import SidebarList from "./SidebarList";
 import Weather from "./Weather";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function Sidebar() {
+  const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [touristSpots, setTouristSpots] = useState([]);
   const [sidebarHeight, setSidebarHeight] = useState(0);
+
+  const selectedLanguage = i18n.language; // 현재 선택된 언어 코드
 
 
   useEffect(() => {
@@ -25,9 +29,6 @@ function Sidebar() {
       }
     };
 
-
-
-    
     window.addEventListener("resize", handleResize); // 리사이즈 이벤트 추가
     handleResize() // 초기 실행
     return () => {
@@ -40,7 +41,7 @@ function Sidebar() {
 
     const fetchTouristSpots = async () => {
       try {
-        const response = await fetch('/src/data/touristSpots.json');  // public 폴더에 있는 JSON 파일 경로
+        const response = await fetch(`http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}`);
         const data = await response.json();
         setTouristSpots(data); // 가져온 데이터 상태에 저장
       } catch (error) {
@@ -49,7 +50,7 @@ function Sidebar() {
     };
 
     fetchTouristSpots(); // 데이터 호출
-  }, []);
+  }, [selectedLanguage]);
 
 
 

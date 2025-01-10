@@ -10,10 +10,10 @@ function Translation() {
   const [selectedLanguage, setSelectedLanguage] = useState(t('한국어'));  // 초기 언어 설정
 
   const languages = [
-    { code: 'ko', label: '한국어' },
-    { code: 'en', label: 'English' },
-    { code: 'ja', label: '日本語' },
-    { code: 'zh', label: '中文' }
+    { code: 'kor', label: '한국어' },
+    { code: 'eng', label: 'English' },
+    { code: 'jpn', label: '日本語' },
+    { code: 'chs', label: '中文' }
   ];
 
   const toggleDropdown = () => {
@@ -21,8 +21,8 @@ function Translation() {
   };
 
   const selectLanguage = (languageCode, languageLabel) => {
-    i18n.changeLanguage(languageCode);
-    setSelectedLanguage(languageLabel);  // 언어 변경
+    i18n.changeLanguage(languageCode); // 언어 변경
+    setSelectedLanguage(languageLabel);
     setIsActive(false);  // 리스트 닫기
   };
 
