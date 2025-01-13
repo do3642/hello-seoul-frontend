@@ -38,11 +38,18 @@ function MapHover(map, geoJson, activeButton, handleClick, groupedSpots) {
 
     // 클릭 시 구로 확대, 관광지버튼활성화, 해당구 관광지마커,팝업생성
     map.data.addListener('click', function (e) {
+      var color = 'rgb(169, 118, 31)'
+
+      map.data.overrideStyle(e.feature, {
+        fillColor: color,
+        strokeColor: color,
+        strokeWeight: 3,
+      });
       
       var clickedFeature = e.feature;
       var district = clickedFeature.getProperty('SIG_KOR_NM');
 
-      // 그룹화된 데이터에서 해당 구의 관관지 리스트 가져오기
+      // 그룹화된 데이터에서 해당 구의 관광지 리스트 가져오기
       const spots = groupedSpots[district];
 
       if (spots) {
