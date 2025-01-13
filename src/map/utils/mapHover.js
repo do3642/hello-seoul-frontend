@@ -2,7 +2,7 @@ import zoomInToRegion from '/src/utils/zoomInToRegion'
 import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkersForDistrict';
 
 
-function MapHover(map, geoJson,activeButton,handleClick) {
+function MapHover(map, geoJson, activeButton, handleClick) {
   
   if (map && geoJson) {
     // GeoJSON 데이터를 지도에 추가
