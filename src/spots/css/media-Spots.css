@@ -1,0 +1,77 @@
+/* max-width: 1400px */
+@media (max-width: 1400px) {
+  .spots header {
+    width: 90%;
+  }
+  .spots-container {
+  width: 90%;
+  }
+}
+
+/* max-width: 1200px */
+@media (max-width: 1200px) {
+  .spots-content-cards {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .spots-content-card {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .spots header > ul > li:nth-child(-n+3){
+    display: none;
+  }
+  .spots .mobile-menu {
+    display: block;
+  }
+}
+
+/* max-width: 768px */
+@media (max-width: 768px) {
+
+}
+@media (max-width: 687px) {
+  .spots-menu-box::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 엣지 등에서 스크롤바 숨기기 */
+  }
+  .spots header .search-box {
+    order: 1; /* h1과 ul 아래로 이동 */
+    margin-top: 10px; /* 상단 마진 추가 */
+    width: 100%;
+  }
+  .spots .search-box input {
+    width: 100%;
+  }
+  .spots header > ul {
+    order: 0; /* `h1`과 함께 상단에 위치 */
+    justify-content: space-between;
+  }
+  .spots-menu-box{
+    width: 100%;
+    overflow-X: scroll;
+    margin: 20px 0;
+    margin-right: auto;
+
+  }
+  .spots-menu-box button{
+    flex-shrink: 0;
+    width: 100px;
+  }
+  .spots-content-card {
+    width: 100%;
+  }
+}
+/* max-width: 576px */
+@media (max-width: 576px) {
+  .spots header > ul li .translation .dropdown-menu{
+    left: 0;
+  }
+  .spots .mobile-menu li{
+    flex-direction: column;
+    gap: 2px;
+    padding: 7px 0
+  }
+}
