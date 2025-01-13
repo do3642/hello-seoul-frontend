@@ -1,10 +1,9 @@
-import touristSpots from '/src/data/touristSpots.json';
-
 let markers = [];
 let infoWindows = [];
 let activeInfoWindow = null;
 
-function createMarkersForDistrict(map, identifier, activeButton, handleClick) {
+function createMarkersForDistrict(map, identifier, activeButton, handleClick, touristSpots) {
+  console.log(touristSpots)
   // 활성화 버튼이 "관광지"가 아닐 경우, handleClick 호출
   if (activeButton !== "관광지") {
     handleClick("관광지");
@@ -15,19 +14,19 @@ function createMarkersForDistrict(map, identifier, activeButton, handleClick) {
 
   // 구 또는 관광지 이름에 따라 관광지 필터링
   const spots = touristSpots.filter(spot => 
-    spot.district === identifier || spot.touristName === identifier
+    spot.guName === identifier || spot.title === identifier
   );
-
+  
   // 마커와 팝업 생성
   spots.forEach(spot => {
     const marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(spot.coordinates.lat, spot.coordinates.lng),
+      position: new naver.maps.LatLng(spot.mapy, spot.mapx),
       map: map,
-      title: spot.touristName,
+      title: spot.title,
     });
 
     const infoWindow = new naver.maps.InfoWindow({
-      content: `<div style="padding:5px;">${spot.touristName}</div>`,
+      content: `<div style="padding:5px;">${spot.title}</div>`,
     });
 
     naver.maps.Event.addListener(marker, 'click', function () {

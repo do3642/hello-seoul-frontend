@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Pagination from "./pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
+import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
 
 function Sidebar({ map, activeButton, handleButtonClick }) {
   const { i18n } = useTranslation();
@@ -21,12 +22,19 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
     // currentTarget을 사용해 클릭된 요소의 부모 요소에 접근
     const lon = parseFloat(event.currentTarget.getAttribute('data-lon'));
     const lat = parseFloat(event.currentTarget.getAttribute('data-lat'));
+
+    // 클릭된 리스트에서 관광지 이름에 접근할 수 있도록 함.
+    const spotName = event.currentTarget.querySelector('p').textContent;
   
     // 좌표가 유효한지 확인 (NaN 체크)
     if (isNaN(lon) || isNaN(lat)) {
       console.error("Invalid coordinates:", lon, lat);
       return;
     }
+
+    // 지도에 관광지 하나에 대한 마커 생성
+    clearMarkers();
+    createMarkersForDistrict(map, spotName, activeButton, handleButtonClick, touristSpots);
   
     // 좌표를 이용해 지도 확대
     zoomInToRegion(map, lon, lat, activeButton, handleButtonClick);
