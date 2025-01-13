@@ -8,6 +8,7 @@ import Translation from '../map/components/Translation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import data from '/src/data/2025서울시 문화행사 정보.json';
 
 
 function Spots() {
@@ -28,9 +29,10 @@ function Spots() {
       .catch(error => console.error('Error fetching tourist spots:', error));
 
     // 축제 데이터 요청
-    axios.get('http://localhost:8888/api/festivals')
-      .then(response => setFestivals(response.data))
-      .catch(error => console.error('Error fetching festivals:', error));
+    const sortedFestivals = data.DATA
+      .sort((a, b) => b.end_date - a.end_date) // 최신 축제부터 정렬
+      .slice(0, 4); // 최신 4개만 가져옴
+    setFestivals(sortedFestivals);
 
   }, []);
 
