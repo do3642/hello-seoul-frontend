@@ -2,6 +2,9 @@ import React from 'react';
 import './css/Card.css';
 
 function Card({ type, guName,guname,date, title, addr1, firstimage,main_img}) {
+  if(firstimage === ''){
+    firstimage = '/public/img/noimage_l.gif'
+  }
   return (
     <div className="spots-content-card">
       <p><img src={type === 'tourist' ? firstimage : main_img} alt={`${type} 이미지`}  /></p>

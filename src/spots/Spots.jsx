@@ -11,8 +11,9 @@ import axios from 'axios';
 import data from '/src/data/2025서울시 문화행사 정보.json';
 
 
+
 function Spots() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const buttonLabels = ['전체', '계절별', '힐링', '산책', '등산', '전통'];
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,10 +22,24 @@ function Spots() {
   const [touristSpots, setTouristSpots] = useState([]);
   const [festivals, setFestivals] = useState([]);
 
+  // 언어 코드 변환 함수
+  const getLanguageCode = (lang) => {
+    const languageMap = {
+      ko: 'kor',
+      en: 'eng',
+      ja: 'jpn',
+      zh: 'chs'
+    };
+    return languageMap[lang] || 'kor'; // 기본값은 'kor'로 설정
+  };
+
+
   // API 호출하여 데이터 가져오기
   useEffect(() => {
+    const languageCode = i18n.language; 
+    const replaceLang = getLanguageCode(languageCode)
     // 관광지 데이터 요청
-    axios.get('http://localhost:8888/api/tourist-spots')
+    axios.get(`http://localhost:8888/api/tourist-spots?lang=${replaceLang}`)
       .then(response => setTouristSpots(response.data))
       .catch(error => console.error('Error fetching tourist spots:', error));
 
@@ -34,7 +49,7 @@ function Spots() {
       .slice(0, 4); // 최신 4개만 가져옴
     setFestivals(sortedFestivals);
 
-  }, []);
+  }, [i18n.language]);
 
   // 경로 이동 함수
   const handleNavigation = (path) => {
