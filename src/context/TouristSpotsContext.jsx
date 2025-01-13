@@ -5,7 +5,7 @@ const TouristSpotsContext = createContext();
 export const TouristSpotsProvider = ({ children }) => {
   const [touristSpots, setTouristSpots] = useState([]); // 배열 형식 유지
   const [groupedSpots, setGroupedSpots] = useState({}); // 그룹화된 데이터 상태 추가
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [selectedLanguage, setSelectedLanguage] = useState("kor");
   const [totalPages, setTotalPages] = useState(1);
 
