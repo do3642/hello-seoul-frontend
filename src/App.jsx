@@ -12,6 +12,7 @@ import SpotsHealing from './spots/SpotsHealing';
 import SpotsWalk from './spots/SpotsWalk';
 import SpotsHiking from './spots/SpotsHiking';
 import SpotsTraditional from './spots/SpotsTraditional';
+import SpotsAllFestival from './spots/SpotsAllFestival';
 
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route path='/spots' element={<Spots />} >
         <Route path='' element={<SpotsMain />} />
         <Route path='alltourist' element={<SpotsAllTourist />} />
+        <Route path='allfestival' element={<SpotsAllFestival />} />
         <Route path='season' element={<SpotsSeason />} />
         <Route path='healing' element={<SpotsHealing />} />
         <Route path='walk' element={<SpotsWalk />} />

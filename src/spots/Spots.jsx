@@ -54,11 +54,7 @@ function Spots() {
   const handleButtonClick = (index) => {
     setActiveIndex(index);
   };
-  const handleMoreClick = () => {
-    // /spots/alltourist로 경로 변경
-    navigate('/spots/alltourist');
 
-  };
 
   return (
     <div className='spots'>
@@ -97,7 +93,7 @@ function Spots() {
 
         <article className='spots-content'>
           {/* <SpotsMain handleMoreClick={handleMoreClick}  setIsAutoWidth={setIsAutoWidth}/> */}
-          <Outlet context={{ handleMoreClick }} /> 
+          <Outlet context={{ handleNavigation }} /> 
         </article>
       </section>
 

@@ -6,12 +6,12 @@ import Card from "./Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
-function SpotsAllTourist() {
+function SpotsAllFestival() {
   const { t, i18n } = useTranslation();
-  const [touristSpots, setTouristSpots] = useState([]);
+  const [festivals, setFestivals] = useState([]);
   const [excludeIds, setExcludeIds] = useState([]); 
 
-  // 무한스크롤
+
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
@@ -19,10 +19,11 @@ function SpotsAllTourist() {
   const fetchData = async () => {
     const languageCode = i18n.language;
     const replaceLang = getLanguageCode(languageCode);
+
     try {
       setLoading(true);
       // 관광지 데이터 요청 (페이지 번호 추가)
-      const response = await axios.get(`http://localhost:8888/api/tourist-spots`, {
+      const response = await axios.get(`http://localhost:8888/api/festivals`, {
         params: {
           lang: replaceLang,
           page: page,
@@ -34,28 +35,26 @@ function SpotsAllTourist() {
       if (response.data.length === 0) {
         setHasMore(false);
       } else {
-        const newSpots = response.data.filter(spot => !excludeIds.includes(spot.id));
-        
-        // 새로운 관광지만 touristSpots 상태에 추가
-        setTouristSpots(prevSpots => [...prevSpots, ...newSpots]);
+        const newFestival = response.data.filter(festival => !excludeIds.includes(festival.id));
+        console.log(newFestival);
+        console.log(response.data)
 
-        // 새로 받은 관광지 ID들을 excludeIds 배열에 추가
-        setExcludeIds(prevIds => [...prevIds, ...newSpots.map(spot => spot.id)]);
+        setFestivals(prevSpots => [...prevSpots, ...newFestival]);
+
+        setExcludeIds(prevIds => [...prevIds, ...newFestival.map(festival => festival.id)]);
 
         setPage(prevPage => prevPage + 1);
       }
     } catch (error) {
-      console.error('Error fetching tourist spots:', error);
+      console.error('Error fetching Festivals:', error);
     } finally {
       setLoading(false);
     }
-    console.log(excludeIds);
-
   };
 
   // 컴포넌트 마운트 시 첫 번째 데이터 로딩
   useEffect(() => {
-    setTouristSpots([]); // 기존 데이터 날리기
+    setFestivals([]); // 기존 데이터 날리기
     setExcludeIds([]); // excludeIds 초기화
     setPage(0); // 페이지 초기화
     fetchData();
@@ -63,21 +62,21 @@ function SpotsAllTourist() {
 
 
   return (
-    <div className="all-tourist">
+    <div className="all-festival">
       <div className="spots-content-top">
-        <h2>{t('spots.allSpots')}</h2>
+        <h2>{t('spots.allFestival')}</h2>
       </div>
 
       <InfiniteScroll
-        dataLength={touristSpots.length} // 현재 로드된 데이터 개수
+        dataLength={festivals.length} // 현재 로드된 데이터 개수
         next={fetchData} // 스크롤할 때마다 호출되는 함수
         hasMore={hasMore} // 더 이상 데이터가 없을 경우
         loader={<h4>Loading...</h4>} // 로딩 중 표시
         endMessage={<p>No more tourist spots available</p>} // 데이터 끝에 도달했을 때 메시지
       >
-        <div className="spots-content-cards spots-all-tourist">
-          {touristSpots.map((spot, index) => (
-            <Card key={index} type="tourist" {...spot} />
+        <div className="spots-content-cards spots-all-festival">
+          {festivals.map((spot, index) => (
+            <Card key={index} type="festival" {...spot} />
           ))}
         </div>
       </InfiniteScroll>
@@ -85,4 +84,4 @@ function SpotsAllTourist() {
   );
 }
 
-export default SpotsAllTourist;
+export default SpotsAllFestival;

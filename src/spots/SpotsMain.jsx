@@ -9,10 +9,11 @@ import getLanguageCode from '../utils/getLanguageCode';
 
 
 function SpotsMain() {
-  const { handleMoreClick } = useOutletContext();
+  const { handleNavigation } = useOutletContext();
   const { t, i18n } = useTranslation();
   const [touristSpots, setTouristSpots] = useState([]);
   const [festivals, setFestivals] = useState([]);
+  const [excludeIds, setExcludeIds] = useState([]); 
 
 
     // API 호출하여 데이터 가져오기
@@ -20,12 +21,29 @@ function SpotsMain() {
       const languageCode = i18n.language; 
       const replaceLang = getLanguageCode(languageCode)
       // 관광지 데이터 요청
-      axios.get(`http://localhost:8888/api/tourist-spots?lang=${replaceLang}&page=0&size=4`)
+
+
+      axios.get(`http://localhost:8888/api/tourist-spots`, {
+      params: {
+        lang: replaceLang,
+        page: 0,
+        size: 4,
+        excludeIds: excludeIds.join(',')
+      }
+      })
         .then(response => setTouristSpots(response.data))
         .catch(error => console.error('Error fetching tourist spots:', error));
   
       // 축제 데이터 요청
-      axios.get(`http://localhost:8888/api/festivals?lang=${replaceLang}`)
+
+      axios.get(`http://localhost:8888/api/festivals`, {
+        params: {
+          lang: replaceLang,
+          page: 0,
+          size: 4,
+          excludeIds: excludeIds.join(',')
+        }
+      })
       .then(response => setFestivals(response.data))
       .catch(error => console.error('Error fetching festivals:', error));
   
@@ -36,7 +54,7 @@ function SpotsMain() {
     <>
       <div className="spots-content-top">
         <h2>{t('spots.allSpots')}</h2>
-        <button onClick={handleMoreClick}>
+        <button onClick={() => handleNavigation('/spots/alltourist')}>
           <i className="fas fa-plus"> </i>
           {t('spots.more')}
         </button>
@@ -49,7 +67,7 @@ function SpotsMain() {
 
       <div className="spots-content-top">
         <h2>{t('spots.allFestival')}</h2>
-        <button>
+        <button onClick={() => handleNavigation('/spots/allfestival')}>
           <i className="fas fa-plus"> </i>
           {t('spots.more')}
         </button>

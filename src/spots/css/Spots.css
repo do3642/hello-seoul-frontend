@@ -262,6 +262,6 @@
   color: #666;
 }
 
-.spots-all-tourist{
+.spots-all-tourist, .spots-all-festival{
   flex-wrap: wrap;
 }

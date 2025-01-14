@@ -1,12 +1,12 @@
 import React from 'react';
 import './css/Card.css';
 
-function Card({ type, guName,date, title, addr1, firstimage}) {
+function Card({ type, guName, title, addr1, firstimage,contentid }) {
   if(firstimage === ''){
-    firstimage = '/public/img/noimage_l.gif'
+    firstimage = '/img/noimage_l.gif'
   }
   return (
-    <div className="spots-content-card">
+    <div className="spots-content-card" data-id={contentid}>
       <p><img src={firstimage} alt={`${type} 이미지`}  /></p>
       <div className="spots-content-card-text">
         <div className="spots-card-districts">{guName}</div>
