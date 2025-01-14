@@ -67,5 +67,18 @@
       "송파구": "송파구",
       "강동구": "강동구"
     }
+  },
+  "spots": {
+    "allSpots": "전체 관광지",
+    "btn-label": {
+      "all": "전체",
+      "season": "계절",
+      "healing": "힐링",
+      "walk": "산책",
+      "hiking": "등산",
+      "traditional": "전통"
+    },
+    "allFestival": "전체 축제",
+    "more": "더보기"
   }
 }

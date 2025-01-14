@@ -67,5 +67,18 @@
       "송파구": "松坡区",
       "강동구": "江东区"
     }
+  },
+  "spots": {
+    "allSpots": "所有旅游景点",
+    "btn-label": {
+        "all": "全部",
+        "season": "季节",
+        "healing": "疗愈",
+        "walk": "散步",
+        "hiking": "徒步",
+        "traditional": "传统"
+    },
+    "allFestival": "所有节日",
+    "more": "查看更多"
   }
 }

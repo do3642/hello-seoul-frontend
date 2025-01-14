@@ -67,5 +67,18 @@
       "송파구": "Songpa-gu",
       "강동구": "Gangdong-gu"
     }
+  },
+  "spots": {
+    "allSpots": "All Tourist Spots",
+    "btn-label": {
+        "all": "All",
+        "season": "Season",
+        "healing": "Healing",
+        "walk": "Walk",
+        "hiking": "Hiking",
+        "traditional": "Traditional"
+    },
+    "allFestival": "All Festivals",
+    "more": "See More"
   }
 }

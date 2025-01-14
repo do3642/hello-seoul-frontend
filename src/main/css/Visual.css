@@ -227,3 +227,17 @@ color: #fff;
 .main-translation{}
 
 
+.main-weather .weather-icon i.fa-sun{
+  color: #f8d71c;
+}
+.main-weather .weather-icon i.fa-cloud,
+.main-weather .weather-icon i.fa-cloud-sun,
+.main-weather .weather-icon i.fa-snowflake{
+  color: #f0f0f0;
+}
+.main-weather .weather-icon i.fa-cloud-showers-heavy{
+  color: #b0b0b0;
+}
+
+
+

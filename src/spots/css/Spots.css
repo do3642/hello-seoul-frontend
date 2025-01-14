@@ -105,6 +105,31 @@
   cursor: pointer;
 }
 
+
+.spots .weather-container, .spots .weather-container .weather-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+.spots .weather-container .weather-temperature span{
+  font-family: 'SeoulHangangM';
+}
+.spots .weather-icon i.fa-sun{
+  color: #f8d71c;
+}
+.spots .weather-icon i.fa-cloud,
+.spots .weather-icon i.fa-cloud-sun,
+.spots .weather-icon i.fa-snowflake{
+  color: #f0f0f0;
+}
+.spots .weather-icon i.fa-cloud-showers-heavy{
+  color: #b0b0b0;
+}
+
+
+
+
 /* 카드 리스트 */
 .spots-container {
   display: flex;
@@ -120,6 +145,9 @@
   gap: 10px;
   margin: 20px auto;
   
+}
+.spots-menu-box.auto-width button {
+  width: auto;
 }
 
 .spots-menu-box button {
@@ -232,4 +260,8 @@
 }
 .spots .mobile-menu ul li i{
   color: #666;
+}
+
+.spots-all-tourist{
+  flex-wrap: wrap;
 }

@@ -1,4 +1,8 @@
-/* max-width: 1400px */
+@media (max-width: 1450px) {
+  .spots header > ul{
+    gap: 23px;
+  }
+}
 @media (max-width: 1400px) {
   .spots header {
     width: 90%;
@@ -6,6 +10,7 @@
   .spots-container {
   width: 90%;
   }
+
 }
 
 /* max-width: 1200px */
@@ -18,9 +23,6 @@
     width: 48%;
     margin-bottom: 20px;
   }
-}
-
-@media (max-width: 900px) {
   .spots header > ul > li:nth-child(-n+3){
     display: none;
   }
@@ -29,11 +31,9 @@
   }
 }
 
-/* max-width: 768px */
-@media (max-width: 768px) {
 
-}
-@media (max-width: 687px) {
+
+@media (max-width: 768px) {
   .spots-menu-box::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 엣지 등에서 스크롤바 숨기기 */
   }
@@ -73,5 +73,26 @@
     flex-direction: column;
     gap: 2px;
     padding: 7px 0
+  }
+  .spots header h1 {
+    font-size: 14px;
+  }
+  .spots .weather-container h2,
+  .spots .weather-container .weather-temperature span,
+  .spots .weather-container .weather-icon i{
+    font-size: 12px;
+  }
+  .spots header > ul > li{
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .spots-content-top h2{
+    font-size: 1.2em;
+  }
+  .spots-content-top button{
+    font-size: 0.8em;
+    padding: 5px 18px 5px 10px;
   }
 }
