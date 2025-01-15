@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/Card.css';
+
 
 function Card({ type, guName, title, addr1, firstimage,contentid }) {
   if(firstimage === ''){

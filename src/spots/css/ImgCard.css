@@ -1,0 +1,42 @@
+.spots-img-card {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.spots-img-card figure {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.spots-img-card figure p {
+  width: 100%;
+  height: 100%;
+}
+
+.spots-img-card figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.spots-img-card figure:hover img {
+  transform: scale(1.05); /* 이미지 확대 효과 */
+}
+
+.spots-img-card figure figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: 'PressStart2P';
+}

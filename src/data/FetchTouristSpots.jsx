@@ -61,6 +61,23 @@ const FetchTouristSpots = () => {
     }
   };
 
+  const saveTouristDateDetails = async (contentid) => {
+    setDistrictMessage("데이터를 저장 중입니다...");
+  
+    try {
+      const response = await fetch(`http://localhost:8888/api/touristdateSave`, {
+        method: "POST",
+      });
+  
+      if (!response.ok) throw new Error("데이터 저장 실패");
+  
+      setDistrictMessage("데이터 저장 완료!");
+    } catch (error) {
+      setDistrictMessage("데이터 저장 중 오류가 발생했습니다.");
+    }
+  };
+
+
   const goHome = () => {
     navigate("/"); // 메인 페이지로 리디렉션
   };
@@ -89,6 +106,8 @@ const FetchTouristSpots = () => {
               </button>
             </div>
           ))}
+         <button onClick={() => saveTouristDateDetails()}>관광지 날짜 데이터 저장</button>
+
         </>
       )}
       {districtStatus === "completed" &&

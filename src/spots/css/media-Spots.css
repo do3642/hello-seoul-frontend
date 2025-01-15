@@ -4,7 +4,7 @@
   }
 }
 @media (max-width: 1400px) {
-  .spots header {
+  .spots header,.footer-container{
     width: 90%;
   }
   .spots-container {
@@ -28,6 +28,9 @@
   }
   .spots .mobile-menu {
     display: block;
+  }
+  .footer-container {
+    padding-bottom: 30px;
   }
 }
 
@@ -63,6 +66,8 @@
   .spots-content-card {
     width: 100%;
   }
+
+
 }
 /* max-width: 576px */
 @media (max-width: 576px) {
@@ -84,6 +89,9 @@
   }
   .spots header > ul > li{
     font-size: 14px;
+  }
+  .footer-container {
+    padding-bottom: 60px;
   }
 }
 

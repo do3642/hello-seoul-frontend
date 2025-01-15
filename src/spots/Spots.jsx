@@ -1,15 +1,13 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './css/Spots.css';
+import './css/Card.css';
 import './css/media-Spots.css';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Translation from '../map/components/Translation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
 import Weather from '/src/main/Weather';
-import SpotsMain from './SpotsMain';
-import SpotsAllTourist from './SpotsAllTourist';
 
 
 function Spots() {
@@ -113,6 +111,16 @@ function Spots() {
             </li>
            </ul>
         </div>
+
+
+        <footer className="footer">
+          <div className="footer-container">
+            <p>© 2025 안녕, 서울</p>
+            <p>서울의 매력을 한눈에, 당신의 여행을 더 특별하게.</p>
+            <small className="footer-developers">Developed by: 이영찬, 최하영, 권민수</small>
+          </div>
+        </footer>
+
 
     </div>
   );

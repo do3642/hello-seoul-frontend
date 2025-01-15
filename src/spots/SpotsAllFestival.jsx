@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
 import InfiniteScroll from "react-infinite-scroll-component";
+import loadingSVG from '../utils/loadingSVG'
 
 
 function SpotsAllFestival() {
@@ -36,8 +37,6 @@ function SpotsAllFestival() {
         setHasMore(false);
       } else {
         const newFestival = response.data.filter(festival => !excludeIds.includes(festival.id));
-        console.log(newFestival);
-        console.log(response.data)
 
         setFestivals(prevSpots => [...prevSpots, ...newFestival]);
 
@@ -71,8 +70,8 @@ function SpotsAllFestival() {
         dataLength={festivals.length} // 현재 로드된 데이터 개수
         next={fetchData} // 스크롤할 때마다 호출되는 함수
         hasMore={hasMore} // 더 이상 데이터가 없을 경우
-        loader={<h4>Loading...</h4>} // 로딩 중 표시
-        endMessage={<p>No more tourist spots available</p>} // 데이터 끝에 도달했을 때 메시지
+        loader={<h4>{loadingSVG()}</h4>} // 로딩 중 표시
+        endMessage={<p className="load-all-data">모든 항목을 확인하셨습니다!</p>} // 데이터 끝에 도달했을 때 메시지
       >
         <div className="spots-content-cards spots-all-festival">
           {festivals.map((spot, index) => (

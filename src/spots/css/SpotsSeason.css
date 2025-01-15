@@ -1,0 +1,108 @@
+.spots-season-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #ced4da;
+  padding: 10px 0;
+}
+
+.spots-season-top h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: 'GmarketSansMedium';
+}
+.spots-season-top button{
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 5px 20px;
+  font-size: 1em;
+  font-family: 'GmarketSansMedium';
+  cursor: pointer;
+  transition: .5s;
+}
+.spots-season-top button:hover{
+  opacity: 0.7;
+}
+.spots-season-top button.season-ani{
+  animation: season-btn 1s forwards;
+}
+
+@keyframes season-btn {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+  
+}
+
+
+.spots-season-top .spring-btn{
+  background-color: #32CD32 ;
+  color: #fff;
+}
+.spots-season-top .summer-btn{
+  background-color: #FF6347;
+  color: #fff;
+}
+.spots-season-top .fall-btn{
+  background-color: #D2691E ;
+  color: #fff;
+}
+.spots-season-top .winter-btn{
+  background-color: #1E90FF ;
+  color: #fff;
+}
+
+
+
+.spring-img-cards, .summer-img-cards, .fall-img-cards, .winter-img-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.spring-img-cards .spots-img-card:nth-child(1) {
+  grid-column: span 2; 
+  grid-row: span 2; 
+}
+
+.spring-img-cards .spots-img-card:nth-child(2),
+.spring-img-cards .spots-img-card:nth-child(3) {
+  grid-column: span 1; 
+}
+
+.spring-img-cards .spots-img-card:nth-child(4) {
+  grid-column: span 1; 
+}
+
+.spring-img-cards .spots-img-card:nth-child(5) {
+  grid-column: span 2; 
+  grid-row: span 2; 
+}
+
+.spring-img-cards .spots-img-card:nth-child(6) {
+  grid-column: span 1; 
+}
+
+.summer-img-cards .spots-img-card:nth-child(1) {
+  grid-column: span 2; 
+  grid-row: span 2; 
+}
+.fall-img-cards .spots-img-card:nth-child(2) {
+  grid-column: span 2; 
+  grid-row: span 2; 
+}
+.winter-img-cards .spots-img-card:nth-child(1),
+.winter-img-cards .spots-img-card:nth-child(5) {
+  grid-column: span 2; 
+  grid-row: span 2; 
+}
