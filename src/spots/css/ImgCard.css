@@ -2,12 +2,18 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: .5s;
+
+}
+.spots-img-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .spots-img-card figure {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -18,7 +24,7 @@
 
 .spots-img-card figure img {
   width: 100%;
-  height: auto;
+  height: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
   transition: transform 0.3s ease;
@@ -30,13 +36,33 @@
 
 .spots-img-card figure figcaption {
   position: absolute;
-  bottom: 0;
+  bottom: -100%;
   left: 0;
   width: 100%;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   color: white;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: bold;
   font-family: 'PressStart2P';
+  transition: .5s;
+  line-height: 1.5;
+
+  
+}
+.spots-img-card:hover figure figcaption {
+  bottom: 0;
+}
+
+
+.spots-img-card figure figcaption p:first-child {
+  font-family: 'Pretendard-Regular';
+  color: #ddd;
+  font-size: .8em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.spots-img-card figure figcaption p:last-child {
+  font-family: 'Pretendard-Regular';
+  font-size: 1em;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); 
 }

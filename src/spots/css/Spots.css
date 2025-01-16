@@ -20,6 +20,7 @@
   font-size: 24px;
   font-weight: bold;
   font-family: 'SeoulHangangM';
+  cursor: pointer;
 }
 
 
@@ -68,7 +69,7 @@
   display: flex;
   list-style: none;
   align-items: center;
-  gap: 30px;
+  gap: 29px;
 }
 
 .spots header > ul > li {
@@ -81,6 +82,52 @@
   color: #888;
   cursor: pointer;
   font-family: 'Pretendard-Regular';
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+  transition: .5s;
+}
+.spots header > ul li button:after {
+  content: '';
+  position: absolute;
+  left: 50%;top: 80%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0px;
+  background-color: transparent;
+  border-radius: 100%;
+  transition: .5s;
+  z-index: -1;
+}
+
+.spots header > ul li button:hover {
+  color: #333;
+}
+.spots header > ul li button:hover::after {
+  width: 30px;
+  height: 30px;
+}
+.spots header > ul li:nth-of-type(1) button:after{
+  left: 20%;
+}
+.spots header > ul li:nth-of-type(1) button:hover::after {
+  background-color: rgba(255, 99, 71, 0.7);
+}
+
+
+.spots header > ul li:nth-of-type(2) button:after{
+  left: 50%;
+  top: 15%;
+}
+.spots header > ul li:nth-of-type(2) button:hover::after {
+  background-color: rgba(70, 130, 180, 0.7);
+}
+
+.spots header > ul li:nth-of-type(3) button:after{
+  left: 80%;
+}
+.spots header > ul li:nth-of-type(3) button:hover::after {
+  background-color: rgba(50, 205, 50, 0.7);
 }
 
 .spots header > ul li .translation{
@@ -161,6 +208,7 @@
   color: #000;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  font-family: 'Pretendard-Regular';
 }
 
 
@@ -242,7 +290,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   display: flex;
-  
+  cursor: pointer;
 }
 
 .spots .mobile-menu ul li{
@@ -322,4 +370,54 @@
 .footer small{
   font-size: 12px;
   color: #999;
+}
+
+
+
+.spots-healing,.spots-hiking,.spots-traditional,.spots-walk{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 15px;
+  width: 60%;
+  margin: 20px auto;
+}
+.spots-healing img,.spots-hiking img,.spots-traditional img,.spots-walk img{
+  width: 100%;
+  object-fit: fill;
+}
+
+
+
+.spots-search-container h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: 'GmarketSansMedium';
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.spots-search-container .spots-content-cards{
+  flex-wrap: wrap;
+}
+
+.spots-no-results{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  font-size: 20px;
+  color: #555;
+  font-family: 'GmarketSansMedium';
+  line-height: 1.5;
+}
+.spots-no-results p, .spots-no-results p strong{
+  font-family: inherit;
+}
+.spots-no-results p strong{
+  font-size: 1.3em;
+  color: #2a247a;
 }

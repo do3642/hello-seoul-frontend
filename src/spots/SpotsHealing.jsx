@@ -1,8 +1,7 @@
 function SpotsHealing() {
   return (
-    <div>
-      <h2>Healing Tourist Spots</h2>
-      <p>Content for healing tourist spots will go here.</p>
+    <div className="spots-healing">
+      <img src="https://www.ddtech.kr/html/img/ready.jpg" alt="" />
     </div>
   );
 }

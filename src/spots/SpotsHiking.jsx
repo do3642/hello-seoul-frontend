@@ -1,8 +1,7 @@
 function SpotsHiking() {
   return (
-    <div>
-      <h2>Hiking Tourist Spots</h2>
-      <p>Content for hiking tourist spots will go here.</p>
+    <div className="spots-hiking">
+      <img src="https://www.ddtech.kr/html/img/ready.jpg" alt="" />
     </div>
   );
 }

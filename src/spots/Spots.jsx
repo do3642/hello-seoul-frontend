@@ -1,6 +1,8 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './css/Spots.css';
 import './css/Card.css';
+import './css/SpotsSeason.css';
+import './css/ImgCard.css';
 import './css/media-Spots.css';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,6 +16,7 @@ function Spots() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState('');
 
 
   const buttonLabels = [
@@ -53,6 +56,14 @@ function Spots() {
     setActiveIndex(index);
   };
 
+  // 검색어 입력 시 경로 이동
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/spots/search?search=${searchTerm}`);  // 검색어를 쿼리로 전달
+    }
+  };
+
+
 
   return (
     <div className='spots'>
@@ -60,8 +71,16 @@ function Spots() {
       <header>
         <h1 onClick={() => handleNavigation('/')}>{t('logo')}</h1>
         <div className="search-box">
-          <input type="search" name="search" id="spots-search" />
-          <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon'/>
+          <input 
+            type="search"
+            name="search" 
+            id="spots-search" 
+            placeholder={t('spots.search')}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}  // 엔터키로 검색
+
+           />
+          <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon' onClick={handleSearch}/>
         </div>
         <ul>
           <li><button onClick={() => handleNavigation('/')}>{t('logo')}</button></li>
@@ -91,7 +110,7 @@ function Spots() {
 
         <article className='spots-content'>
           {/* <SpotsMain handleMoreClick={handleMoreClick}  setIsAutoWidth={setIsAutoWidth}/> */}
-          <Outlet context={{ handleNavigation }} /> 
+          <Outlet context={{ handleNavigation,setActiveIndex }}/> 
         </article>
       </section>
 

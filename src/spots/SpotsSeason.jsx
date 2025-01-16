@@ -1,7 +1,12 @@
-import './css/SpotsSeason.css';
+import { useOutletContext } from 'react-router-dom';
 import SeasonBox from './SeasonBox';
+import { useEffect } from 'react';
 
 function SpotsSeason() {
+    const { setActiveIndex } = useOutletContext();
+    useEffect(() => {
+        setActiveIndex(1);
+    }, [setActiveIndex]);
   return (
     <div className="spots-season">
     <SeasonBox

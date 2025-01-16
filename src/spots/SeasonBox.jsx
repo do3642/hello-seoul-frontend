@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import ImgCard from "./ImgCard";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import getLanguageCode from '../utils/getLanguageCode';
 
 function SeasonBox({ seasonName, seasonNameKR }){
   const { t, i18n } = useTranslation();
   const [spots, setSpots] = useState([]);
 
   const [animate, setAnimate] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false); // 애니메이션이 진행 중인지 여부
+  const [isAnimating, setIsAnimating] = useState(false); 
   
  // 각 계절에 맞는 데이터 요청 함수
  const fetchSeasonData = (seasonKR) => {
 
   axios
-    .get(`http://localhost:8888/api/season-spots`, { // 서버 주소는 나중에 바꾸기
+    .get(`http://localhost:8888/api/season-spots`, { 
       params: {
         seasonKR: seasonNameKR, // 계절 한글 이름
       }
@@ -43,7 +42,7 @@ useEffect(() => {
     }, 1000); // 애니메이션 지속 시간 1초
   };
 
-
+  
   return (
     <div className={`${seasonName}-box`}>
       <div className="spots-season-top">
@@ -52,7 +51,7 @@ useEffect(() => {
           className={`${seasonName}-btn ${animate ? 'season-ani' : ''}`}
           onClick={handleButtonClick}
           >
-            재추천
+            <i className="fa fa-sync-alt"></i>새로 추천
         </button>
       </div>
 

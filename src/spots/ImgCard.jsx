@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/ImgCard.css';
+
 
 function ImgCard({ spot }) {
   if(spot.firstimage === ''){

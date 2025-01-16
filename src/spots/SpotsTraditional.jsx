@@ -1,8 +1,7 @@
 function SpotsTraditional() {
   return (
-    <div>
-      <h2>Traditional Tourist Spots</h2>
-      <p>Content for traditional tourist spots will go here.</p>
+    <div className="spots-traditional">
+      <img src="https://www.ddtech.kr/html/img/ready.jpg" alt="" />
     </div>
   );
 }
