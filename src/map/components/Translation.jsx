@@ -3,11 +3,13 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import i18n from "../../locales/i18n";
+import { TouristSpots } from '../../context/TouristSpotsContext';
 
 function Translation() {
   const { t } = useTranslation();
+  const { setSelectedLanguage } = TouristSpots();
   const [isActive, setIsActive] = useState(false);  // active 상태 유지
-  const [selectedLanguage, setSelectedLanguage] = useState(t('한국어'));  // 초기 언어 설정
+  const [displayedLanguage, setDisplayedLanguage] = useState(t('한국어'));  // 초기 언어 설정
 
   const languages = [
     { code: 'kor', label: '한국어' },
@@ -22,7 +24,8 @@ function Translation() {
 
   const selectLanguage = (languageCode, languageLabel) => {
     i18n.changeLanguage(languageCode); // 언어 변경
-    setSelectedLanguage(languageLabel);
+    setDisplayedLanguage(languageLabel);
+    setSelectedLanguage(languageCode);
     setIsActive(false);  // 리스트 닫기
   };
 
