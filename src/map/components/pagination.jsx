@@ -3,27 +3,31 @@ import '../styles/Pagination.css';
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const maxPagesToShow = 5; // 한 블록당 최대 페이지 수
-  const startPage = Math.floor((currentPage - 1) / maxPagesToShow) * maxPagesToShow + 1; // 현재 블록의 시작 페이지
-  const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages); // 현재 블록의 끝 페이지
+  
+  // currentPage가 0부터 시작하므로, startPage를 올바르게 계산
+  const startPage = Math.floor(currentPage / maxPagesToShow) * maxPagesToShow + 1;
+  const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
 
   // 이전 버튼 함수
   const handlePrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
+    if (currentPage >= maxPagesToShow) {
+      const previousBlockLastPage = startPage - 1; // 이전 블록의 마지막 페이지로 이동
+      onPageChange(previousBlockLastPage - 1); // 0-index 보정
     }
   };
 
   // 다음 버튼 함수
   const handleNext = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
+    const nextBlockFirstPage = startPage + maxPagesToShow - 1;
+    if (currentPage < totalPages - 1 && endPage < totalPages) {
+      onPageChange(nextBlockFirstPage);
     }
   };
 
   // 목록을 누르면 이동하도록 해주는 함수
   const handlePageClick = (page) => {
-    if (page !== currentPage) {
-      onPageChange(page);
+    if (page !== currentPage + 1) {
+      onPageChange(page - 1); // 페이지 번호와 currentPage를 맞추기 위해 -1
     }
   };
 
@@ -31,7 +35,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
     <div className="pagination">
       <button 
         onClick={handlePrevious} 
-        disabled={currentPage === 1} 
+        disabled={currentPage < maxPagesToShow} 
         className="pagination-button"
       >
         이전
@@ -41,15 +45,15 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         <button
           key={page}
           onClick={() => handlePageClick(page)}
-          className={`pagination-button ${page === currentPage ? "active" : ""}`}
+          className={`pagination-button ${page === currentPage + 1 ? "active" : ""}`}
         >
-          {page+1}
+          {page}
         </button>
       ))}
 
       <button 
         onClick={handleNext} 
-        disabled={currentPage === totalPages} 
+        disabled={endPage >= totalPages} 
         className="pagination-button"
       >
         다음

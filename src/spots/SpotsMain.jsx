@@ -19,13 +19,13 @@ function SpotsMain() {
     // API 호출하여 데이터 가져오기
     useEffect(() => {
       const languageCode = i18n.language; 
-      const replaceLang = getLanguageCode(languageCode)
+      // const replaceLang = getLanguageCode(languageCode)
       // 관광지 데이터 요청
 
 
       axios.get(`http://localhost:8888/api/tourist-spots`, {
       params: {
-        lang: replaceLang,
+        lang: languageCode,
         page: 0,
         size: 4,
         excludeIds: excludeIds.join(',')
@@ -38,7 +38,7 @@ function SpotsMain() {
 
       axios.get(`http://localhost:8888/api/festivals`, {
         params: {
-          lang: replaceLang,
+          lang: languageCode,
           page: 0,
           size: 4,
           excludeIds: excludeIds.join(',')

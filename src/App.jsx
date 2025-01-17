@@ -24,7 +24,6 @@ function App() {
 
   return (
     <main>
-      {/* <Trainline/> */}
       <TouristSpotsProvider>
         <Routes>
           <Route path='/' element={<Home />} />
@@ -46,7 +45,6 @@ function App() {
           <Route path='/api/touristspot' element={<FetchTouristSpots />} />
         </Routes>
       </TouristSpotsProvider>
-
     </main>
   )
 }

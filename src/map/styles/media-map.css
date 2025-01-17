@@ -119,10 +119,12 @@
   .side-bar{
     transition: .5s;
     width: 100%;
-    top: 85%;
+    bottom: -15vh;
+    height: auto;
+    padding-bottom: 48px;
   }
   .side-bar:hover{
-    top:65%;
+    bottom: 0;
   }
 
   .weather,.sidebar-list{
@@ -169,7 +171,7 @@
 
   .map-header-right{
     position: absolute;
-    left: 0;top: 15%;
+    left: 0;top: 120px;
     width: 100%;
     justify-content: space-between;
   }
@@ -187,10 +189,9 @@
 }
 @media (max-height: 700px){
   .map-header-right{
-    top: 18%;
+    top: 19%;
   }
 }
-
 
 @media (max-width: 450px) {
   .map-web-nav li{
