@@ -9,10 +9,10 @@ const TranslationDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
-    { code: 'ko', label: '한국어' },
-    { code: 'en', label: 'English' },
-    { code: 'ja', label: '日本語' },
-    { code: 'zh', label: '中文' }
+    { code: 'kor', label: '한국어' },
+    { code: 'eng', label: 'English' },
+    { code: 'jpn', label: '日本語' },
+    { code: 'chs', label: '中文' }
   ];
 
   const [selectedLanguage, setSelectedLanguage] = useState(() => {

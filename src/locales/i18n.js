@@ -10,21 +10,21 @@ import zhTranslation from './zh/translation.json';
 
 i18n.use(initReactI18next).init({
   resources: {
-    ko: {
+    kor: {
       translation: koTranslation,
     },
-    en: {
+    eng: {
       translation: enTranslation,
     },
-    ja: {
+    jpn: {
       translation: jaTranslation,
     },
-    zh: {
+    chs: {
       translation: zhTranslation,
     },
   },
-  lng: 'ko', // 기본 언어 설정
-  fallbackLng: 'en', // 언어를 찾을 수 없으면 기본 언어로 fallback
+  lng: 'kor', // 기본 언어 설정
+  fallbackLng: 'eng', // 언어를 찾을 수 없으면 기본 언어로 fallback
   interpolation: {
     escapeValue: false,
   },

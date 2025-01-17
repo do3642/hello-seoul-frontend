@@ -1,17 +1,18 @@
 import React from "react";
 import '../styles/SidebarList.css';
 
-function SidebarList({ spot }) {
+function SidebarList({ spot, onClick }) {
+
   return (
-    <div className="sidebar-list">
+    <div className="sidebar-list" data-lon={spot.mapx} data-lat={spot.mapy} onClick={onClick}>
       <div className="sidebar-list-left">
-        <h4>{spot.district}</h4>
+        <h4>{spot.guName}</h4>
         <br />
-        <p>{spot.touristName}</p>
-        <p>{spot.phoneNumber}</p>
+        <p>{spot.title}</p>
+        <p>{spot.tel}</p>
       </div>
       <div className="sidebar-list-right">
-        <img src={spot.image} alt="관광지 이미지" />
+        <img src={spot.firstimage2} alt="관광지 이미지" />
       </div>
     </div>
   );

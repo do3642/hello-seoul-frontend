@@ -41,7 +41,7 @@ function Map() {
   return (
     <div className="mappage-ctrl-box">
       <NaverMap  map={map} geoJson={gudata} showCurrentLocation={showCurrentLocation} activeButton={activeButton} handleButtonClick={handleButtonClick}/>
-      <Sidebar />
+      <Sidebar map={map} activeButton={activeButton} handleButtonClick={handleButtonClick}/>
       <MapHeader activeButton={activeButton} onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick}/>
       <MapWebNav />
       {
