@@ -123,7 +123,7 @@
     height: auto;
     padding-bottom: 48px;
   }
-  .side-bar:hover{
+  .side-bar:hover,.side-bar.active{
     bottom: 0;
   }
 

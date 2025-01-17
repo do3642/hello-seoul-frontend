@@ -14,6 +14,7 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
   const selectedLanguage = i18n.language; // 현재 선택된 언어 코드y
 
@@ -61,10 +62,15 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
     };
   }, []);
 
+
+  const handleToggle = () => {
+    setIsActive(!isActive);
+  };
+
   return (
         <>
           {windowWidth > 820 ? (
-            <div className="side-bar">
+            <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
               <Search />
               <Weather />
               <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
