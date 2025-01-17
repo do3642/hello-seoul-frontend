@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './css/SpotsDetail.css';
+
 
 function SpotsDetail() {
   const { contentid } = useParams(); // URL에서 contentid 가져오기
@@ -117,7 +117,7 @@ function SpotsDetail() {
         <div className={`spots-detail-image ${isFullHeight ? 'full-height' : ''}`}>
           <img src={spotDetails.touristSpot.firstimage || '/img/noimage_l.gif'} alt={spotDetails.touristSpot.title} />
           <button className="toggle-height-button" onClick={toggleImageHeight}>
-            이미지 크기 전환
+          이미지 토글 버튼
           </button>
         </div>
         <div className="spots-detail-info">

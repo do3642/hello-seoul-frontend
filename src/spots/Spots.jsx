@@ -3,6 +3,7 @@ import './css/Spots.css';
 import './css/Card.css';
 import './css/SpotsSeason.css';
 import './css/ImgCard.css';
+import './css/SpotsDetail.css';
 import './css/media-Spots.css';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

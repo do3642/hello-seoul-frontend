@@ -90,6 +90,15 @@
   .spots-season-top button{
     padding: 4px 10px;;
   }
+  
+  .spots-detail-image,
+  .spots-detail-image.full-height{
+    width: 100%;
+  }
+  .spots-detail-content{
+    flex-direction: column;
+  }
+
 }
 /* max-width: 576px */
 @media (max-width: 576px) {
