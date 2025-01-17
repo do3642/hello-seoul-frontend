@@ -66,8 +66,13 @@
 .logo h1{
   font-size: 1em;
 }
-.weather-container h2,.weather-icon i,.weather-temperature span{
+.main-weather .weather-container h2,.main-weather .weather-icon i,.main-weather .weather-temperature span{
   font-size: 12px;
+}
+.weather-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main-dots .dot{
   padding: 5px;

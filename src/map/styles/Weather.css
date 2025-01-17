@@ -59,6 +59,23 @@
   color: #3498db;
 }
 
+.weather-popup i.fa-sun{
+  color: #F57C00 ;
+}
+.weather-popup i.fa-cloud{
+  color: #3498db;
+}
+.weather-popup i.fa-cloud-sun{
+  color: #FF5722;
+}
+.weather-popup i.fa-snowflake{
+  color: #0288D1 ;
+}
+.weather-popup i.fa-cloud-showers-heavy{
+  color: #1976D2;
+}
+
+
 .weather-popup .temperature {
   font-size: 22px;
   color: #e74c3c;

@@ -76,7 +76,7 @@ function Weather() {
 
   // 로딩 중일 때, 에러 발생 시, 또는 데이터가 있을 때의 처리
   if (isLoading) return <div>{LoadingSVG()}</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>날씨API 점검중</div>;
 
   return (
     <div className="weather-container">

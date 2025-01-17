@@ -1,0 +1,185 @@
+.spots-detail-container>button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  /* 부드러운 전환 효과 */
+  font-family: 'Pretendard-Regular';
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.spots-detail-container>button i {
+  font-size: .9em;
+  /* 아이콘 크기 조정 */
+}
+
+/* hover 효과 */
+.spots-detail-container>button:hover {
+  background-color: #0056b3;
+  /* hover 시 배경색 변경 */
+  transform: translateY(-2px);
+  /* 살짝 위로 이동 효과 */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  /* hover 시 그림자 효과 강화 */
+}
+
+
+
+
+.spots-detail-container>h2 {
+  font-size: 1.5em;
+  /* 타이틀 폰트 크기 */
+  font-weight: bold;
+  /* 타이틀 폰트 굵기 */
+  font-family: 'GmarketSansMedium';
+  /* 타이틀 폰트 */
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+
+.spots-detail-content {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 100px;
+}
+
+.spots-detail-image {
+  width: 50%;
+  max-height: 500px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative; /* 버튼 위치를 설정하기 위해 추가 */
+  transition: .5s;
+}
+.spots-detail-image.full-height{
+  max-height: 1000px;
+}
+
+.spots-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s;
+}
+.toggle-height-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.toggle-height-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+.spots-detail-info{
+  font-size: 1em;
+  font-family: 'Pretendard-Regular';
+
+}
+.spots-detail-info h3,.spots-addr-title,.spots-tel-title,.spots-event-title{
+  display: inline-block;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  position: relative;
+  font-family: inherit;
+}
+
+
+.spots-addr,.spots-tel,.spots-event{
+  margin-top: 20px;
+  font-family: 'Pretendard-Regular';
+}
+
+/* 각 타이틀의 밑배경을 위한 공통 스타일 */
+.spots-addr-title::before,
+.spots-category-title::before,
+.spots-tel-title::before,
+.spots-event-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  background-color: rgba(0, 123, 255, 0.3); /* 기본 배경색 */
+  z-index: -1;
+}
+/* 카테고리 타이틀의 배경색 변경 */
+.spots-category-title::before {
+  background-color: rgba(30, 144, 255, 0.3); /* DodgerBlue */
+}
+
+/* 주소 타이틀의 배경색 변경 */
+.spots-addr-title::before {
+  background-color: rgba(255, 99, 71, 0.3); /* Tomato */
+}
+
+/* 연락처 타이틀의 배경색 변경 */
+.spots-tel-title::before {
+  background-color: rgba(34, 139, 34, 0.3); /* ForestGreen */
+}
+
+/* 이벤트 기간 타이틀의 배경색 변경 */
+.spots-event-title::before {
+  background-color: rgba(255, 215, 0, 0.3); /* Gold */
+}
+
+
+
+.spots-guname{
+  font-size: .85em;
+  font-family: inherit;
+  color: #999;
+}
+
+.spots-category,.spots-addr-content,.spots-tel-content,.spots-event-content{
+  font-size: 1em;
+  font-family: "Pretendard-Regular";
+  color: #333;
+}
+
+.spots-event-status{
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 0;
+  margin-top: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-family: inherit;
+}
+.spots-event-status-pre {
+  background-color: #fff8b3; /* 연한 노랑색 */
+  color: #333; /* 진한 회색 */
+}
+
+.spots-event-status-progress {
+  background-color: #b3d9ff; /* 연한 파랑색 */
+  color: #003366; /* 진한 남색 */
+}
+
+.spots-event-status-end {
+  background-color: #ffcccc; /* 연한 빨강색 */
+  color: #660000; /* 진한 빨강색 */
+}

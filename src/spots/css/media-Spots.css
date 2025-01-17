@@ -1,0 +1,144 @@
+@media (max-width: 1450px) {
+  .spots header > ul{
+    gap: 18px;
+  }
+}
+@media (max-width: 1400px) {
+  .spots header,.footer-container{
+    width: 90%;
+  }
+  .spots-container {
+  width: 90%;
+  }
+
+}
+
+/* max-width: 1200px */
+@media (max-width: 1200px) {
+  .spots-content-cards {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .spots-content-card {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  .spots header > ul > li:nth-child(-n+3){
+    display: none;
+  }
+  .spots .mobile-menu {
+    display: block;
+  }
+  .footer-container {
+    padding-bottom: 30px;
+  }
+
+  .spots-img-card figure figcaption {
+    font-size: 1em;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .spots-menu-box::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 엣지 등에서 스크롤바 숨기기 */
+  }
+  .spots header .search-box {
+    order: 1; /* h1과 ul 아래로 이동 */
+    margin-top: 10px; /* 상단 마진 추가 */
+    width: 100%;
+  }
+  .spots .search-box input {
+    width: 100%;
+  }
+  .spots header > ul {
+    order: 0; /* `h1`과 함께 상단에 위치 */
+    justify-content: space-between;
+  }
+  .spots-menu-box{
+    width: 100%;
+    overflow-X: scroll;
+    margin: 20px 0;
+    margin-right: auto;
+
+  }
+  .spots-menu-box button{
+    flex-shrink: 0;
+    width: 100px;
+  }
+  .spots-content-card {
+    width: 100%;
+  }
+ 
+  .spring-img-cards, .summer-img-cards, .fall-img-cards, .winter-img-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .spring-img-cards .spots-img-card:nth-child(1),
+  .spring-img-cards .spots-img-card:nth-child(5),
+  .summer-img-cards .spots-img-card:nth-child(1),
+  .fall-img-cards .spots-img-card:nth-child(2),
+  .winter-img-cards .spots-img-card:nth-child(1),
+  .winter-img-cards .spots-img-card:nth-child(5){
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .spots-img-card figure figcaption{
+    font-size: .8em;
+  }
+  .spots-season-top button{
+    padding: 4px 10px;;
+  }
+  
+  .spots-detail-image,
+  .spots-detail-image.full-height{
+    width: 100%;
+  }
+  .spots-detail-content{
+    flex-direction: column;
+  }
+
+}
+/* max-width: 576px */
+@media (max-width: 576px) {
+  .spots header > ul li .translation .dropdown-menu{
+    left: 0;
+  }
+  .spots .mobile-menu li{
+    flex-direction: column;
+    gap: 2px;
+    padding: 7px 0
+  }
+  .spots header h1 {
+    font-size: 14px;
+  }
+  .spots .weather-container h2,
+  .spots .weather-container .weather-temperature span,
+  .spots .weather-container .weather-icon i{
+    font-size: 12px;
+  }
+  .spots header > ul > li{
+    font-size: 14px;
+  }
+  .footer-container {
+    padding-bottom: 60px;
+  }
+  .spots-season-top button{
+    padding: 2px 10px;;
+  }
+  .spots-season-top h2{
+    line-height: 5px;
+  }
+}
+
+@media (max-width: 375px) {
+
+  .spots-content-top button{
+    font-size: 0.8em;
+    padding: 5px 18px 5px 10px;
+  }
+  .spots-img-card figure figcaption {
+    font-size: 0.7em;
+  }
+}
