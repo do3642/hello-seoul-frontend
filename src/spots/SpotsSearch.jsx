@@ -18,7 +18,6 @@ function SpotsSearch() {
   
       const data = await response.json();
       setFilteredSpots(data);
-      console.log(data)
 
     } catch (error) {
       console.error('서버 요청에 오류발생:', error);
