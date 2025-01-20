@@ -5,12 +5,12 @@ import Weather from "./Weather";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TouristSpots } from "../../context/TouristSpotsContext";
-import Pagination from "./pagination";
+import Pagination from "./Pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
 
 function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtName }) {
-  const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
+  const { touristSpots, currentPage, totalPages, setCurrentPage, fetchSearchTouristSpots, searchKeyword } = TouristSpots();
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
@@ -21,6 +21,11 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
   const [isDragging, setIsDragging] = useState(false);
 
   const selectedLanguage = i18n.language; // 현재 선택된 언어 코드
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    fetchSearchTouristSpots(searchKeyword, newPage);
+  };
 
   const handleListClick = (event) => {
     // currentTarget을 사용해 클릭된 요소의 부모 요소에 접근
@@ -134,13 +139,13 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
               <Search />
               <Weather districtName={districtName} />
               <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
-                {touristSpots.map((spot, index) => (
+                {(touristSpots || []).map((spot, index) => (
                   <SidebarList key={index} spot={spot} onClick={handleListClick} />
                 ))}
                 <Pagination 
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+                  onPageChange={handlePageChange}
                 />
               </div>
             </div>
@@ -150,13 +155,13 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
               <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
                 <Weather districtName={districtName}/>
                 <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
-                  {touristSpots.map((spot, index) => (
+                  {(touristSpots || []).map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />
-                  ))}
+                  ))} 
                   <Pagination 
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={setCurrentPage}
+                    onPageChange={handlePageChange}
                   />
                 </div>
               </div>
