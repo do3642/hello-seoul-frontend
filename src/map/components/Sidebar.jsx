@@ -9,7 +9,7 @@ import Pagination from "./pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
 
-function Sidebar({ map, activeButton, handleButtonClick }) {
+function Sidebar({ map, activeButton, handleButtonClick,districtName }) {
   const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -129,7 +129,7 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
           {windowWidth > 820 ? (
             <div className='side-bar'>
               <Search />
-              <Weather />
+              <Weather districtName={districtName} />
               <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
                 {touristSpots.map((spot, index) => (
                   <SidebarList key={index} spot={spot} onClick={handleListClick} />
@@ -145,7 +145,7 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
             <>
               <Search />
               <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
-                <Weather />
+                <Weather districtName={districtName}/>
                 <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
                   {touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />

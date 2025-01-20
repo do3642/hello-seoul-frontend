@@ -25,7 +25,23 @@ function createMarkersForDistrict(map, identifier, activeButton, handleClick, to
     });
 
     const infoWindow = new naver.maps.InfoWindow({
-      content: `<div style="padding:5px;">${spot.title}</div>`,
+      content: `
+        <div class='tourist-popup' style="
+          padding: 10px; 
+          background-color: #ffffff; 
+          border: 1px solid #cccccc; 
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+          font-size: 14px; 
+          color: #333;">
+          <strong class='popup-info-strong' style="font-size: 16px; color: #007BFF;">${spot.title}</strong>
+          <p class='popup-info-small' style="margin-top: 5px;">${spot.addr1}</p>
+        </div>
+      `,
+      disableAnchor: 'false', // 말풍선 꼬리 사용
+      backgroundColor: 'transparent', // 말풍선 배경색 투명
+      borderColor: '#007BFF', // 테두리 색상
+      borderWidth: 2, // 테두리 두께
+      pixelOffset: new naver.maps.Point(0, -10) // 말풍선 위치 조정
     });
 
     naver.maps.Event.addListener(marker, 'click', function () {

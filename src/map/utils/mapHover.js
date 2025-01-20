@@ -1,8 +1,9 @@
 import zoomInToRegion from '/src/utils/zoomInToRegion'
 import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkersForDistrict';
+import { getWeatherData } from '../../utils/getFetchWeather'
 
 
-function MapHover(map, geoJson, activeButton, handleClick, groupedSpots) {
+function MapHover(map, geoJson, activeButton, handleClick, groupedSpots,handleDistrictChange) {
   
   if (map && geoJson) {
     // GeoJSON 데이터를 지도에 추가
@@ -48,6 +49,9 @@ function MapHover(map, geoJson, activeButton, handleClick, groupedSpots) {
       
       var clickedFeature = e.feature;
       var district = clickedFeature.getProperty('SIG_KOR_NM');
+      // 구 클릭시 날씨변경
+      handleDistrictChange(district)
+      getWeatherData(district);
 
       // 그룹화된 데이터에서 해당 구의 관광지 리스트 가져오기
       const spots = groupedSpots[district];
