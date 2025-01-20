@@ -185,6 +185,11 @@
     top: 100%;
   }
 }
+@media (max-height: 700px){
+  .map-header-right{
+    top: 18%;
+  }
+}
 
 
 @media (max-width: 450px) {

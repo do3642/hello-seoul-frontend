@@ -22,6 +22,17 @@ const Line = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleElementClick = (event) => {
+    // 클릭한 요소가 tspan인 경우 텍스트값 출력
+    if (event.target.tagName === 'tspan') {
+      console.log('클릭한 텍스트:', event.target.textContent);
+    }
+    // 클릭한 요소가 circle인 경우, 해당 역 이름 출력
+    if (event.target.tagName === 'circle') {
+      console.log('클릭한 역: ', event.target.getAttribute('data-station-name'));
+    }
+  };
+  
   return (
     <div id="Line" style={{ width: '100%', height: '100vh' }}>
       <TransformWrapper
@@ -37,6 +48,7 @@ const Line = () => {
             width="100vw"
             height="100vh"
             viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+            onClick={handleElementClick} 
           >
             <Subway />
           </svg>

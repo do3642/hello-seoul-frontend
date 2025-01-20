@@ -1,73 +1,147 @@
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './css/Spots.css';
-import Card from './Card';  // Card 컴포넌트 import
+import './css/Card.css';
+import './css/SpotsSeason.css';
+import './css/ImgCard.css';
+import './css/SpotsDetail.css';
+import './css/media-Spots.css';
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Translation from '../map/components/Translation';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import Weather from '/src/main/Weather';
+
 
 function Spots() {
-  const buttonLabels = ['전체', '계절별', '힐링', '산책', '등산', '전통'];
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState('');
+
+
+  const buttonLabels = [
+    'spots.btn-label.all', 
+    'spots.btn-label.season', 
+    'spots.btn-label.healing', 
+    'spots.btn-label.walk', 
+    'spots.btn-label.hiking', 
+    'spots.btn-label.traditional'
+  ];
+  const buttonNav = [
+    '/spots', 
+    '/spots/season', 
+    '/spots/healing', 
+    '/spots/walk', 
+    '/spots/hiking', 
+    '/spots/traditional'
+  ]
+  
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAutoWidth, setIsAutoWidth] = useState(false);
+
+    useEffect(() => {
+      const languageCode = i18n.language; 
+      setIsAutoWidth(languageCode === 'en' || languageCode === 'ja');
+    }, [i18n.language]);
+
+
 
   // 경로 이동 함수
   const handleNavigation = (path) => {
     navigate(path);
   };
 
-  // 관광지 데이터 (4개 가정)
-  const touristSpots = [
-    { district: '송파구', name: '롯데월드', additionalInfo: '02-000-0000' },
-    { district: '강남구', name: '스타필드', additionalInfo: '02-111-1111' },
-    { district: '중구', name: '남산서울타워', additionalInfo: '02-222-2222' },
-    { district: '종로구', name: '경복궁', additionalInfo: '02-333-3333' },
-  ];
+  // 버튼 클릭 핸들러
+  const handleButtonClick = (index) => {
+    setActiveIndex(index);
+  };
 
-  // 축제 데이터 (4개 가정)
-  const festivals = [
-    { district: '광진구', name: '서울 재즈 페스티벌', additionalInfo: '2025-05-01 ~ 2025-05-03' },
-    { district: '강남구', name: '서울 봄꽃 축제', additionalInfo: '2025-04-01 ~ 2025-04-07' },
-    { district: '동대문구', name: '서울 북촌한옥마을 축제', additionalInfo: '2025-06-01 ~ 2025-06-05' },
-    { district: '영등포구', name: '서울 여름 축제', additionalInfo: '2025-07-15 ~ 2025-07-20' },
-  ];
+  // 검색어 입력 시 경로 이동
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/spots/search?search=${searchTerm}`);  // 검색어를 쿼리로 전달
+    }
+  };
+
+
 
   return (
     <div className='spots'>
+
       <header>
-        <h1>안녕,서울</h1>
-        <input type="search" name="search" id="spots-search" />
+        <h1 onClick={() => handleNavigation('/')}>{t('logo')}</h1>
+        <div className="search-box">
+          <input 
+            type="search"
+            name="search" 
+            id="spots-search" 
+            placeholder={t('spots.search')}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}  // 엔터키로 검색
+
+           />
+          <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon' onClick={handleSearch}/>
+        </div>
         <ul>
-          <li><button onClick={() => handleNavigation('/')}>홈</button></li>
-          <li><button onClick={() => handleNavigation('/map')}>지도</button></li>
-          <li><button onClick={() => handleNavigation('/subway')}>지하철</button></li>
+          <li><button onClick={() => handleNavigation('/')}>{t('logo')}</button></li>
+          <li><button onClick={() => handleNavigation('/map')}>{t('nav.0.navMap')}</button></li>
+          <li><button onClick={() => handleNavigation('/subway')}>{t('nav.0.subway')}</button></li>
+          <li><Weather /></li>
+          <li><Translation/></li>
         </ul>
       </header>
 
       <section className='spots-container'>
-        <div className="spots-menu-box">
+
+        <div className={`spots-menu-box ${isAutoWidth ? 'auto-width' : ''}`}>
           {buttonLabels.map((label, index) => (
-            <button key={index}>{label}</button>
+            <button
+              key={index}
+              className={index === activeIndex ? 'active' : ''}
+              onClick={() => {
+                handleButtonClick(index);
+                handleNavigation(buttonNav[index]);
+              }}
+            >
+              {t(label)}
+            </button>
           ))}
         </div>
 
         <article className='spots-content'>
-          <div className="spots-content-top">
-            <h2>전체 관광지</h2>
-            <button>더보기</button>
-          </div>
-          <div className="spots-content-cards">
-            {touristSpots.map((spot, index) => (
-              <Card key={index} type="tourist" {...spot} />
-            ))}
-          </div>
-
-          <div className="spots-content-top">
-            <h2>전체 축제</h2>
-            <button>더보기</button>
-          </div>
-          <div className="spots-content-cards">
-            {festivals.map((festival, index) => (
-              <Card key={index} type="festival" {...festival} />
-            ))}
-          </div>
+          {/* <SpotsMain handleMoreClick={handleMoreClick}  setIsAutoWidth={setIsAutoWidth}/> */}
+          <Outlet context={{ handleNavigation,setActiveIndex }}/> 
         </article>
       </section>
+
+      <div className="mobile-menu">
+          <ul className="">
+            <li className="nav-item home" onClick={() => handleNavigation('/')}>
+              <i className="fas fa-home"></i> {/* 홈 아이콘 */}
+              <span className="nav-text">{t('logo')}</span>
+            </li>
+            <li className="nav-item map" onClick={() => handleNavigation('/map')}>
+              <i className="fas fa-map"></i> {/* 지도 아이콘 */}
+              <span className="nav-text">{t('nav.0.navMap')}</span>
+            </li>
+            <li className="nav-item subway" onClick={() => handleNavigation('/subway')}>
+              <i className="fas fa-subway"></i> {/* 별 아이콘 */}
+              <span className="nav-text">{t('nav.0.subway')}</span>
+            </li>
+           </ul>
+        </div>
+
+
+        <footer className="footer">
+          <div className="footer-container">
+            <p>© 2025 안녕, 서울</p>
+            <p>서울의 매력을 한눈에, 당신의 여행을 더 특별하게.</p>
+            <small className="footer-developers">Developed by: 이영찬, 최하영, 권민수</small>
+          </div>
+        </footer>
+
+
     </div>
   );
 }

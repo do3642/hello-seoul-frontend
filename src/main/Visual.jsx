@@ -5,10 +5,12 @@ import TranslationDropdown from './TranslationDropdown';
 import Navigation from "./Navigation";
 import './css/Visual.css'
 import './css/media-Visual.css'
+import { useNavigate } from "react-router-dom";
 
 function Visual (){
   const { t } = useTranslation(); // useTranslation 훅 사용
   const visuals = t('visuals', { returnObjects: true });
+  const navigate = useNavigate();
   // console.log(visuals);
   const [visualStates, setVisualStates] = useState([]);
   const [visualEffects, setVisualEffects] = useState([
@@ -79,14 +81,17 @@ function Visual (){
     const restartedInterval = setInterval(updateVisualEffects, intervalTime);
     setIntervalId(restartedInterval); // 기존 interval ID 업데이트
 
-    
+  };
+      
+  const handleNavigation = (path) => {
+    navigate(path);  // 해당 경로로 이동
   };
   
   return(
     <section id="main-visual">
 
       <article className='main-top'>
-        <div className='logo'><h1>{t('logo')}</h1></div>
+        <div className='logo'><h1 onClick={() => handleNavigation('/')}>{t('logo')}</h1></div>
         <div className='main-top-func'>
           <div className="main-weather">
           <Weather />

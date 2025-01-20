@@ -10,7 +10,7 @@ import '../src/locales/i18n.js'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
     <BrowserRouter
       future={{
         v7_startTransition: true,
@@ -19,5 +19,5 @@ createRoot(document.getElementById('root')).render(
     >
       <App />
     </BrowserRouter>
-  </StrictMode>,
+
 )
