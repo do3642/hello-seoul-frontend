@@ -3,7 +3,7 @@ import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkers
 import { getWeatherData } from '../../utils/getFetchWeather'
 
 
-function MapHover(map, geoJson, activeButton, handleClick, groupedSpots,handleDistrictChange) {
+function MapHover(map, geoJson, activeButton, handleClick, groupedSpots,handleDistrictChange, navigate) {
   
   if (map && geoJson) {
     // GeoJSON 데이터를 지도에 추가
@@ -58,7 +58,7 @@ function MapHover(map, geoJson, activeButton, handleClick, groupedSpots,handleDi
 
       if (spots) {
         // 구에 해당하는 관광지가 있는 경우 마커 생성
-        createMarkersForDistrict(map, district, activeButton, handleClick, spots);
+        createMarkersForDistrict(map, district, activeButton, handleClick, spots, navigate);
       } else {
         console.warn(`No tourist spots found for district: ${district}`);
       }
