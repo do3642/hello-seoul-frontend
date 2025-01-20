@@ -12,7 +12,6 @@ import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
   const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots } = TouristSpots();
-  console.log(touristSpots)
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
@@ -174,7 +173,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
         </div>
       ) : (
         <>
-          <Search />
+          <Search setTouristSpots={setTouristSpots}/>
           <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
             <Weather districtName={districtName} />
             <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>

@@ -27,7 +27,6 @@ function Search({ setTouristSpots }) {
 
       // touristSpots만 갱신
       setTouristSpots(data);
-      console.log(data);
     }
   };
 
