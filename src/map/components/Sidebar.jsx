@@ -3,12 +3,42 @@ import '../styles/Sidebar.css';
 import SidebarList from "./SidebarList";
 import Weather from "./Weather";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { TouristSpots } from "../../context/TouristSpotsContext";
+import Pagination from "./pagination";
+import zoomInToRegion from "../../utils/zoomInToRegion";
+import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
 
-function Sidebar() {
+function Sidebar({ map, activeButton, handleButtonClick }) {
+  const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
+  const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [touristSpots, setTouristSpots] = useState([]);
   const [sidebarHeight, setSidebarHeight] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
+  const selectedLanguage = i18n.language; // 현재 선택된 언어 코드y
+
+  const handleListClick = (event) => {
+    // currentTarget을 사용해 클릭된 요소의 부모 요소에 접근
+    const lon = parseFloat(event.currentTarget.getAttribute('data-lon'));
+    const lat = parseFloat(event.currentTarget.getAttribute('data-lat'));
+
+    // 클릭된 리스트에서 관광지 이름에 접근할 수 있도록 함.
+    const spotName = event.currentTarget.querySelector('p').textContent;
+  
+    // 좌표가 유효한지 확인 (NaN 체크)
+    if (isNaN(lon) || isNaN(lat)) {
+      console.error("Invalid coordinates:", lon, lat);
+      return;
+    }
+
+    // 지도에 관광지 하나에 대한 마커 생성
+    clearMarkers();
+    createMarkersForDistrict(map, spotName, activeButton, handleButtonClick, touristSpots);
+  
+    // 좌표를 이용해 지도 확대
+    zoomInToRegion(map, lon, lat, activeButton, handleButtonClick);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,9 +55,6 @@ function Sidebar() {
       }
     };
 
-
-
-    
     window.addEventListener("resize", handleResize); // 리사이즈 이벤트 추가
     handleResize() // 초기 실행
     return () => {
@@ -36,51 +63,47 @@ function Sidebar() {
   }, []);
 
 
-  useEffect(() => {
-
-    const fetchTouristSpots = async () => {
-      try {
-        const response = await fetch('/src/data/touristSpots.json');  // public 폴더에 있는 JSON 파일 경로
-        const data = await response.json();
-        setTouristSpots(data); // 가져온 데이터 상태에 저장
-      } catch (error) {
-        console.error('데이터를 불러오는 데 실패했습니다:', error);
-      }
-    };
-
-    fetchTouristSpots(); // 데이터 호출
-  }, []);
-
-
+  const handleToggle = () => {
+    setIsActive(!isActive);
+  };
 
   return (
-    <>
-        {windowWidth > 820 ? (
-          <div className="side-bar">
-            <Search /> 
-            <Weather />
-            <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
-              {touristSpots.map((spot, index) => (
-              <SidebarList key={index} spot={spot} />
-              ))}
-            </div>
-          </div>
-          ) : (
-            <>
-            <Search /> 
-            <div className="side-bar">
+        <>
+          {windowWidth > 820 ? (
+            <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
+              <Search />
               <Weather />
-              <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
+              <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
                 {touristSpots.map((spot, index) => (
-                <SidebarList key={index} spot={spot} />
+                  <SidebarList key={index} spot={spot} onClick={handleListClick} />
                 ))}
+                <Pagination 
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
               </div>
             </div>
+          ) : (
+            <>
+              <Search />
+              <div className="side-bar">
+                <Weather />
+                <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
+                  {touristSpots.map((spot, index) => (
+                    <SidebarList key={index} spot={spot} onClick={handleListClick} />
+                  ))}
+                  <Pagination 
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                  />
+                </div>
+              </div>
             </>
           )}
-
-    </>
-  )
+        </>
+  );
 }
 
 export default Sidebar;
