@@ -9,6 +9,7 @@ function AllWeather({ map, activeButton }) {
   const [isLoading, setIsLoading] = useState(true);
   const [markers, setMarkers] = useState([]); // 마커 상태 추가
   const [infoWindows, setInfoWindows] = useState([]); // infoWindow 상태 추가
+  
 
   // 날씨 데이터를 받아오는 함수
   const fetchWeatherData = async (nx, ny) => {
@@ -95,9 +96,15 @@ function AllWeather({ map, activeButton }) {
 
         const infoWindow = new naver.maps.InfoWindow({
           content: createContentString(),
-          maxWidth: 200,  // 팝업 크기 조정
           zIndex: 1000,   // 팝업이 다른 요소 위에 오도록 설정
+          backgroundColor: "#fff", // 배경 색상
+          borderColor: "#cccccc",  // 테두리 색상
+          borderWidth: 1, // 테두리 두께
+          disableAnchor: 'false',  // 말풍선 꼬리 사용
+          disableAutoPan: 'true', // 팝업 자동 이동을 비활성화
+          pixelOffset: new naver.maps.Point(0, -10), // 팝업 위치 조정
         });
+        
 
         // 마커 클릭 시 InfoWindow 열기
         naver.maps.Event.addListener(marker, "click", function() {

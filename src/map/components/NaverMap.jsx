@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MapHover from "../utils/maphover.js";
 import { TouristSpots } from "../../context/TouristSpotsContext.jsx";
 
-function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButtonClick}) {
+function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButtonClick,handleDistrictChange}) {
   const [marker, setMarker] = useState(null);
 
   const handleClick = (buttonName) => {
@@ -14,7 +14,7 @@ function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButto
   useEffect(() => {
     if (map && geoJson) {
       // 지도 객체와 geoJson이 있을 때만 실행
-      MapHover(map, geoJson, activeButton, handleClick, groupedSpots);
+      MapHover(map, geoJson, activeButton, handleClick, groupedSpots,handleDistrictChange);
     }
   }, [map, geoJson, activeButton, groupedSpots]); // map과 geoJson 변경 시마다 실행
 
