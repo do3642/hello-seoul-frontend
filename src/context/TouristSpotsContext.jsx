@@ -67,6 +67,7 @@ export const TouristSpotsProvider = ({ children }) => {
         selectedLanguage,
         setSelectedLanguage,
         totalPages,
+        setTouristSpots
       }}
     >
       {children}

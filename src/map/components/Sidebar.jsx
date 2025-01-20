@@ -11,7 +11,8 @@ import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../.
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
-  const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
+  const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots } = TouristSpots();
+  console.log(touristSpots)
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
@@ -71,6 +72,22 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
       window.removeEventListener("resize", handleResize); // 리사이즈 이벤트 정리
     };
   }, []);
+
+
+  useEffect(() => {
+    // URL에 쿼리 파라미터가 있을 경우, 해당 검색어로 데이터를 받아옵니다.
+    const searchParams = new URLSearchParams(window.location.search);
+    const query = searchParams.get('query');
+    
+    if (query) {
+      fetch(`/api/search?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+          setTouristSpots(data); // 검색된 데이터로 touristSpots 갱신
+        });
+    }
+  }, [window.location.search, setTouristSpots]); // URL 검색어에 따른 데이터 변경 감지
+
 
 
   // 모바일 고려 터치이벤트들
@@ -134,7 +151,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
     <>
       {windowWidth > 820 ? (
         <div className='side-bar'>
-          <Search />
+          <Search setTouristSpots={setTouristSpots}/>
           <Weather districtName={districtName} />
           <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
             {!contentid && (
