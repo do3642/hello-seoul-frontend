@@ -9,11 +9,16 @@ import Pagination from "./pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
 
-function Sidebar({ map, activeButton, handleButtonClick, resetFeature }) {
+function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtName }) {
   const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+
+  const [startY, setStartY] = useState(0);
+  const [currentY, setCurrentY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const selectedLanguage = i18n.language; // 현재 선택된 언어 코드
 
@@ -64,12 +69,70 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature }) {
     };
   }, []);
 
+
+  // 모바일 고려 터치이벤트들
+  useEffect(() => {
+    if (windowWidth <= 820) {
+      const handleTouchStart = (e) => {
+        setStartY(e.touches[0].clientY);
+        setIsDragging(true);
+      };
+
+      const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        setCurrentY(e.touches[0].clientY);
+        let distance = currentY - startY;
+        
+        // 이동 거리 제한
+        if (distance > 30) distance = 30;
+        if (distance < -30) distance = -30;
+
+        const sidebarElement = document.querySelector('.side-bar');
+        sidebarElement.style.transform = `translateY(${distance}px)`; // 제한된 이동 효과
+      };
+
+      const handleTouchEnd = () => {
+        setIsDragging(false);
+        const distance = startY - currentY;
+
+        const sidebarElement = document.querySelector('.side-bar');
+        sidebarElement.style.transform = 'translateY(0)'; // 드래그 끝나면 원래 위치로
+
+        if (distance > 50) {
+          setIsActive(true);
+        } else if (distance < -50) {
+          setIsActive(false);
+        }
+
+        setCurrentY(0); // 초기화
+      };
+
+      const sidebarElement = document.querySelector('.side-bar');
+      sidebarElement.addEventListener('touchstart', handleTouchStart);
+      sidebarElement.addEventListener('touchmove', handleTouchMove);
+      sidebarElement.addEventListener('touchend', handleTouchEnd);
+
+      return () => {
+        sidebarElement.removeEventListener('touchstart', handleTouchStart);
+        sidebarElement.removeEventListener('touchmove', handleTouchMove);
+        sidebarElement.removeEventListener('touchend', handleTouchEnd);
+      };
+    }
+  }, [windowWidth, startY, currentY, isDragging]);
+
+
+
+
+  const handleToggle = () => {
+    setIsActive(!isActive);
+  };
+
   return (
         <>
           {windowWidth > 820 ? (
-            <div className="side-bar">
+            <div className='side-bar'>
               <Search />
-              <Weather />
+              <Weather districtName={districtName} />
               <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
                 {touristSpots.map((spot, index) => (
                   <SidebarList key={index} spot={spot} onClick={handleListClick} />
@@ -84,8 +147,8 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature }) {
           ) : (
             <>
               <Search />
-              <div className="side-bar">
-                <Weather />
+              <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
+                <Weather districtName={districtName}/>
                 <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
                   {touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />

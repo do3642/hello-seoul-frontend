@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import getLanguageCode from "../utils/getLanguageCode";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
@@ -18,13 +17,13 @@ function SpotsAllTourist() {
 
   const fetchData = async () => {
     const languageCode = i18n.language;
-    const replaceLang = getLanguageCode(languageCode);
+    // const replaceLang = getLanguageCode(languageCode);
     try {
       setLoading(true);
       // 관광지 데이터 요청 (페이지 번호 추가)
       const response = await axios.get(`http://localhost:8888/api/tourist-spots`, {
         params: {
-          lang: replaceLang,
+          lang: languageCode,
           page: page,
           size: 8,
           excludeIds: excludeIds.join(',')  // 이미 받은 ID들을 제외한 데이터만 요청

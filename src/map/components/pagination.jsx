@@ -3,30 +3,31 @@ import '../styles/Pagination.css';
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const maxPagesToShow = 5; // 한 블록당 최대 페이지 수
-  const currentBlock = Math.floor(currentPage / maxPagesToShow); // 현재 블록 계산
-  const startPage = currentBlock * maxPagesToShow; // 현재 블록의 첫 페이지
-  const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages - 1); // 현재 블록의 마지막 페이지
+  
+  // currentPage가 0부터 시작하므로, startPage를 올바르게 계산
+  const startPage = Math.floor(currentPage / maxPagesToShow) * maxPagesToShow + 1;
+  const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
 
   // 이전 블록 버튼 함수
   const handlePrevious = () => {
-    if (currentPage > 0) {
-      const previousBlockStart = Math.max(startPage - maxPagesToShow, 0); // 이전 블록의 시작 페이지
-      onPageChange(previousBlockStart);
+    if (currentPage >= maxPagesToShow) {
+      const previousBlockLastPage = startPage - 1; // 이전 블록의 마지막 페이지로 이동
+      onPageChange(previousBlockLastPage - 1); // 0-index 보정
     }
   };
 
   // 다음 블록 버튼 함수
   const handleNext = () => {
-    if (currentPage < totalPages - 1) {
-      const nextBlockStart = Math.min(startPage + maxPagesToShow, totalPages - 1); // 다음 블록의 시작 페이지
-      onPageChange(nextBlockStart);
+    const nextBlockFirstPage = startPage + maxPagesToShow - 1;
+    if (currentPage < totalPages - 1 && endPage < totalPages) {
+      onPageChange(nextBlockFirstPage);
     }
   };
 
   // 특정 페이지를 클릭하면 이동
   const handlePageClick = (page) => {
-    if (page !== currentPage) {
-      onPageChange(page);
+    if (page !== currentPage + 1) {
+      onPageChange(page - 1); // 페이지 번호와 currentPage를 맞추기 위해 -1
     }
   };
 
@@ -35,7 +36,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       {/* 이전 블록 버튼 */}
       <button 
         onClick={handlePrevious} 
-        disabled={currentPage === 0} // 첫 블록일 때 비활성화
+        disabled={currentPage < maxPagesToShow} 
         className="pagination-button"
       >
         이전
@@ -46,16 +47,16 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         <button
           key={page}
           onClick={() => handlePageClick(page)}
-          className={`pagination-button ${page === currentPage ? "active" : ""}`}
+          className={`pagination-button ${page === currentPage + 1 ? "active" : ""}`}
         >
-          {page + 1}
+          {page}
         </button>
       ))}
 
       {/* 다음 블록 버튼 */}
       <button 
         onClick={handleNext} 
-        disabled={currentPage >= totalPages - 1} // 마지막 블록일 때 비활성화
+        disabled={endPage >= totalPages} 
         className="pagination-button"
       >
         다음

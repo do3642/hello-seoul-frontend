@@ -2,6 +2,9 @@ import React from "react";
 import '../styles/SidebarList.css';
 
 function SidebarList({ spot, onClick }) {
+  if(spot.firstimage2 === ''){
+    spot.firstimage2 = '/public/img/noimage_l.gif'
+  }
 
   return (
     <div className="sidebar-list" data-lon={spot.mapx} data-lat={spot.mapy} onClick={onClick}>
@@ -12,7 +15,7 @@ function SidebarList({ spot, onClick }) {
         <p>{spot.tel}</p>
       </div>
       <div className="sidebar-list-right">
-        <img src={spot.firstimage2} alt="관광지 이미지" />
+        <img src={spot.firstimage2} alt={spot.title} />
       </div>
     </div>
   );
