@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MapHover from "../utils/maphover.js";
 import { TouristSpots } from "../../context/TouristSpotsContext.jsx";
 
-function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButtonClick}) {
+function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButtonClick, setResetFeature }) {
   const [marker, setMarker] = useState(null);
 
   const handleClick = (buttonName) => {
@@ -14,9 +14,10 @@ function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButto
   useEffect(() => {
     if (map && geoJson) {
       // 지도 객체와 geoJson이 있을 때만 실행
-      MapHover(map, geoJson, activeButton, handleClick, groupedSpots);
+      const { resetSelectedFeature } = MapHover(map, geoJson, activeButton, handleButtonClick, groupedSpots);
+      setResetFeature(() => resetSelectedFeature); // 초기화 함수 저장
     }
-  }, [map, geoJson, activeButton, groupedSpots]); // map과 geoJson 변경 시마다 실행
+  }, [map, geoJson, activeButton, groupedSpots, setResetFeature]); // map과 geoJson 변경 시마다 실행
 
   useEffect(() => {
     // 현재 위치의 정확도를 높이기 위한 옵션
@@ -51,6 +52,8 @@ function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButto
               
               // 부드럽게 이동하고 줌하기
               map.morph(currentLocation, 17);
+
+              if (setResetFeature) setResetFeature(); // 클릭된 지역 초기화
             },
             (error) => {
               console.error("위치를 가져올 수 없습니다.", error);
@@ -68,7 +71,7 @@ function NaverMap({ map, geoJson, showCurrentLocation, activeButton, handleButto
         }
       }
     }
-  }, [showCurrentLocation]);
+  }, [showCurrentLocation, map, setResetFeature]);
 
   return(
     <>

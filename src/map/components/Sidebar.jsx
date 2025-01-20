@@ -9,13 +9,13 @@ import Pagination from "./pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
 
-function Sidebar({ map, activeButton, handleButtonClick }) {
+function Sidebar({ map, activeButton, handleButtonClick, resetFeature }) {
   const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
 
-  const selectedLanguage = i18n.language; // 현재 선택된 언어 코드y
+  const selectedLanguage = i18n.language; // 현재 선택된 언어 코드
 
   const handleListClick = (event) => {
     // currentTarget을 사용해 클릭된 요소의 부모 요소에 접근
@@ -30,6 +30,9 @@ function Sidebar({ map, activeButton, handleButtonClick }) {
       console.error("Invalid coordinates:", lon, lat);
       return;
     }
+
+    // 기존 선택 지역 초기화
+    if (resetFeature) resetFeature();
 
     // 지도에 관광지 하나에 대한 마커 생성
     clearMarkers();

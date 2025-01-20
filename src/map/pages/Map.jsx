@@ -11,6 +11,7 @@ function Map() {
   const [map, setMap] = useState(null);
   const [showCurrentLocation, setShowCurrentLocation] = useState(false);    // 현재 위치 표시 여부
   const [activeButton, setActiveButton] = useState("관광지");
+  const [resetFeature, setResetFeature] = useState(null); // 초기화 함수 상태 관리
   
 
   useEffect(() => {
@@ -40,15 +41,15 @@ function Map() {
 
   return (
     <div className="mappage-ctrl-box">
-      <NaverMap  map={map} geoJson={gudata} showCurrentLocation={showCurrentLocation} activeButton={activeButton} handleButtonClick={handleButtonClick}/>
-      <Sidebar map={map} activeButton={activeButton} handleButtonClick={handleButtonClick}/>
+      <NaverMap  map={map} geoJson={gudata} showCurrentLocation={showCurrentLocation} activeButton={activeButton} handleButtonClick={handleButtonClick} setResetFeature={setResetFeature}/>
+      <Sidebar map={map} activeButton={activeButton} handleButtonClick={handleButtonClick} resetFeature={resetFeature}/>
       <MapHeader activeButton={activeButton} onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick}/>
       <MapWebNav />
       {
         map && <AllWeather map={map} activeButton={activeButton} />
       }
     </div>
-  )
+  );
 }
 
 export default Map;

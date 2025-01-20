@@ -4,6 +4,14 @@ import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkers
 
 function MapHover(map, geoJson, activeButton, handleClick, groupedSpots) {
   let selectedFeature = null; // 현재 클릭된 지역을 저장하는 변수
+
+  function resetSelectedFeature() {
+    if (selectedFeature) {
+      // 이전 선택된 지역 초기화
+      map.data.revertStyle(selectedFeature);
+      selectedFeature = null;
+    }
+  }
   
   if (map && geoJson) {
     // GeoJSON 데이터를 지도에 추가
@@ -45,10 +53,7 @@ function MapHover(map, geoJson, activeButton, handleClick, groupedSpots) {
 
     // 클릭 시 구로 확대, 관광지버튼활성화, 해당구 관광지마커, 팝업생성
     map.data.addListener('click', function (e) {
-      if(selectedFeature) {
-        // 이전에 선택된 피처 스타일 초기화
-        map.data.revertStyle(selectedFeature);
-      }
+      resetSelectedFeature(); // 이전 선택된 지역 초기화
 
       selectedFeature = e.feature; // 현재 클릭된 피처 저장
 
@@ -92,6 +97,8 @@ function MapHover(map, geoJson, activeButton, handleClick, groupedSpots) {
   if (activeButton !== "관광지") {
     clearMarkers();
   }
+
+  return { resetSelectedFeature }; // 초기화 함수 반환
 };
 
 export default MapHover;
