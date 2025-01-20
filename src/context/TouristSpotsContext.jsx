@@ -88,8 +88,7 @@ export const TouristSpotsProvider = ({ children }) => {
         selectedLanguage,
         setSelectedLanguage,
         totalPages,
-        searchKeyword,
-        setSearchKeyword, // 검색어를 상태로 관리
+        setTouristSpots
       }}
     >
       {children}

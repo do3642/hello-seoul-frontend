@@ -7,25 +7,26 @@ import { useTranslation } from "react-i18next";
 import { TouristSpots } from "../../context/TouristSpotsContext";
 import Pagination from "./Pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
-import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
+import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtName }) {
-  const { touristSpots, currentPage, totalPages, setCurrentPage, fetchSearchTouristSpots, searchKeyword } = TouristSpots();
+function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
+  const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots } = TouristSpots();
+  console.log(touristSpots)
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
+
 
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const selectedLanguage = i18n.language; // 현재 선택된 언어 코드
+  const { contentid } = useParams();
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    fetchSearchTouristSpots(searchKeyword, newPage);
-  };
+  const selectedLanguage = i18n.language; // 현재 선택된 언어 코드y
 
   const handleListClick = (event) => {
     // currentTarget을 사용해 클릭된 요소의 부모 요소에 접근
@@ -34,7 +35,7 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
 
     // 클릭된 리스트에서 관광지 이름에 접근할 수 있도록 함.
     const spotName = event.currentTarget.querySelector('p').textContent;
-  
+
     // 좌표가 유효한지 확인 (NaN 체크)
     if (isNaN(lon) || isNaN(lat)) {
       console.error("Invalid coordinates:", lon, lat);
@@ -46,8 +47,9 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
 
     // 지도에 관광지 하나에 대한 마커 생성
     clearMarkers();
-    createMarkersForDistrict(map, spotName, activeButton, handleButtonClick, touristSpots);
-  
+    createMarkersForDistrict(map, spotName, activeButton, handleButtonClick, touristSpots, navigate);
+    openAllInfoWindows();
+
     // 좌표를 이용해 지도 확대
     zoomInToRegion(map, lon, lat, activeButton, handleButtonClick);
   };
@@ -75,6 +77,22 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
   }, []);
 
 
+  useEffect(() => {
+    // URL에 쿼리 파라미터가 있을 경우, 해당 검색어로 데이터를 받아옵니다.
+    const searchParams = new URLSearchParams(window.location.search);
+    const query = searchParams.get('query');
+    
+    if (query) {
+      fetch(`/api/search?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+          setTouristSpots(data); // 검색된 데이터로 touristSpots 갱신
+        });
+    }
+  }, [window.location.search, setTouristSpots]); // URL 검색어에 따른 데이터 변경 감지
+
+
+
   // 모바일 고려 터치이벤트들
   useEffect(() => {
     if (windowWidth <= 820) {
@@ -87,7 +105,7 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
         if (!isDragging) return;
         setCurrentY(e.touches[0].clientY);
         let distance = currentY - startY;
-        
+
         // 이동 거리 제한
         if (distance > 30) distance = 30;
         if (distance < -30) distance = -30;
@@ -133,41 +151,51 @@ function Sidebar({ map, activeButton, handleButtonClick, resetFeature, districtN
   };
 
   return (
-        <>
-          {windowWidth > 820 ? (
-            <div className='side-bar'>
-              <Search />
-              <Weather districtName={districtName} />
-              <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
-                {(touristSpots || []).map((spot, index) => (
+    <>
+      {windowWidth > 820 ? (
+        <div className='side-bar'>
+          <Search setTouristSpots={setTouristSpots}/>
+          <Weather districtName={districtName} />
+          <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
+            {!contentid && (
+              <>
+                {touristSpots.map((spot, index) => (
                   <SidebarList key={index} spot={spot} onClick={handleListClick} />
                 ))}
-                <Pagination 
+                <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={handlePageChange}
+                  onPageChange={setCurrentPage}
                 />
-              </div>
-            </div>
-          ) : (
-            <>
-              <Search />
-              <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
-                <Weather districtName={districtName}/>
-                <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
-                  {(touristSpots || []).map((spot, index) => (
+              </>
+            )}
+            {contentid && <Outlet />}
+          </div>
+        </div>
+      ) : (
+        <>
+          <Search />
+          <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
+            <Weather districtName={districtName} />
+            <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
+              {!contentid && (
+                <>
+                  {touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />
-                  ))} 
-                  <Pagination 
+                  ))}
+                  <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={handlePageChange}
+                    onPageChange={setCurrentPage}
                   />
-                </div>
-              </div>
-            </>
-          )}
+                </>
+              )}
+              {contentid && <Outlet />}
+            </div>
+          </div>
         </>
+      )}
+    </>
   );
 }
 

@@ -3,7 +3,7 @@ import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkers
 import { getWeatherData } from '../../utils/getFetchWeather'
 
 
-function MapHover(map, geoJson, activeButton, handleClick, groupedSpots, handleDistrictChange) {
+function MapHover(map, geoJson, activeButton, handleClick, groupedSpots, handleDistrictChange, navigate) {
   let selectedFeature = null; // 현재 클릭된 지역을 저장하는 변수
 
   function resetSelectedFeature() {
@@ -74,7 +74,7 @@ function MapHover(map, geoJson, activeButton, handleClick, groupedSpots, handleD
 
       if (spots) {
         // 구에 해당하는 관광지가 있는 경우 마커 생성
-        createMarkersForDistrict(map, district, activeButton, handleClick, spots);
+        createMarkersForDistrict(map, district, activeButton, handleClick, spots, navigate);
       } else {
         console.warn(`${district}에 해당하는 관광지가 없습니다.`);
       }

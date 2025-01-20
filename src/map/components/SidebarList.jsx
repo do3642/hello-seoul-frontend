@@ -1,13 +1,28 @@
 import React from "react";
 import '../styles/SidebarList.css';
+import { useNavigate } from "react-router-dom";
 
 function SidebarList({ spot, onClick }) {
-  if(spot.firstimage2 === ''){
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/map/${spot.contentid}`);
+  };
+
+  if (spot.firstimage2 === '') {
     spot.firstimage2 = '/public/img/noimage_l.gif'
   }
 
   return (
-    <div className="sidebar-list" data-lon={spot.mapx} data-lat={spot.mapy} onClick={onClick}>
+    <div
+      className="sidebar-list"
+      data-lon={spot.mapx}
+      data-lat={spot.mapy}
+      onClick={(event) => {
+        onClick(event);
+        handleClick();
+      }}>
       <div className="sidebar-list-left">
         <h4>{spot.guName}</h4>
         <br />

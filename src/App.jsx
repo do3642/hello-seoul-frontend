@@ -15,7 +15,9 @@ import SpotsTraditional from './spots/SpotsTraditional';
 import SpotsAllFestival from './spots/SpotsAllFestival';
 import SpotsSearch from './spots/SpotsSearch';
 import SpotsDetail from './spots/SpotsDetail';
+import MapDetail from './map/components/MapDetail'
 import { TouristSpotsProvider } from './context/TouristSpotsContext';
+import Sidebar from './map/components/Sidebar';
 
 
 
@@ -28,7 +30,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/subway' element={<Trainline />} />
-          <Route path='/map' element={<Map />} />
+          <Route path='/map' element={<Map />} >
+            <Route path=":contentid" element={<MapDetail />} />
+            <Route path="search?" element={<Sidebar />} />
+          </Route>
           <Route path='/spots' element={<Spots />} >
             <Route index element={<SpotsMain />} />
             <Route path='alltourist' element={<SpotsAllTourist />} />

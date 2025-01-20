@@ -12,7 +12,7 @@
   height: 100%; /* 기본 높이 설정 */
   overflow-y: auto; /* 세로 스크롤 가능 */
   -webkit-overflow-scrolling: touch; /* 모바일에서 부드럽게 스크롤 */
-  cursor: pointer;
+  background-color: #f5f5f5;
 }
 
 
