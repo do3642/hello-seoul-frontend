@@ -7,6 +7,7 @@ import gudata from "../../data/Seoul_Gu.json"
 import AllWeather from "../components/AllWeather";
 import '../styles/media-map.css'
 
+
 function Map() {
   const [map, setMap] = useState(null);
   const [showCurrentLocation, setShowCurrentLocation] = useState(false);    // 현재 위치 표시 여부
@@ -63,7 +64,12 @@ function Map() {
         handleButtonClick={handleButtonClick}
         handleDistrictChange={handleDistrictChange}
       />
-      <Sidebar map={map} activeButton={activeButton} handleButtonClick={handleButtonClick} districtName={districtName}/>
+      <Sidebar
+        map={map}
+        activeButton={activeButton}
+        handleButtonClick={handleButtonClick}
+        districtName={districtName}
+      />
       <MapHeader activeButton={activeButton} onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick} />
       <MapWebNav />
       {

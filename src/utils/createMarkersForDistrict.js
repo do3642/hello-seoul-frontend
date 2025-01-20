@@ -2,7 +2,8 @@ let markers = [];
 let infoWindows = [];
 let activeInfoWindow = null;
 
-function createMarkersForDistrict(map, identifier, activeButton, handleClick, touristSpots) {
+function createMarkersForDistrict(map, identifier, activeButton, handleClick, touristSpots, navigate) {
+  console.log(navigate);
   // 활성화 버튼이 "관광지"가 아닐 경우, handleClick 호출
   if (activeButton !== "관광지") {
     handleClick("관광지");
@@ -57,6 +58,11 @@ function createMarkersForDistrict(map, identifier, activeButton, handleClick, to
       }
     });
 
+    naver.maps.Event.addListener(marker, 'click', function () {
+      // 마커 클릭 시 해당 touristSpot의 contentid를 사용하여 URL로 이동
+      navigate(`/map/${spot.contentid}`); // map/{contentid}로 이동
+    });
+
     markers.push(marker);
     infoWindows.push(infoWindow);
   });
@@ -74,4 +80,21 @@ function clearMarkers() {
   activeInfoWindow = null;
 }
 
-export { createMarkersForDistrict, clearMarkers };
+function openAllInfoWindows() {
+  markers.forEach((marker, index) => {
+    const infoWindow = infoWindows[index];
+    if (infoWindow && marker.getMap()) {
+      infoWindow.open(marker.getMap(), marker);
+    }
+  });
+}
+
+function closeAllInfoWindows() {
+  infoWindows.forEach((window) => {
+    if (window && window.getMap()) {
+      window.close();
+    }
+  });
+  activeInfoWindow = null;  // 현재 열린 팝업을 null로 설정
+}
+export { createMarkersForDistrict, clearMarkers, openAllInfoWindows,closeAllInfoWindows };

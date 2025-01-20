@@ -7,18 +7,23 @@ import { useTranslation } from "react-i18next";
 import { TouristSpots } from "../../context/TouristSpotsContext";
 import Pagination from "./pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
-import { clearMarkers, createMarkersForDistrict } from "../../utils/createMarkersForDistrict";
+import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-function Sidebar({ map, activeButton, handleButtonClick,districtName }) {
+function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
   const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
+
 
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+
+  const { contentid } = useParams();
 
   const selectedLanguage = i18n.language; // 현재 선택된 언어 코드y
 
@@ -29,7 +34,7 @@ function Sidebar({ map, activeButton, handleButtonClick,districtName }) {
 
     // 클릭된 리스트에서 관광지 이름에 접근할 수 있도록 함.
     const spotName = event.currentTarget.querySelector('p').textContent;
-  
+
     // 좌표가 유효한지 확인 (NaN 체크)
     if (isNaN(lon) || isNaN(lat)) {
       console.error("Invalid coordinates:", lon, lat);
@@ -38,8 +43,9 @@ function Sidebar({ map, activeButton, handleButtonClick,districtName }) {
 
     // 지도에 관광지 하나에 대한 마커 생성
     clearMarkers();
-    createMarkersForDistrict(map, spotName, activeButton, handleButtonClick, touristSpots);
-  
+    createMarkersForDistrict(map, spotName, activeButton, handleButtonClick, touristSpots, navigate);
+    openAllInfoWindows();
+
     // 좌표를 이용해 지도 확대
     zoomInToRegion(map, lon, lat, activeButton, handleButtonClick);
   };
@@ -79,7 +85,7 @@ function Sidebar({ map, activeButton, handleButtonClick,districtName }) {
         if (!isDragging) return;
         setCurrentY(e.touches[0].clientY);
         let distance = currentY - startY;
-        
+
         // 이동 거리 제한
         if (distance > 30) distance = 30;
         if (distance < -30) distance = -30;
@@ -125,41 +131,51 @@ function Sidebar({ map, activeButton, handleButtonClick,districtName }) {
   };
 
   return (
-        <>
-          {windowWidth > 820 ? (
-            <div className='side-bar'>
-              <Search />
-              <Weather districtName={districtName} />
-              <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
+    <>
+      {windowWidth > 820 ? (
+        <div className='side-bar'>
+          <Search />
+          <Weather districtName={districtName} />
+          <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
+            {!contentid && (
+              <>
                 {touristSpots.map((spot, index) => (
                   <SidebarList key={index} spot={spot} onClick={handleListClick} />
                 ))}
-                <Pagination 
+                <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
                   onPageChange={setCurrentPage}
                 />
-              </div>
-            </div>
-          ) : (
-            <>
-              <Search />
-              <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
-                <Weather districtName={districtName}/>
-                <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
+              </>
+            )}
+            {contentid && <Outlet />}
+          </div>
+        </div>
+      ) : (
+        <>
+          <Search />
+          <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
+            <Weather districtName={districtName} />
+            <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
+              {!contentid && (
+                <>
                   {touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />
                   ))}
-                  <Pagination 
+                  <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={setCurrentPage}
                   />
-                </div>
-              </div>
-            </>
-          )}
+                </>
+              )}
+              {contentid && <Outlet />}
+            </div>
+          </div>
         </>
+      )}
+    </>
   );
 }
 
