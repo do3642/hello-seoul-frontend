@@ -6,10 +6,9 @@ import Location from './Location';
 import Translation from './Translation';
 import { useTranslation } from 'react-i18next';
 
-function MapHeader({ onToggleLocation, onButtonClick  }) {
+function MapHeader({ activeButton, onToggleLocation, onButtonClick  }) {
   const { t, i18n  } = useTranslation();
 
-  const [activeButton, setActiveButton] = useState("관광지");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -34,7 +33,6 @@ function MapHeader({ onToggleLocation, onButtonClick  }) {
   };
   
   const handleClick = (buttonName) => {
-    setActiveButton(buttonName);
     onButtonClick(buttonName);
   };
 

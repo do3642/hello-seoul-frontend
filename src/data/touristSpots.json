@@ -1,0 +1,128 @@
+[
+  {
+    "district": "강남구",
+    "touristName": "코엑스몰",
+    "phoneNumber": "02-123-4567",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.512604, "lng": 127.058212 }
+  },
+  {
+    "district": "강남구",
+    "touristName": "압구정로데오",
+    "phoneNumber": "02-456-7890",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.527564, "lng": 127.040213 }
+  },
+  {
+    "district": "강남구",
+    "touristName": "강남역",
+    "phoneNumber": "02-678-1234",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.498004, "lng": 127.027739 }
+  },
+  {
+    "district": "종로구",
+    "touristName": "경복궁",
+    "phoneNumber": "02-234-5678",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.579617, "lng": 126.977041 }
+  },
+  {
+    "district": "종로구",
+    "touristName": "인사동",
+    "phoneNumber": "02-345-6789",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.572988, "lng": 126.986334 }
+  },
+  {
+    "district": "마포구",
+    "touristName": "홍대거리",
+    "phoneNumber": "02-345-6789",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.556332, "lng": 126.923610 }
+  },
+  {
+    "district": "마포구",
+    "touristName": "상암 DMC",
+    "phoneNumber": "02-890-1234",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.578892, "lng": 126.890444 }
+  },
+  {
+    "district": "중구",
+    "touristName": "서울시청",
+    "phoneNumber": "02-567-8901",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.566295, "lng": 126.977945 }
+  },
+  {
+    "district": "중구",
+    "touristName": "명동거리",
+    "phoneNumber": "02-789-1234",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.563656, "lng": 126.985974 }
+  },
+  {
+    "district": "강서구",
+    "touristName": "김포공항",
+    "phoneNumber": "02-678-1234",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.558303, "lng": 126.794796 }
+  },
+  {
+    "district": "송파구",
+    "touristName": "롯데월드타워",
+    "phoneNumber": "02-789-1234",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.512598, "lng": 127.102409 }
+  },
+  {
+    "district": "송파구",
+    "touristName": "석촌호수",
+    "phoneNumber": "02-345-6789",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.511634, "lng": 127.107712 }
+  },
+  {
+    "district": "영등포구",
+    "touristName": "여의도공원",
+    "phoneNumber": "02-890-1234",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.525529, "lng": 126.928601 }
+  },
+  {
+    "district": "영등포구",
+    "touristName": "타임스퀘어",
+    "phoneNumber": "02-567-8901",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.517236, "lng": 126.903421 }
+  },
+  {
+    "district": "성동구",
+    "touristName": "서울숲",
+    "phoneNumber": "02-345-6789",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.544801, "lng": 127.037810 }
+  },
+  {
+    "district": "성동구",
+    "touristName": "응봉산",
+    "phoneNumber": "02-123-4567",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.547491, "lng": 127.028144 }
+  },
+  {
+    "district": "용산구",
+    "touristName": "남산타워",
+    "phoneNumber": "02-456-7890",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.551169, "lng": 126.988226 }
+  },
+  {
+    "district": "용산구",
+    "touristName": "이태원",
+    "phoneNumber": "02-678-1234",
+    "image": "http://placehold.it/100X100",
+    "coordinates": { "lat": 37.534815, "lng": 126.995703 }
+  }
+]

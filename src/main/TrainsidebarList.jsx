@@ -1,7 +1,7 @@
 import React from "react";
-import '../styles/SidebarList.css';
+import '../styles/TrainsidebarList.css';
 
-function SidebarList({ spot }) {
+function TrainsidebarList({ spot }) {
   return (
     <div className="sidebar-list">
       <div className="sidebar-list-left">
@@ -17,4 +17,4 @@ function SidebarList({ spot }) {
   );
 }
 
-export default SidebarList;
+export default TrainsidebarListt;

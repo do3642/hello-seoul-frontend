@@ -22,7 +22,7 @@ const Navigation = ({ contentName, link }) => {
           <p>{navItems.subway} <i className="fa-solid fa-train-subway"></i></p>
           <span>{navItems.page}<i className="fa-solid fa-caret-right"></i></span>
         </li>
-        <li>
+        <li onClick={() => handleNavigation('/spots')}>
           <p>{navItems.whereToGo} <i className="fa-solid fa-star"></i></p>
           <span>{navItems.page}<i className="fa-solid fa-caret-right"></i></span>
         </li>

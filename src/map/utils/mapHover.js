@@ -1,4 +1,9 @@
-function MapHover(map, geoJson) {
+import zoomInToRegion from '/src/utils/zoomInToRegion'
+import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkersForDistrict';
+
+
+function MapHover(map, geoJson,activeButton,handleClick) {
+  
   if (map && geoJson) {
     // GeoJSON 데이터를 지도에 추가
     map.data.addGeoJson(geoJson);
@@ -31,12 +36,14 @@ function MapHover(map, geoJson) {
     });
 
 
-    // 클릭 시 구로 확대
+    // 클릭 시 구로 확대, 관광지버튼활성화, 해당구 관광지마커,팝업생성
     map.data.addListener('click', function (e) {
+      
       var clickedFeature = e.feature;
+      var district = clickedFeature.getProperty('SIG_KOR_NM');
+      createMarkersForDistrict(map, district, activeButton, handleClick);
 
-      var geometry = clickedFeature;
-      var bounds = geometry.bounds;
+      var bounds = clickedFeature.bounds;
 
       if (bounds) {
        
@@ -47,15 +54,17 @@ function MapHover(map, geoJson) {
           new naver.maps.LatLng(minPoint.y, minPoint.x), // 좌하단 (위도, 경도 순서)
           new naver.maps.LatLng(maxPoint.y, maxPoint.x)  // 우상단 (위도, 경도 순서)
         );
-    
-        var center = latLngBounds.getCenter();
-        map.morph(center,14,'linear')
+        zoomInToRegion(map, latLngBounds.getCenter().x, latLngBounds.getCenter().y, activeButton, handleClick);
+
       }
     });
     
     
     
 
+  }
+  if (activeButton !== "관광지") {
+    clearMarkers();
   }
 };
 

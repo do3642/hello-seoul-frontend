@@ -1,10 +1,11 @@
-import Search from "./Search";
-import '../styles/Sidebar.css';
-import SidebarList from "./SidebarList";
-import Weather from "./Weather";
-import { useEffect, useState } from "react";
 
-function Sidebar() {
+import { useEffect, useState } from "react";
+import Search from '../map/components/Search';
+import Weather from "./Weather";
+import SidebarList from "../map/components/SidebarList";
+import TrainSearch from "./TrainSearch";
+
+function Trainsidebar({selectedStation, startStation, endStation, setStartStation ,setEndStation, startLatLng, endLatLng}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [touristSpots, setTouristSpots] = useState([]);
   const [sidebarHeight, setSidebarHeight] = useState(0);
@@ -57,7 +58,8 @@ function Sidebar() {
     <>
         {windowWidth > 820 ? (
           <div className="side-bar">
-            <Search /> 
+            <TrainSearch startStation={startStation} endStation={endStation}  setStartStation={setStartStation} setEndStation={setEndStation}  startLatLng={startLatLng} endLatLng={endLatLng}/> 
+            <p style={{textAlign:'center'}}>{selectedStation}</p>
             <Weather />
             <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
               {touristSpots.map((spot, index) => (
@@ -83,4 +85,4 @@ function Sidebar() {
   )
 }
 
-export default Sidebar;
+export default Trainsidebar;
