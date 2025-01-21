@@ -10,19 +10,16 @@ function Search() {
   const { setCurrentPage, selectedLanguage, setSearchKeyword } = TouristSpots();
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
     setCurrentPage(0);
   };
 
-  const handleSearchSubmit = async (event) => {
-    if (event.key === 'Enter' || event.type === 'submit') {
-      event.preventDefault();
-
+  const handleSearchSubmit = async () => {
       // URL 갱신
       navigate(`/map/search?languageCode=${selectedLanguage}&query=${searchQuery}&page=0&size=10`);
       setSearchKeyword(searchQuery)
-    }
   };
 
   return (
@@ -33,7 +30,11 @@ function Search() {
           id="search" 
           value={searchQuery} 
           onChange={handleSearchChange} 
-          onKeyDown={handleSearchSubmit} 
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              handleSearchSubmit();
+            }
+          }} 
           placeholder="검색어를 입력하세요"
         />
         <FontAwesomeIcon 
