@@ -1,13 +1,13 @@
 import '../styles/Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Search.css';
 import { TouristSpots } from '../../context/TouristSpotsContext';
 
 function Search() {
-  const { setCurrentPage, selectedLanguage, setSearchKeyword } = TouristSpots();
+  const { setCurrentPage, selectedLanguage, setSearchKeyword, currentPage } = TouristSpots();
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -21,6 +21,21 @@ function Search() {
       navigate(`/map/search?languageCode=${selectedLanguage}&query=${searchQuery}&page=0&size=10`);
       setSearchKeyword(searchQuery)
   };
+
+  // Cleanup function: 페이지 이동 시 검색어 초기화
+  useEffect(() => {
+    // URL에 query가 없거나 변경될 때마다 검색어를 초기화
+    const queryParams = new URLSearchParams(location.search);
+    const query = queryParams.get('query');
+    
+    if (!query) {
+      setSearchQuery('');  // 검색어 초기화
+      setSearchKeyword(''); // 검색어 상태 초기화
+    } else {
+      setSearchQuery(query); // URL에 검색어가 있을 경우 해당 검색어를 상태에 설정
+    }
+  }, [location.search, setSearchKeyword]);
+
 
   return (
     <div className="search">

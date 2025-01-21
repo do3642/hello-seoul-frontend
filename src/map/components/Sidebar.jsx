@@ -10,18 +10,13 @@ import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-import axios from "axios";
-
 function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
-  const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots, setTotalPages } = TouristSpots();
+  const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
 
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [isActive, setIsActive] = useState(false);
-
-  const [query, setQuery] = useState(""); // 검색어
-
 
   const navigate = useNavigate();
 
@@ -81,29 +76,6 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
       window.removeEventListener("resize", handleResize); // 리사이즈 이벤트 정리
     };
   }, []);
-  
-  const fetchTouristSpots = async () => {
-    try {
-      const response = await axios.get("/api/mapSearch", {
-        params: {
-          query: query || "", // 검색어
-          page: currentPage, // 현재 페이지
-          size: 10, // 페이지당 데이터 수
-        },
-      });
-
-      setTouristSpots(response.data.touristSpots);
-      setTotalPages(response.data.totalPages);
-    } catch (error) {
-      console.error("Error fetching tourist spots:", error);
-    }
-  };
-
-  
-  useEffect(() => {
-    fetchTouristSpots();
-
-  }, [query, currentPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page); // 페이지 변경
