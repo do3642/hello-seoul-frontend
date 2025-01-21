@@ -11,7 +11,7 @@ function SpotsSearch() {
   const fetchSearchResults = async () => {
     const searchTerm = searchQuery;  // `searchQuery`는 전달된 검색어
     try {
-      const response = await fetch(`http://localhost:8888/api/search?search=${encodeURIComponent(searchTerm)}`);
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/search?search=${encodeURIComponent(searchTerm)}`);
       if (!response.ok) {
         throw new Error('서버 오류가 발생했습니다. 다시 시도해주세요.');
       }

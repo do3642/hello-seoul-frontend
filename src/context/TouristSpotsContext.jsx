@@ -15,7 +15,7 @@ export const TouristSpotsProvider = ({ children }) => {
     const fetchAllTouristSpots = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8888/api/alltouristspotdata?languageCode=${selectedLanguage}`
+          `${import.meta.env.VITE_SERVER_URL}/api/alltouristspotdata?languageCode=${selectedLanguage}`
         );
         const data = await response.json();
 
@@ -43,7 +43,7 @@ export const TouristSpotsProvider = ({ children }) => {
     const fetchTouristSpots = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
+          `${import.meta.env.VITE_SERVER_URL}/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
         );
         const data = await response.json();
         setTouristSpots(data.content); // 페이지네이션된 데이터

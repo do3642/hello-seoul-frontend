@@ -21,7 +21,7 @@ function Search({ setTouristSpots }) {
       // URL 갱신
       navigate(`/map/search?query=${searchQuery}`);
       // 서버에서 검색어에 맞는 데이터를 받아옵니다.
-      const response = await fetch(`http://localhost:8888/api/mapSearch?query=${searchQuery}`);
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/mapSearch?query=${searchQuery}`);
       const data = await response.json();
 
       // touristSpots만 갱신

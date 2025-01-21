@@ -21,7 +21,7 @@ function SpotsAllTourist() {
     try {
       setLoading(true);
       // 관광지 데이터 요청 (페이지 번호 추가)
-      const response = await axios.get(`http://localhost:8888/api/tourist-spots`, {
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/tourist-spots`, {
         params: {
           lang: languageCode,
           page: page,

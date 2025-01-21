@@ -14,7 +14,7 @@ function SeasonBox({ seasonName, seasonNameKR }){
  const fetchSeasonData = (seasonKR) => {
 
   axios
-    .get(`http://localhost:8888/api/season-spots`, { 
+    .get(`${import.meta.env.VITE_SERVER_URL}/api/season-spots`, { 
       params: {
         seasonKR: seasonNameKR, // 계절 한글 이름
       }

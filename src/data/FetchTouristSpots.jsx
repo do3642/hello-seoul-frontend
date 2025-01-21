@@ -21,7 +21,7 @@ const FetchTouristSpots = () => {
     setDistrictMessage("지역 데이터를 저장 중입니다...");
 
     try {
-      const districtResponse = await fetch("http://localhost:8888/api/districts", {
+      const districtResponse = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/districts`, {
         method: "POST",
       });
       if (!districtResponse.ok) throw new Error("지역 데이터 저장 실패");
@@ -43,7 +43,7 @@ const FetchTouristSpots = () => {
 
     try {
       const touristResponse = await fetch(
-        `http://localhost:8888/api/touristspot?languageCode=${languageCode.code}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/touristspot?languageCode=${languageCode.code}`,
         { method: "POST" }
       );
       if (!touristResponse.ok) throw new Error(`${languageCode} 데이터 저장 실패`);
@@ -65,7 +65,7 @@ const FetchTouristSpots = () => {
     setDistrictMessage("데이터를 저장 중입니다...");
   
     try {
-      const response = await fetch(`http://localhost:8888/api/touristdateSave`, {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/touristdateSave`, {
         method: "POST",
       });
   

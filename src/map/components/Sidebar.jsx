@@ -12,7 +12,6 @@ import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
   const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots } = TouristSpots();
-  console.log(touristSpots)
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
