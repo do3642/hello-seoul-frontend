@@ -1,13 +1,13 @@
 import '../styles/Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Search.css';
 import { TouristSpots } from '../../context/TouristSpotsContext';
 
 function Search() {
-  const { setCurrentPage, selectedLanguage, setSearchKeyword } = TouristSpots();
+  const { setCurrentPage, selectedLanguage, setSearchKeyword, currentPage } = TouristSpots();
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -22,13 +22,18 @@ function Search() {
       setSearchKeyword(searchQuery)
   };
 
+  // 다른 페이지 갔다가 왔을 때 검색창 비워줌.
+  useEffect(() => {
+    setSearchKeyword(null)
+  }, [])
+
   return (
     <div className="search">
       <div className="search-container">
         <input 
           type="search" 
           id="search" 
-          value={searchQuery} 
+          value={searchQuery}
           onChange={handleSearchChange} 
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
