@@ -86,15 +86,18 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
           size: 10, // 페이지당 데이터 수
         },
       });
+
       setTouristSpots(response.data.touristSpots);
       setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching tourist spots:", error);
     }
   };
+
   
   useEffect(() => {
     fetchTouristSpots();
+
   }, [query, currentPage]);
 
   const handlePageChange = (page) => {
@@ -151,6 +154,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
         sidebarElement.removeEventListener('touchend', handleTouchEnd);
       };
     }
+    
   }, [windowWidth, startY, currentY, isDragging]);
 
 
