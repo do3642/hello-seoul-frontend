@@ -96,7 +96,7 @@ function Weather() {
           <span>{temperature.max}°C</span>
         </div>
       ) : (
-        <p>날씨 정보를 불러오는 중입니다.</p>
+        <p>{LoadingSVG()}</p>
       )}
     </div>
   );
