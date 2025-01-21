@@ -10,18 +10,13 @@ import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-import axios from "axios";
-
 function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
-  const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots, setTotalPages } = TouristSpots();
+  const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
 
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [isActive, setIsActive] = useState(false);
-
-  const [query, setQuery] = useState(""); // 검색어
-
 
   const navigate = useNavigate();
 
@@ -60,6 +55,13 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
     zoomInToRegion(map, lon, lat, activeButton, handleButtonClick);
   };
 
+  // 컴포넌트가 언마운트될 때 currentPage를 0으로 초기화
+  useEffect(() => {
+    return () => {
+      setCurrentPage(0);
+    };
+  }, [setCurrentPage]);
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth); // 화면 크기 변경 시 상태 업데이트
@@ -81,12 +83,6 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
       window.removeEventListener("resize", handleResize); // 리사이즈 이벤트 정리
     };
   }, []);
-  
-
-  
-  useEffect(() => {
-
-  }, [query, currentPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page); // 페이지 변경

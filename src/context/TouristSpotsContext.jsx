@@ -43,7 +43,7 @@ export const TouristSpotsProvider = ({ children }) => {
   
   useEffect(() => {
     fetchTouristSpots();
-  }, [currentPage, searchKeyword])
+  }, [currentPage, searchKeyword, selectedLanguage])
 
   // 페이지네이션된 관광지 데이터 가져오기
   const fetchTouristSpots = async () => {
