@@ -43,7 +43,6 @@ function Search() {
         <input 
           type="search" 
           id="search" 
-          value={searchQuery} 
           onChange={handleSearchChange} 
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
