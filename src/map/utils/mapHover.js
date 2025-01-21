@@ -3,6 +3,7 @@ import { createMarkersForDistrict,clearMarkers  } from '/src/utils/createMarkers
 import { getWeatherData } from '../../utils/getFetchWeather'
 
 
+
 function MapHover(map, geoJson, activeButton, handleClick, groupedSpots, handleDistrictChange, navigate) {
   let selectedFeature = null; // 현재 클릭된 지역을 저장하는 변수
 
@@ -13,6 +14,7 @@ function MapHover(map, geoJson, activeButton, handleClick, groupedSpots, handleD
       selectedFeature = null;
     }
   }
+
   
   if (map && geoJson) {
     // GeoJSON 데이터를 지도에 추가

@@ -66,7 +66,9 @@ function Map() {
         handleDistrictChange={handleDistrictChange}
         setResetFeature={setResetFeature}
       />
+
       <Sidebar map={map} activeButton={activeButton} handleButtonClick={handleButtonClick} districtName={districtName} resetFeature={resetFeature}/>
+
       <MapHeader activeButton={activeButton} onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick} />
       <MapWebNav />
       {

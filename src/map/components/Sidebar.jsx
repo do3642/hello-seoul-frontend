@@ -9,15 +9,20 @@ import Pagination from "./Pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
+
 import axios from "axios";
 
 function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
   const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots, setTotalPages } = TouristSpots();
+
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [isActive, setIsActive] = useState(false);
+
   const [query, setQuery] = useState(""); // 검색어
+
+
   const navigate = useNavigate();
 
 
@@ -168,11 +173,13 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
     <>
       {windowWidth > 820 ? (
         <div className='side-bar'>
-          <Search setTouristSpots={setTouristSpots}/>
+
+          <Search />
           <Weather districtName={districtName} />
           <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
             {!contentid && (
               <>
+
                 {touristSpots && touristSpots.length > 0 ? (
                   touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />
@@ -180,6 +187,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
                 ) : (
                   <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지
                 )}
+
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
@@ -192,12 +200,13 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
         </div>
       ) : (
         <>
-          <Search setTouristSpots={setTouristSpots}/>
+          <Search />
           <div className={`side-bar ${isActive ? 'active' : ''}`} onClick={handleToggle}>
             <Weather districtName={districtName} />
             <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
               {!contentid && (
                 <>
+
                   {touristSpots && touristSpots.length > 0 ? (
                   touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />
@@ -205,6 +214,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
                 ) : (
                   <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지
                 )}
+
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
