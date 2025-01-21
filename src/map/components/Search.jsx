@@ -22,20 +22,9 @@ function Search() {
       setSearchKeyword(searchQuery)
   };
 
-  // Cleanup function: 페이지 이동 시 검색어 초기화
   useEffect(() => {
-    // URL에 query가 없거나 변경될 때마다 검색어를 초기화
-    const queryParams = new URLSearchParams(location.search);
-    const query = queryParams.get('query');
-    
-    if (!query) {
-      setSearchQuery('');  // 검색어 초기화
-      setSearchKeyword(''); // 검색어 상태 초기화
-    } else {
-      setSearchQuery(query); // URL에 검색어가 있을 경우 해당 검색어를 상태에 설정
-    }
-  }, [location.search, setSearchKeyword]);
-
+    setSearchKeyword(null)
+  }, [])
 
   return (
     <div className="search">
@@ -43,6 +32,7 @@ function Search() {
         <input 
           type="search" 
           id="search" 
+          value={searchQuery}
           onChange={handleSearchChange} 
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
