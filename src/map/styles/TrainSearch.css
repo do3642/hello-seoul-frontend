@@ -1,0 +1,75 @@
+.Trainsearch {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.Trainsearch-container > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.Trainsearch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Trainsearch-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.Trainsearch-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.Trainsearch-input-wrapper {
+  position: relative;
+}
+
+.Trainsearch-input {
+  width: 100%;
+  padding: 10px 35px 10px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.Trainsearch-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none;
+}
+
+.swap-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.swap-button:hover {
+  background-color: #0056b3;
+}
+
+.point {
+  cursor: pointer;
+}
