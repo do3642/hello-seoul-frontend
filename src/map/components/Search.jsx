@@ -22,6 +22,7 @@ function Search() {
       setSearchKeyword(searchQuery)
   };
 
+  // 다른 페이지 갔다가 왔을 때 검색창 비워줌.
   useEffect(() => {
     setSearchKeyword(null)
   }, [])
