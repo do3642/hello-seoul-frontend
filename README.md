@@ -8,12 +8,15 @@
 
 ## ⏳ 작업 기간 및 내용
 
-- **작업 기간**: 2024년 12월 31일 ~ 2025년 1월 22일 (약 3주)
+- **작업 기간**: 3주
 - **내용**:
   - 서울의 주요 관광지 정보 제공
+  - 관광지 위치 정보 제공
   - 계절별 맞춤 관광지 추천 기능 구현
-  - 지하철역에 따른 관광지 추천 제안
+  - 지하철역에 따른 관광지 추천 제안 (미구현)
+  - 지하철역간 소요시간 제공
   - 축제별 기간 정보 제공
+  - 각 구별 기상청 단기 예보 제공
 
 ## 💡 기능 소개
 
@@ -24,7 +27,7 @@
 
 ## 🔧 기술 스택
 
-- **프론트엔드**: React, Axios, React Router, react-i18next, react-infinite-scroll-component, react-svg-pan-zoom, react-zoom-pan-pinch, Font Awesome
+- **프론트엔드**: React, Axios, React Router, react-i18next, react-infinite-scroll-component, react-svg-pan-zoom, react-zoom-pan-pinch, Font Awesome, Naver Map api, T-map api
 - **백엔드**: Spring Boot, Spring Data JPA, MySQL, Lombok, Gson
 
 ## 👨‍💻 팀 구성

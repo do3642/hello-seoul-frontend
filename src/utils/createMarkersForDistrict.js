@@ -5,6 +5,7 @@ let infoWindows = [];
 let activeInfoWindow = null;
 
 function createMarkersForDistrict(map, identifier, activeButton, handleClick, touristSpots, navigate) {
+
   // 활성화 버튼이 "관광지"가 아닐 경우, handleClick 호출
   if (activeButton !== "관광지") {
     handleClick("관광지");
