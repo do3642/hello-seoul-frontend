@@ -10,7 +10,7 @@ import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
+function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature, handleDistrictChange }) {
   const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
 
   const { i18n } = useTranslation();
@@ -161,7 +161,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
 
                 {touristSpots && touristSpots.length > 0 ? (
                   touristSpots.map((spot, index) => (
-                    <SidebarList key={index} spot={spot} onClick={handleListClick} />
+                    <SidebarList key={index} spot={spot} onClick={handleListClick} handleDistrictChange={handleDistrictChange}/>
                   ))
                 ) : (
                   <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지
@@ -188,7 +188,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
 
                   {touristSpots && touristSpots.length > 0 ? (
                   touristSpots.map((spot, index) => (
-                    <SidebarList key={index} spot={spot} onClick={handleListClick} />
+                    <SidebarList key={index} spot={spot} onClick={handleListClick} handleDistrictChange={handleDistrictChange} />
                   ))
                 ) : (
                   <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지

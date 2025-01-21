@@ -73,7 +73,8 @@ function Map() {
         handleButtonClick={handleButtonClick}
         districtName={districtName}
         handleDistrictChange={handleDistrictChange}
-        resetFeature={resetFeature} />
+        resetFeature={resetFeature} 
+        />
 
       <MapHeader activeButton={activeButton} onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick} />
       <MapWebNav />

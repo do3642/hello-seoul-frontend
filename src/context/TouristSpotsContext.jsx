@@ -37,7 +37,7 @@ export const TouristSpotsProvider = ({ children }) => {
     };
 
     fetchAllTouristSpots();
-    console.log('컨텍스트.jsx의 turistSpots',touristSpots)
+    // console.log('컨텍스트.jsx의 turistSpots',touristSpots)
 
   }, [selectedLanguage]);
   
