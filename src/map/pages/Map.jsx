@@ -69,6 +69,7 @@ function Map() {
         activeButton={activeButton}
         handleButtonClick={handleButtonClick}
         districtName={districtName}
+        handleDistrictChange={handleDistrictChange}
       />
       <MapHeader activeButton={activeButton} onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick} />
       <MapWebNav />

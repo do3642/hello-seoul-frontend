@@ -2,11 +2,12 @@ import React from "react";
 import '../styles/SidebarList.css';
 import { useNavigate } from "react-router-dom";
 
-function SidebarList({ spot, onClick }) {
+function SidebarList({ spot, onClick, handleDistrictChange }) {
 
   const navigate = useNavigate();
 
   const handleClick = () => {
+    handleDistrictChange(spot.guName)
     navigate(`/map/${spot.contentid}`);
   };
 

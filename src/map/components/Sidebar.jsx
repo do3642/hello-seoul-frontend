@@ -10,7 +10,7 @@ import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
+function Sidebar({ map, activeButton, handleButtonClick, districtName, handleDistrictChange}) {
   const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots } = TouristSpots();
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -156,7 +156,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
             {!contentid && (
               <>
                 {touristSpots.map((spot, index) => (
-                  <SidebarList key={index} spot={spot} onClick={handleListClick} />
+                  <SidebarList key={index} spot={spot} onClick={handleListClick} handleDistrictChange={handleDistrictChange}/>
                 ))}
                 <Pagination
                   currentPage={currentPage}
