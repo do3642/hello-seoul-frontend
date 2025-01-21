@@ -2,16 +2,17 @@ import React from "react";
 import '../styles/SidebarList.css';
 import { useNavigate } from "react-router-dom";
 
-function SidebarList({ spot, onClick }) {
+function SidebarList({ spot, onClick, handleDistrictChange }) {
 
   const navigate = useNavigate();
 
   const handleClick = () => {
+    handleDistrictChange(spot.guName)
     navigate(`/map/${spot.contentid}`);
   };
 
   if (spot.firstimage2 === '') {
-    spot.firstimage2 = '/public/img/noimage_l.gif'
+    spot.firstimage2 = '/img/noimage_l.gif'
   }
 
   return (

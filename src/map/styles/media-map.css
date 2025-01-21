@@ -1,7 +1,7 @@
 
 @media (max-width: 1200px) {
   .side-bar{
-    width:auto;
+    width:300px;
   }
   .search{
     width: auto;
@@ -23,9 +23,9 @@
     height: 70px;
   }
   .map-header{
-    left: 280px;
+    left: 290px;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
   }
   .map-header button{
     font-size: 1em;

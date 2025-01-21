@@ -18,7 +18,7 @@ function MapDetail() {
   const fetchMapDetails = async () => {
     setLoading(true); // 데이터 요청 시작 시 로딩 상태로 설정
     try {
-      const response = await axios.get(`http://localhost:8888/api/tourist-detail/${contentid}`);
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/tourist-detail/${contentid}`);
 
       if (!response.data || Object.keys(response.data).length === 0) {
         // 데이터가 없을 경우
@@ -67,7 +67,7 @@ function MapDetail() {
       </button>
 
       <div className="map-detail-img">
-        <img src={mapDetails.touristSpot?.firstimage2 || "/public/img/noimage_l.gif"} alt="" />
+        <img src={mapDetails.touristSpot?.firstimage2 || "/img/noimage_l.gif"} alt="" />
       </div>
 
       <h3>{mapDetails.touristSpot.title}</h3>

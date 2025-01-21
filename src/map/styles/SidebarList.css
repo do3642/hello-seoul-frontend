@@ -46,7 +46,6 @@
   overflow: hidden; /* 넘치는 내용 숨김 */
   text-overflow: ellipsis; /* 말줄임 표시 */
   margin: 0; /* 여백 제거 */
-  max-width: 250px; /* 부제목의 최대 너비 제한 */
 }
 
 .sidebar-list-right {

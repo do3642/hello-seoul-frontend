@@ -17,7 +17,7 @@ export const TouristSpotsProvider = ({ children }) => {
     const fetchAllTouristSpots = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8888/api/alltouristspotdata?languageCode=${selectedLanguage}`
+          `${import.meta.env.VITE_SERVER_URL}/api/alltouristspotdata?languageCode=${selectedLanguage}`
         );
         const data = await response.json();
 
@@ -37,6 +37,8 @@ export const TouristSpotsProvider = ({ children }) => {
     };
 
     fetchAllTouristSpots();
+    // console.log('컨텍스트.jsx의 turistSpots',touristSpots)
+
   }, [selectedLanguage]);
   
   useEffect(() => {
@@ -46,10 +48,10 @@ export const TouristSpotsProvider = ({ children }) => {
   // 페이지네이션된 관광지 데이터 가져오기
   const fetchTouristSpots = async () => {
     try {
-      let URL = `http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
+      let URL = `${import.meta.env.VITE_SERVER_URL}/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
 
       if(searchKeyword)
-        URL = `http://localhost:8888/api/mapSearch?languageCode=${selectedLanguage}&query=${searchKeyword}&page=${currentPage}&size=10`
+        URL = `${import.meta.env.VITE_SERVER_URL}/api/mapSearch?languageCode=${selectedLanguage}&query=${searchKeyword}&page=${currentPage}&size=10`
 
       const response = await fetch(URL);
       const data = await response.json();

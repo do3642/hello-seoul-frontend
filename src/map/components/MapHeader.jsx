@@ -10,6 +10,7 @@ function MapHeader({ activeButton, onToggleLocation, onButtonClick  }) {
   const { t, i18n  } = useTranslation();
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [buttonStyle, setButtonStyle] = useState({});
 
   useEffect(() => {
     const handleResize = () => {
@@ -18,19 +19,30 @@ function MapHeader({ activeButton, onToggleLocation, onButtonClick  }) {
 
     window.addEventListener("resize", handleResize);
 
+    const updateButtonStyle = () => {
+      const newStyle = {
+        fontSize: (i18n.language === "eng" && windowWidth <= 500) ? "10px" : // 영어일 경우 500px 이하에서만 10px
+                  (i18n.language === "kor" && windowWidth <= 500) ? "14px" : // 한국어일 경우 500px 이하에서만 14px
+                  (windowWidth <= 500) ? "12px" :  // 그 외 언어 및 500px 이하일 때는 12px
+                  (i18n.language === "eng") ? "12px" :  // 영어일 경우 기본 폰트 크기 12px
+                  (i18n.language === "jpn") ? "12px" :  // 영어일 경우 기본 폰트 크기 12px
+                  "16px"  // 나머지 언어의 기본 폰트 크기 16px
+      };
+      setButtonStyle(newStyle);
+    };
+
+
+    updateButtonStyle();
+    i18n.on('languageChanged', updateButtonStyle);
+
+
     return () => {
       window.removeEventListener("resize", handleResize); // 컴포넌트 언마운트 시 이벤트 제거
+      i18n.off('languageChanged', updateButtonStyle); 
     };
-  }, []);
+  }, [i18n.language]);
 
-  // 폰트 크기 조건 설정
-  const buttonStyle = {
-    fontSize: (i18n.language === "eng" && windowWidth <= 500) ? "10px" : // 영어일 경우 500px 이하에서만 10px
-               (i18n.language === "kor" && windowWidth <= 500) ? "14px" : // 한국어일 경우 500px 이하에서만 14px
-               (windowWidth <= 500) ? "12px" :  // 그 외 언어 및 500px 이하일 때는 12px
-               (i18n.language === "en") ? "12px" :  // 영어일 경우 기본 폰트 크기 12px
-               "16px"  // 나머지 언어의 기본 폰트 크기 16px
-  };
+
   
   const handleClick = (buttonName) => {
     onButtonClick(buttonName);

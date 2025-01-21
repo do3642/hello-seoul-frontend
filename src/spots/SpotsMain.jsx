@@ -23,7 +23,7 @@ function SpotsMain() {
       // 관광지 데이터 요청
 
 
-      axios.get(`http://localhost:8888/api/tourist-spots`, {
+      axios.get(`${import.meta.env.VITE_SERVER_URL}/api/tourist-spots`, {
       params: {
         lang: languageCode,
         page: 0,
@@ -36,7 +36,7 @@ function SpotsMain() {
   
       // 축제 데이터 요청
 
-      axios.get(`http://localhost:8888/api/festivals`, {
+      axios.get(`${import.meta.env.VITE_SERVER_URL}/api/festivals`, {
         params: {
           lang: languageCode,
           page: 0,

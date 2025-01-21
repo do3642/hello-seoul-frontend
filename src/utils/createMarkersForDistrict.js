@@ -1,3 +1,5 @@
+import {getWeatherData} from './getFetchWeather'
+
 let markers = [];
 let infoWindows = [];
 let activeInfoWindow = null;
@@ -61,6 +63,7 @@ function createMarkersForDistrict(map, identifier, activeButton, handleClick, to
     naver.maps.Event.addListener(marker, 'click', function () {
       // 마커 클릭 시 해당 touristSpot의 contentid를 사용하여 URL로 이동
       navigate(`/map/${spot.contentid}`); // map/{contentid}로 이동
+
     });
 
     markers.push(marker);

@@ -14,7 +14,7 @@ function SpotsDetail() {
   const fetchSpotDetails = async () => {
     if (spotDetails) return;
     try {
-      const response = await axios.get(`http://localhost:8888/api/tourist-detail/${contentid}`);
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/tourist-detail/${contentid}`);
       setSpotDetails(response.data); // 데이터를 state에 저장
     } catch (e) {
       setError(e);
