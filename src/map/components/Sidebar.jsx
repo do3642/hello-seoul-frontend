@@ -34,7 +34,6 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
 
   const selectedLanguage = i18n.language; // 현재 선택된 언어 코드y
 
-    console.log(touristSpots )
   const handleListClick = (event) => {
     // currentTarget을 사용해 클릭된 요소의 부모 요소에 접근
     const lon = parseFloat(event.currentTarget.getAttribute('data-lon'));
@@ -83,27 +82,10 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
     };
   }, []);
   
-  const fetchTouristSpots = async () => {
-    try {
-      const response = await axios.get("/api/mapSearch", {
-        params: {
-          query: query || "", // 검색어
-          page: currentPage, // 현재 페이지
-          size: 10, // 페이지당 데이터 수
-        },
-      });
-
-      setTouristSpots(response.data.touristSpots);
-      setTotalPages(response.data.totalPages);
-    } catch (error) {
-      console.error("Error fetching tourist spots:", error);
-    }
-  };
 
   
   useEffect(() => {
-    fetchTouristSpots();
-    console.log('sidebar.jsx의 turistSpots',touristSpots)
+
   }, [query, currentPage]);
 
   const handlePageChange = (page) => {
