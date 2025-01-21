@@ -10,7 +10,7 @@ export const TouristSpotsProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
   const [selectedLanguage, setSelectedLanguage] = useState("kor"); // 선택된 언어
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
-  const [searchKeyword, setSearchKeyword] = useState(""); // 검색어
+  const [searchKeyword, setSearchKeyword] = useState(null); // 검색어
 
   // 전체 관광지 데이터 가져오기
   useEffect(() => {
@@ -38,37 +38,20 @@ export const TouristSpotsProvider = ({ children }) => {
 
     fetchAllTouristSpots();
   }, [selectedLanguage]);
-
-  // 검색된 관광지 데이터 가져오기 (검색어가 있을 때만)
+  
   useEffect(() => {
-    const fetchSearchResults = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8888/api/searchtouristspotdata?languageCode=${selectedLanguage}&keyword=${searchKeyword}&page=${currentPage}&pagesize=10`
-        );
-        const data = await response.json();
-        setTouristSpots(data.content); // 페이지네이션된 데이터
-        setTotalPages(data.totalPages); // 전체 페이지 수
-      } catch (error) {
-        console.error("Failed to fetch tourist spots: ", error);
-      }
-    };
+    fetchTouristSpots();
+  }, [currentPage, searchKeyword])
 
-    // 검색어가 있을 경우에만 검색 결과 요청
-    if (searchKeyword.trim()) {
-      fetchSearchResults();
-    } else {
-      // 검색어가 비어있으면 전체 데이터 불러오기
-      fetchTouristSpots();
-    }
-  }, [searchKeyword, currentPage, selectedLanguage]);
-
-  // 페이지네이션된 관광지 데이터 가져오기 (검색어가 없을 때)
+  // 페이지네이션된 관광지 데이터 가져오기
   const fetchTouristSpots = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
-      );
+      let URL = `http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
+
+      if(searchKeyword)
+        URL = `http://localhost:8888/api/mapSearch?languageCode=${selectedLanguage}&query=${searchKeyword}&page=${currentPage}&size=10`
+
+      const response = await fetch(URL);
       const data = await response.json();
       setTouristSpots(data.content); // 페이지네이션된 데이터
       setTotalPages(data.totalPages); // 전체 페이지 수
@@ -88,7 +71,9 @@ export const TouristSpotsProvider = ({ children }) => {
         selectedLanguage,
         setSelectedLanguage,
         totalPages,
-        setTouristSpots
+        setTotalPages,
+        setTouristSpots,
+        setSearchKeyword
       }}
     >
       {children}

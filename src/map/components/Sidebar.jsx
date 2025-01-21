@@ -9,13 +9,15 @@ import Pagination from "./Pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
-  const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots } = TouristSpots();
+  const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots, setTotalPages } = TouristSpots();
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [query, setQuery] = useState(""); // 검색어
   const navigate = useNavigate();
 
 
@@ -74,21 +76,30 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
       window.removeEventListener("resize", handleResize); // 리사이즈 이벤트 정리
     };
   }, []);
-
-
-  useEffect(() => {
-    // URL에 쿼리 파라미터가 있을 경우, 해당 검색어로 데이터를 받아옵니다.
-    const searchParams = new URLSearchParams(window.location.search);
-    const query = searchParams.get('query');
-    
-    if (query) {
-      fetch(`/api/search?query=${query}`)
-        .then(response => response.json())
-        .then(data => {
-          setTouristSpots(data); // 검색된 데이터로 touristSpots 갱신
-        });
+  
+  const fetchTouristSpots = async () => {
+    try {
+      const response = await axios.get("/api/mapSearch", {
+        params: {
+          query: query || "", // 검색어
+          page: currentPage, // 현재 페이지
+          size: 10, // 페이지당 데이터 수
+        },
+      });
+      setTouristSpots(response.data.touristSpots);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error("Error fetching tourist spots:", error);
     }
-  }, [window.location.search, setTouristSpots]); // URL 검색어에 따른 데이터 변경 감지
+  };
+  
+  useEffect(() => {
+    fetchTouristSpots();
+  }, [query, currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page); // 페이지 변경
+  };
 
 
 
@@ -158,13 +169,17 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
           <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
             {!contentid && (
               <>
-                {touristSpots.map((spot, index) => (
-                  <SidebarList key={index} spot={spot} onClick={handleListClick} />
-                ))}
+                {touristSpots && touristSpots.length > 0 ? (
+                  touristSpots.map((spot, index) => (
+                    <SidebarList key={index} spot={spot} onClick={handleListClick} />
+                  ))
+                ) : (
+                  <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지
+                )}
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+                  onPageChange={handlePageChange}
                 />
               </>
             )}
@@ -179,13 +194,17 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
             <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
               {!contentid && (
                 <>
-                  {touristSpots.map((spot, index) => (
+                  {touristSpots && touristSpots.length > 0 ? (
+                  touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />
-                  ))}
+                  ))
+                ) : (
+                  <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지
+                )}
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={setCurrentPage}
+                    onPageChange={handlePageChange}
                   />
                 </>
               )}
