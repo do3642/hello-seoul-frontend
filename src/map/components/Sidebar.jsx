@@ -55,6 +55,13 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeat
     zoomInToRegion(map, lon, lat, activeButton, handleButtonClick);
   };
 
+  // 컴포넌트가 언마운트될 때 currentPage를 0으로 초기화
+  useEffect(() => {
+    return () => {
+      setCurrentPage(0);
+    };
+  }, [setCurrentPage]);
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth); // 화면 크기 변경 시 상태 업데이트
