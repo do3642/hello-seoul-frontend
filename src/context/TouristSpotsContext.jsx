@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const TouristSpotsContext = createContext();
@@ -6,9 +7,10 @@ export const TouristSpotsProvider = ({ children }) => {
   const [touristSpots, setTouristSpots] = useState([]); // 페이지네이션 된 데이터
   const [allTouristSpots, setAllTouristSpots] = useState([]); // 전체 관광지 데이터
   const [groupedSpots, setGroupedSpots] = useState({}); // 그룹화된 데이터 상태 추가
-  const [currentPage, setCurrentPage] = useState(0);
-  const [selectedLanguage, setSelectedLanguage] = useState("kor");
-  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
+  const [selectedLanguage, setSelectedLanguage] = useState("kor"); // 선택된 언어
+  const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
+  const [searchKeyword, setSearchKeyword] = useState(null); // 검색어
 
   // 전체 관광지 데이터 가져오기
   useEffect(() => {
@@ -19,7 +21,6 @@ export const TouristSpotsProvider = ({ children }) => {
         );
         const data = await response.json();
 
-        // 데이터를 배열로 상태에 저장
         setAllTouristSpots(data);
 
         // 데이터를 그룹화하여 저장 (별도의 상태)
@@ -37,24 +38,27 @@ export const TouristSpotsProvider = ({ children }) => {
 
     fetchAllTouristSpots();
   }, [selectedLanguage]);
+  
+  useEffect(() => {
+    fetchTouristSpots();
+  }, [currentPage, searchKeyword, touristSpots])
 
   // 페이지네이션된 관광지 데이터 가져오기
-  useEffect(() => {
-    const fetchTouristSpots = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
-        );
-        const data = await response.json();
-        setTouristSpots(data.content); // 페이지네이션된 데이터
-        setTotalPages(data.totalPages);
-      } catch (error) {
-        console.error("Failed to fetch tourist spots: ", error);
-      }
-    };
+  const fetchTouristSpots = async () => {
+    try {
+      let URL = `http://localhost:8888/api/touristspotdata?languageCode=${selectedLanguage}&page=${currentPage}&pagesize=10`
 
-    fetchTouristSpots();
-  }, [currentPage, selectedLanguage]);
+      if(searchKeyword)
+        URL = `http://localhost:8888/api/mapSearch?languageCode=${selectedLanguage}&query=${searchKeyword}&page=${currentPage}&size=10`
+
+      const response = await fetch(URL);
+      const data = await response.json();
+      setTouristSpots(data.content); // 페이지네이션된 데이터
+      setTotalPages(data.totalPages); // 전체 페이지 수
+    } catch (error) {
+      console.error("Failed to fetch tourist spots: ", error);
+    }
+  };
 
   return (
     <TouristSpotsContext.Provider
@@ -67,6 +71,9 @@ export const TouristSpotsProvider = ({ children }) => {
         selectedLanguage,
         setSelectedLanguage,
         totalPages,
+        setTotalPages,
+        setTouristSpots,
+        setSearchKeyword
       }}
     >
       {children}

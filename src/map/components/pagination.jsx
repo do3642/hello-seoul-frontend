@@ -8,7 +8,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
   const startPage = Math.floor(currentPage / maxPagesToShow) * maxPagesToShow + 1;
   const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
 
-  // 이전 버튼 함수
+  // 이전 블록 버튼 함수
   const handlePrevious = () => {
     if (currentPage >= maxPagesToShow) {
       const previousBlockLastPage = startPage - 1; // 이전 블록의 마지막 페이지로 이동
@@ -16,7 +16,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
     }
   };
 
-  // 다음 버튼 함수
+  // 다음 블록 버튼 함수
   const handleNext = () => {
     const nextBlockFirstPage = startPage + maxPagesToShow - 1;
     if (currentPage < totalPages - 1 && endPage < totalPages) {
@@ -24,7 +24,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
     }
   };
 
-  // 목록을 누르면 이동하도록 해주는 함수
+  // 특정 페이지를 클릭하면 이동
   const handlePageClick = (page) => {
     if (page !== currentPage + 1) {
       onPageChange(page - 1); // 페이지 번호와 currentPage를 맞추기 위해 -1
@@ -33,6 +33,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 
   return (
     <div className="pagination">
+      {/* 이전 블록 버튼 */}
       <button 
         onClick={handlePrevious} 
         disabled={currentPage < maxPagesToShow} 
@@ -41,6 +42,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         이전
       </button>
 
+      {/* 페이지 번호 버튼 */}
       {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
         <button
           key={page}
@@ -51,6 +53,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         </button>
       ))}
 
+      {/* 다음 블록 버튼 */}
       <button 
         onClick={handleNext} 
         disabled={endPage >= totalPages} 

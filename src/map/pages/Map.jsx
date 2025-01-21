@@ -12,6 +12,7 @@ function Map() {
   const [map, setMap] = useState(null);
   const [showCurrentLocation, setShowCurrentLocation] = useState(false);    // 현재 위치 표시 여부
   const [activeButton, setActiveButton] = useState("관광지");
+  const [resetFeature, setResetFeature] = useState(null); // 초기화 함수 상태 관리
   const [districtName, setDistrictName] = useState('서울');
 
 
@@ -63,20 +64,18 @@ function Map() {
         activeButton={activeButton}
         handleButtonClick={handleButtonClick}
         handleDistrictChange={handleDistrictChange}
+        setResetFeature={setResetFeature}
       />
-      <Sidebar
-        map={map}
-        activeButton={activeButton}
-        handleButtonClick={handleButtonClick}
-        districtName={districtName}
-      />
+
+      <Sidebar map={map} activeButton={activeButton} handleButtonClick={handleButtonClick} districtName={districtName} resetFeature={resetFeature}/>
+
       <MapHeader activeButton={activeButton} onToggleLocation={handleToggleLocation} onButtonClick={handleButtonClick} />
       <MapWebNav />
       {
         map && <AllWeather map={map} activeButton={activeButton} />
       }
     </div>
-  )
+  );
 }
 
 export default Map;

@@ -5,17 +5,24 @@ import Weather from "./Weather";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TouristSpots } from "../../context/TouristSpotsContext";
-import Pagination from "./pagination";
+import Pagination from "./Pagination";
 import zoomInToRegion from "../../utils/zoomInToRegion";
 import { clearMarkers, createMarkersForDistrict, openAllInfoWindows } from "../../utils/createMarkersForDistrict";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
-  const { touristSpots, currentPage, totalPages, setCurrentPage } = TouristSpots();
+import axios from "axios";
+
+function Sidebar({ map, activeButton, handleButtonClick, districtName, resetFeature,}) {
+  const { touristSpots, currentPage, totalPages, setCurrentPage, setTouristSpots, setTotalPages } = TouristSpots();
+
   const { i18n } = useTranslation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [isActive, setIsActive] = useState(false);
+
+  const [query, setQuery] = useState(""); // 검색어
+
+
   const navigate = useNavigate();
 
 
@@ -40,6 +47,9 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
       console.error("Invalid coordinates:", lon, lat);
       return;
     }
+
+    // 기존 선택 지역 초기화
+    if (resetFeature) resetFeature();
 
     // 지도에 관광지 하나에 대한 마커 생성
     clearMarkers();
@@ -71,6 +81,34 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
       window.removeEventListener("resize", handleResize); // 리사이즈 이벤트 정리
     };
   }, []);
+  
+  const fetchTouristSpots = async () => {
+    try {
+      const response = await axios.get("/api/mapSearch", {
+        params: {
+          query: query || "", // 검색어
+          page: currentPage, // 현재 페이지
+          size: 10, // 페이지당 데이터 수
+        },
+      });
+
+      setTouristSpots(response.data.touristSpots);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error("Error fetching tourist spots:", error);
+    }
+  };
+
+  
+  useEffect(() => {
+    fetchTouristSpots();
+
+  }, [query, currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page); // 페이지 변경
+  };
+
 
 
   // 모바일 고려 터치이벤트들
@@ -121,6 +159,7 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
         sidebarElement.removeEventListener('touchend', handleTouchEnd);
       };
     }
+    
   }, [windowWidth, startY, currentY, isDragging]);
 
 
@@ -134,18 +173,25 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
     <>
       {windowWidth > 820 ? (
         <div className='side-bar'>
+
           <Search />
           <Weather districtName={districtName} />
           <div className="sidebar-list-box" style={{ height: sidebarHeight, overflowY: 'scroll' }}>
             {!contentid && (
               <>
-                {touristSpots.map((spot, index) => (
-                  <SidebarList key={index} spot={spot} onClick={handleListClick} />
-                ))}
+
+                {touristSpots && touristSpots.length > 0 ? (
+                  touristSpots.map((spot, index) => (
+                    <SidebarList key={index} spot={spot} onClick={handleListClick} />
+                  ))
+                ) : (
+                  <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지
+                )}
+
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+                  onPageChange={handlePageChange}
                 />
               </>
             )}
@@ -160,13 +206,19 @@ function Sidebar({ map, activeButton, handleButtonClick, districtName}) {
             <div className="sidebar-list-box" style={{ height: '200px', overflowY: 'auto' }}>
               {!contentid && (
                 <>
-                  {touristSpots.map((spot, index) => (
+
+                  {touristSpots && touristSpots.length > 0 ? (
+                  touristSpots.map((spot, index) => (
                     <SidebarList key={index} spot={spot} onClick={handleListClick} />
-                  ))}
+                  ))
+                ) : (
+                  <p>데이터를 로딩 중입니다...</p> // 로딩 중일 때 표시할 메시지
+                )}
+
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={setCurrentPage}
+                    onPageChange={handlePageChange}
                   />
                 </>
               )}
