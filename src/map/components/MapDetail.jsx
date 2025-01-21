@@ -67,7 +67,7 @@ function MapDetail() {
       </button>
 
       <div className="map-detail-img">
-        <img src={mapDetails.touristSpot?.firstimage2 || "/public/img/noimage_l.gif"} alt="" />
+        <img src={mapDetails.touristSpot?.firstimage2 || "/img/noimage_l.gif"} alt="" />
       </div>
 
       <h3>{mapDetails.touristSpot.title}</h3>
