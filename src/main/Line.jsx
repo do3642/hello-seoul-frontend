@@ -216,7 +216,6 @@ const Line = () => {
       <TransformWrapper
         initialScale={1}
         minScale={1}
-        maxScale={5}
         disabled={false}
         wheel={{ disabled: false, step: 0.1 }}
         pan={{ disabled: false }}
@@ -227,6 +226,7 @@ const Line = () => {
             width="100vw"
             height="100vh"
             viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+           
           >
             <Subway />
           </svg>

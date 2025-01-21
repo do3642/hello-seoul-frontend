@@ -20,44 +20,69 @@
   color: #555;
   font-family: 'GmarketSansMedium';
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 
 
 /* 전체 구 날씨 팝업 */
 .weather-popup {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard-Regular';
   padding: 15px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
+  background-color: #f5f5f5; /* 배경 색상 */
+  border: 1px solid #ddd; /* 테두리 색상 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  transition: transform 0.3s ease-in-out; /* 마우스 오버 시 애니메이션 */
+  height: 100%;
 }
 
+/* 마우스 오버 시 크기 증가 */
 .weather-popup:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
+/* 제목 스타일 */
 .weather-popup h3 {
   margin-top: 0;
-  font-size: 18px;
-  color: #2c3e50;
-  font-weight: bold;
+  font-size: 16px;
+  color: #2c3e50; /* 제목 색상 */
+  font-weight: bold; /* 굵은 글씨 */
+  font-family: inherit;
 }
 
+/* 내용 텍스트 스타일 */
 .weather-popup p {
   margin: 8px 0;
-  font-size: 16px;
-  color: #34495e;
+  font-size: 14px;
+  color: #34495e; /* 텍스트 색상 */
+  font-family: inherit;
 }
 
 .weather-popup i {
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 10px;
   color: #3498db;
 }
+
+.weather-popup i.fa-sun, .weather-right i.fa-sun{
+  color: #F57C00 ;
+}
+.weather-popup i.fa-cloud, .weather-right i.fa-cloud{
+  color: #3498db;
+}
+.weather-popup i.fa-cloud-sun, .weather-right i.fa-cloud-sun{
+  color: #FF5722;
+}
+.weather-popup i.fa-snowflake, .weather-right i.fa-snowflake{
+  color: #0288D1 ;
+}
+.weather-popup i.fa-cloud-showers-heavy, .weather-right i.fa-cloud-showers-heavy{
+  color: #1976D2;
+}
+
 
 .weather-popup .temperature {
   font-size: 22px;
@@ -67,3 +92,19 @@
 .weather-popup .weather-icon {
   margin: 10px 0;
 }
+
+
+
+.tourist-popup{
+  height: 100%;
+}
+.popup-info-strong{
+  font-family: 'Pretendard-Regular';
+  font-size: 1em;
+
+}
+.popup-info-small{
+  font-family: 'Pretendard-Regular';
+  font-size: 0.95em;
+}
+

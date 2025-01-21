@@ -12,14 +12,14 @@
   ],
   "visuals": [
     {
-      "title": "Christmas Market with Gwanghwamun Square as the Background",
-      "subtitle": "Gwanghwamun Market",
-      "period": "Period 2024.12.13 ~ 2025.01.05"
+      "title": "Walk in the Starlight",
+      "subtitle": "Gwanak Star Light Walk",
+      "period": "Period 2024.11.11 ~ 2025.02.09"
     },
     {
       "title": "SOUL LANTERN: Seoul, Playing with Light",
       "subtitle": "Seoul Lantern Festival",
-      "period": "Period 2024.12.13 ~ 2025.01.12"
+      "period": "Period 2024.12.13 ~ 2025.01.31"
     },
     {
       "title": "Autumn and Winter at the Lake, and Luminarie",
@@ -67,5 +67,19 @@
       "송파구": "Songpa-gu",
       "강동구": "Gangdong-gu"
     }
+  },
+  "spots": {
+    "allSpots": "All Tourist Spots",
+    "btn-label": {
+        "all": "All",
+        "season": "Season",
+        "healing": "Healing",
+        "walk": "Walk",
+        "hiking": "Hiking",
+        "traditional": "Traditional"
+    },
+    "allFestival": "All Festivals",
+    "more": "See More",
+    "search": "Please enter a search term"
   }
 }

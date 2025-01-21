@@ -140,7 +140,7 @@ function TrainSearch({ startStation, endStation, setStartStation, setEndStation,
             <strong>거리:</strong> {routeInfo.distance}
           </p>
           <p>
-            <strong>예상 소요 시간:</strong> {routeInfo.estimatedTime}
+            <strong>예상 소요 시간:</strong> {routeInfo.estimatedTime}분
           </p>
           <p>
             <strong>요금:</strong> {routeInfo.fare}

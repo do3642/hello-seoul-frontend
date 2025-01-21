@@ -19,7 +19,7 @@ function MapWebNav() {
           <i className="fas fa-subway"></i> {/* 지하철 아이콘 */}
           <span className="nav-text">{t('nav.0.subway')}</span>
         </li>
-        <li className="nav-item star" onClick={() => handleNavigation('/star')}>
+        <li className="nav-item spots" onClick={() => handleNavigation('/spots')}>
           <i className="fas fa-star"></i> {/* 별 아이콘 */}
           <span className="nav-text">{t('nav.0.whereToGo')}</span>
         </li>
