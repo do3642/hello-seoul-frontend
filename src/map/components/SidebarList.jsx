@@ -12,7 +12,7 @@ function SidebarList({ spot, onClick, handleDistrictChange }) {
   };
 
   if (spot.firstimage2 === '') {
-    spot.firstimage2 = '/public/img/noimage_l.gif'
+    spot.firstimage2 = '/img/noimage_l.gif'
   }
 
   return (
