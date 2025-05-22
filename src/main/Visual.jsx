@@ -42,7 +42,7 @@ function Visual (){
   };
     // 데이터 파일을 불러옵니다.
     const fetchData = async () => {
-      const response = await fetch('/src/data/visualData.json');
+      const response = await fetch('/data/visualData.json');
       const data = await response.json();
       setVisualStates(data);
     };

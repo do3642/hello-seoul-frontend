@@ -9,7 +9,7 @@ export const getWeatherData = async (districtName) => {
 
   const { nx, ny } = districtCoordinates[districtName]; // 구 이름에 해당하는 nx, ny 좌표
 
-  const serviceKey = '5CQeftawhDwl1cz9L0RxxMn8mjHETjXzCuHxHgteyt%2FvAK1i50baokozMpWbrG%2FEb2yMXkwSwn18uBEylgUk0g%3D%3D';
+  const serviceKey = '5CQeftawhDwl1cz9L0RxxMn8mjHETjXzCuHxHgteyt%2FvAK1i50baokozMpWbrG%2FEb2yMXkwSwn18uBEylgUk0g%3D%3D'; //보안 처리 필요하지만 무료 겸 포트폴리오 용도이므로 그대로 사용함
   const baseDate = new Date().toISOString().slice(0, 10).replace(/-/g, ''); // 오늘 날짜
   const baseTime = getBaseTime(); // 예시 시간 (시간은 동적으로 가져오는 함수 사용)
   const numOfRows = 1000;

@@ -13,7 +13,7 @@ function Weather() {
 
   // 날씨 데이터를 가져오는 함수
   const fetchWeatherData = async () => {
-    const serviceKey = '5CQeftawhDwl1cz9L0RxxMn8mjHETjXzCuHxHgteyt%2FvAK1i50baokozMpWbrG%2FEb2yMXkwSwn18uBEylgUk0g%3D%3D';
+    const serviceKey = '5CQeftawhDwl1cz9L0RxxMn8mjHETjXzCuHxHgteyt%2FvAK1i50baokozMpWbrG%2FEb2yMXkwSwn18uBEylgUk0g%3D%3D'; //무료 키, 포트폴리오 용도라 그대로 사용
     const baseDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
     const baseTime = getBaseTime();
     const nx = 60; 

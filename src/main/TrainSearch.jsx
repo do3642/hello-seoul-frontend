@@ -18,7 +18,7 @@ function TrainSearch({ startStation, endStation, setStartStation, setEndStation,
         {
           method: 'GET',
           headers: {
-            Authorization: 'KakaoAK bad3075e55f46fa4dce1d615ca70bce7',
+            Authorization: 'KakaoAK bad3075e55f46fa4dce1d615ca70bce7', //보안 처리 필요하지만 무료 겸 포트폴리오 용도이므로 그대로 사용함
           },
         }
       );
@@ -64,7 +64,7 @@ function TrainSearch({ startStation, endStation, setStartStation, setEndStation,
       method: 'POST',
       headers: {
         accept: 'application/json',
-        appKey: 'Q5vfRZzFil9sEqN3W2jl74JRa1SKm8QF6j8bUoLW',
+        appKey: 'Q5vfRZzFil9sEqN3W2jl74JRa1SKm8QF6j8bUoLW', //보안 처리 필요하지만 무료 겸 포트폴리오 용도이므로 그대로 사용함
         'content-type': 'application/json'
       },
       body: JSON.stringify({
